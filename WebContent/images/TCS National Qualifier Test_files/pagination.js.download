@@ -1,0 +1,244 @@
+function Pager(tableName, itemsPerPage) {
+    this.tableName = tableName;
+    this.itemsPerPage = itemsPerPage;
+    this.currentPage = 1;
+    this.pages = 0;
+    this.inited = false;
+    var totalPages = 0;
+    
+    this.showRecords = function(from, to) {        
+    
+        var rows = document.getElementById(tableName).rows;
+        
+        for (var i=1; i<=((rows.length-1)/10); i++)
+        {
+        var paginationId="pg"+i;
+        document.getElementById(paginationId).style.cursor = 'pointer';
+        
+        }
+        var totalRecords=rows.length-1;
+        
+        
+       
+         var pageNo=to/10;
+
+         if(totalRecords-from+1>10)
+         {
+         var content="Showing" +" "+ from +" "+ "-" +" " + to + " "+ "of"+" "+ totalRecords +" "+ "records";
+  		 }
+  		 else
+         {
+         var content="Showing" +" "+ from +" "+ "-" +" " + totalRecords + " "+ "of"+" "+ totalRecords +" "+ "records";
+  		 }
+  		 document.getElementById('showedResults').innerHTML=content;
+        
+       if(to>=rows.length-1)
+       {
+    	document.getElementById('pgN').style.display="none";
+    	document.getElementById('td_pgLP').style.display="none";
+    	}
+    	else
+    	{
+    	document.getElementById('pgN').style.display="";
+    	document.getElementById('td_pgLP').style.display="";
+    	}
+        for (var i = 1; i < rows.length; i++) {
+            if (i < from || i > to)  
+                rows[i].style.display = 'none';
+            else
+                rows[i].style.display = '';
+        }
+    }
+    
+    this.showPage = function(pageNumber) {
+    var rows = document.getElementById(tableName).rows;
+    var noOfPagesTemp=(rows.length-1)%10;
+ 
+    if(document.getElementById('chkbxSelectAll')!=null)
+    	{
+    	document.getElementById('chkbxSelectAll').checked=false;
+    	var chkObj = document.getElementsByName("ChkAppln");
+    	for(var i=0;i<chkObj.length;i++){
+    		var chkElement = chkObj[i];
+    		//alert("else chkElement: "+chkElement);
+    		chkElement.checked = false;
+    	}
+    	}
+    if(noOfPagesTemp==0)
+    {
+     var noOfPages=(rows.length-1)/10;
+    }
+     else
+    {
+     var noOfPages=parseInt((rows.length-1)/10)+1;
+    }
+   
+    
+    document.getElementById('totalRecords').innerHTML="Page "+ pageNumber+ " of "+noOfPages;
+    document.getElementById('pageSelected').value=pageNumber;
+
+	try
+	{
+		
+	
+    if(pageNumber==1)
+    	{
+    			document.getElementById('pg1').style.color="red";
+    	    	document.getElementById('pgP').style.display="none";
+    	    	document.getElementById('td_pgFP').style.display="none";
+    		   	
+    	}
+    	else
+    	{
+    	var pageId="pg"+pageNumber;
+    	var lastPageId="pg"+(pageNumber-1);
+    	document.getElementById(lastPageId).style.color="black";
+    	document.getElementById(pageId).style.color="red";
+    	document.getElementById('pgP').style.display="";
+    	document.getElementById('td_pgFP').style.display="";
+    	}
+    	
+    	if(pageNumber<5)
+    	{
+    	  for (var j=1; j<=noOfPages; j++)
+    	   	{
+    			var pageId="pg"+j;
+    	     	if(j<=5)
+    	 	 	 {
+    	 	  		
+    	     		document.getElementById("td_"+pageId).style.display="";
+    	 	   		document.getElementById(pageId).style.display="";
+    	 	  	 }
+    	 	   else
+    	 		{
+    	 		   document.getElementById("td_"+pageId).style.display="none";
+    	 	    	document.getElementById(pageId).style.display="none";
+    	 	   	}
+    	 	   	if(j==pageNumber)
+    	 	   	{
+    	 	   	
+    	 	   	document.getElementById(pageId).style.color="red";
+    	 	   	
+    	 	   
+    	 	   	}
+    	 	   	else
+    	 	   	{
+    	 	   	document.getElementById(pageId).style.color="black";
+    	 	   	}
+    	 	   	
+    	 	
+    		}
+    	}
+    	else
+    	  {
+    	   for (var k=1; k<=noOfPages; k++)
+    	   	{  
+    	   	
+    			var pageId="pg"+k;
+    	     	if(k>(pageNumber-5) && k<=pageNumber)
+    	 	 	 {
+    	 	 	    
+    	     		document.getElementById(pageId).style.display="";
+    	 	   		document.getElementById("td_"+pageId).style.display="";
+    	 	  	 }
+    	 	   else
+    	 		{
+    	 		   	document.getElementById(pageId).style.display="none";
+    	 	    	document.getElementById("td_"+pageId).style.display="none";
+    	 	   	}
+    	 	   	if(k==pageNumber)
+    	 	   	{
+    	 	   	document.getElementById(pageId).style.color="red";
+    	 	   	}
+    	 	   	else
+    	 	   	{
+    	 	   	document.getElementById(pageId).style.color="black";
+    	 	   	}
+    	 	
+    		}
+    	}	
+
+    	
+    	
+    	if (! this.inited) {
+    		alert("not inited");
+    		return;
+    	}
+    
+    	
+
+        var oldPageAnchor = document.getElementById('pg'+this.currentPage);
+        oldPageAnchor.className = 'pg-normal';
+        
+        this.currentPage = pageNumber;
+        var newPageAnchor = document.getElementById('pg'+this.currentPage);
+        newPageAnchor.className = 'pg-selected';
+        
+        var from = (pageNumber - 1) * itemsPerPage + 1;
+        var to = from + itemsPerPage - 1;
+        
+         
+        this.showRecords(from, to);
+	}
+	catch(err)
+	{
+		
+	}
+    }   
+    
+    this.prev = function() {
+        if (this.currentPage > 1)
+            this.showPage(this.currentPage - 1);
+        
+    }
+    
+    this.next = function() {
+    	this.showPage(this.currentPage + 1);
+        
+    }                        
+    
+    this.init = function() {
+        var rows = document.getElementById(tableName).rows;
+        var records = (rows.length - 1); 
+        this.pages = Math.ceil(records / itemsPerPage);
+        this.inited = true;
+    }
+
+    this.showPageNav = function(pagerName, positionId) {
+    	if (! this.inited) {
+    		alert("not inited");
+    		return;
+    	}
+    	var element = document.getElementById(positionId);
+
+            
+            
+         var pagerHtml = '<table><tr><td id="td_pgFP" ><span id="pgFP" class="tableHead" onclick="' + pagerName + '.showPage(1);" style="cursor:pointer"> <b>First </b>   |  </span> </td> ';
+          
+          pagerHtml +='<td id="td_pgP" ><span id="pgP" class="tableHead" onclick="' + pagerName + '.prev();" class="" style="cursor:pointer"> <b>&#171 Prev</b>   |  </span> </td> '; 
+          
+          for (var page = 1; page <= this.pages; page++){ 
+            totalPages ++;
+        	pagerHtml += '<td id="td_pg' + page + '"> <span id="pg' + page + '" class="tableHead" style="color:black" style="cursor:pointer" onclick="' + pagerName + '.showPage(' + page + ');changeColor('+this.pages+','+page+');"><b>' + page + '</b>  | <span> </td>';
+        	
+           
+          }
+           
+            pagerHtml += '<td id="td_pgN"><span id="pgN" class="tableHead" onclick="'+pagerName+'.next();" class="" style="cursor:pointer" ><b> Next &#187 </b></span></td>';    
+         
+         	pagerHtml += '<td id="td_pgLP"><span id="pgLP" class="tableHead" onclick="'+pagerName+'.showPage('+totalPages+');" style="cursor:pointer" ><b> Last</b></span></td></tr></table>';
+            element.innerHTML = pagerHtml;
+        
+    
+            
+    }
+}
+
+function changeColor(total,key){
+//	alert(total+" " +key);
+	for(var i=1;i<=total;i++){
+		if(i==key){
+			document.getElementById("pg"+i).style.color="red";
+		}else document.getElementById("pg"+i).style.color="black";
+	}
+}

@@ -1,0 +1,1313 @@
+@charset "utf-8";
+
+/* CSS Document */
+html,body {
+	color: #252525;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+#wrapper {
+	display: block;
+	min-height: 100%;
+	min-width: 600px;
+	position: absolute;
+	width: 100%;
+	background: #D5E7EC;
+}
+
+* {
+	margin: 0;
+	outline: medium none;
+	padding: 0;
+	position: static;
+}
+
+a,img {
+	border: medium none;
+}
+
+/*--------------------------------------------------pagination table------------------------------*/
+.sub_lower_content { /*border: 1px solid #809BAD; margin: 7px;*/
+	background: #E7F5FE;
+}
+
+.sub_header {
+	background: none repeat scroll 0 0 #E7F5FE;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 10px;
+}
+
+.sub_header_btm {
+	background: none repeat scroll 0 0 #FFFFFF;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 10px;
+}
+
+._first {
+	background: url("/EForms/images/onlineAppForm/first.gif") no-repeat scroll
+		left top transparent;
+	margin-right: 3px;
+	padding: 2px 18px 3px 0;
+	width: 18px;
+}
+
+._prev {
+	background: url("/EForms/images/onlineAppForm/prev_bttn.gif") no-repeat
+		scroll left top transparent;
+	margin-right: 3px;
+	padding: 2px 18px 3px 0;
+	width: 18px;
+}
+
+.input1 {
+	border: 1px solid #AAAAAA;
+	height: 16px;
+	line-height: 16px;
+	text-align: center;
+	width: 20px;
+}
+
+._first {
+	background: url("/EForms/images/onlineAppForm/first.gif") no-repeat scroll
+		left top transparent;
+	margin-right: 3px;
+	padding: 2px 18px 3px 0;
+	width: 18px;
+}
+
+._firstD {
+	background: url("/EForms/images/onlineAppForm/first_end.png") no-repeat
+		scroll left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 6px;
+}
+
+._first:hover {
+	background: url("/EForms/images/onlineAppForm/first_hover.gif") no-repeat
+		scroll left top transparent;
+}
+
+._prev {
+	background: url("/EForms/images/onlineAppForm/prev_bttn.gif") no-repeat
+		scroll left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 6px;
+}
+
+._prevD {
+	background: url("/EForms/images/onlineAppForm/prev_end.png") no-repeat
+		scroll left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 6px;
+}
+
+._prev:hover {
+	background: url("/EForms/images/admin/previous_hover.gif")
+		no-repeat scroll left top transparent;
+}
+
+._next {
+/* 	background: url("/EForms/images/admin/next_bttn.gif") no-repeat
+		scroll left top transparent; */
+	margin-left: 3px;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 6px;
+}
+
+._nextD {
+	background: url("/EForms/images/onlineAppForm/next_end.png") no-repeat
+		scroll left top transparent;
+	margin-left: 3px;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 6px;
+}
+
+._next:hover {
+	background: url("/EForms/images/admin/next_hover.gif") no-repeat
+		scroll left top transparent;
+}
+
+._last {
+	background: url("/EForms/images/onlineAppForm/last.gif") no-repeat scroll
+		left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 6px;
+}
+
+._lastD {
+	background: url("/EForms/images/onlineAppForm/last_end.png") no-repeat
+		scroll left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 6px;
+}
+
+._last:hover {
+	background: url("/EForms/images/onlineAppForm/last_hover.gif") no-repeat
+		scroll left top transparent;
+}
+
+table.sub_table { /* border-bottom: 1px solid #809BAD; */
+	
+}
+
+table.sub_table tr td a {
+	color: #459ECA;
+	text-decoration: none;
+}
+
+table.sub_table tr td a:hover {
+	text-decoration: underline;
+}
+
+th.sub_tab_head {
+	background: none repeat scroll 0 0 #F1F6F9;
+	border-bottom: 0px solid #809BAD;
+	border-left: 0px solid #809BAD;
+	border-top: 0px solid #809BAD;
+	border-right: 1px solid #fff;
+	color: #333333;
+	min-width: 40px;
+	padding: 10px;
+}
+
+th.head_first {
+	border-left: medium none !important;
+}
+
+table.sub_table td {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #CCCCCC;
+	border-left: 1px solid #EEEEEE;
+	height: 20px;
+}
+
+table.sub_table td.last {
+	background-color: #FFFFFF;
+	border-bottom: none;
+	border-left: 1px solid #EEEEEE;
+	height: 20px;
+	padding-left: 5px;
+}
+
+.sub_table td:first-child { /*border-right: 0px solid #809BAD;*/
+	
+}
+
+.sub_table th .sorter {
+	background:
+		url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAICAYAAAAx8TU7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjU3NjczRkJDMkRGMTFFMjk1MDJFMTlGNDQ2Q0Y5NkYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjU3NjczRkNDMkRGMTFFMjk1MDJFMTlGNDQ2Q0Y5NkYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGNTc2NzNGOUMyREYxMUUyOTUwMkUxOUY0NDZDRjk2RiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGNTc2NzNGQUMyREYxMUUyOTUwMkUxOUY0NDZDRjk2RiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhiqNV8AAABESURBVHjaYvj//z8DCJ+4+vQ/jM3EAAQnrz37j0wzglQwoAFGkHJ0wMSABbDAzEFXyYgsYK4lxcgEJBhgEiABEA0QYAAeMyID0wCzPgAAAABJRU5ErkJggg==')
+		no-repeat right center;
+	width: 5px;
+	height: 8px;
+	float: right;
+	/* margin-top: 7px; margin-right: 7px;*/
+	width: 10%;
+	margin-top: 3px;
+}
+
+.url_link a {
+	color: #0099CC;
+	text-decoration: none;
+}
+
+.url_link a:hover {
+	text-decoration: underline;
+}
+
+.modifyDiv {
+	border: 1px solid #598A99;
+	background: #F9F3E7;
+	height: 25px;
+	margin: 7px;
+}
+
+.modifyText {
+	color: #459ECA;
+	cursor: pointer;
+	font-weight: bold;
+	margin: 0 auto;
+	padding: 5px 0 0 10px;
+	text-align: left;
+}
+
+.modifyText:hover {
+	text-decoration: underline;
+}
+
+.modifyText a {
+	text-decoration: none;
+	color: #459ECA;
+}
+
+.modifyText a:hover {
+	text-decoration: underline;
+}
+
+.hideText {
+	color: #459ECA;
+	cursor: pointer;
+	float: left;
+	font-weight: bold;
+	padding: 5px 13px 5px 16px;
+}
+
+.hideText a {
+	text-decoration: none;
+	color: #459ECA;
+}
+
+.hideText a:hover {
+	text-decoration: underline;
+}
+
+.j {
+	float: left;
+	padding-right: 5px;
+	font-size: 12px;
+}
+
+/*------------------------------------- popup ------------------------------*/
+.dataTables_filter {
+	width: 60%;
+	float: right;
+	text-align: right;
+	background: none repeat scroll 0 0 #E7F5FE;
+	height: 32px;
+	line-height: 32px;
+}
+
+.dataTables_filter label {
+	padding-right: 10px;
+}
+
+.dataTables_wrapper { /*border: 1px solid #809BAD;*/
+	position: relative;
+	clear: both;
+	zoom: 1; /* Feeling sorry for IE */
+}
+
+.dataTables_length {
+	width: 40%;
+	float: left;
+	background: none repeat scroll 0 0 #E7F5FE;
+	height: 32px;
+	line-height: 32px;
+}
+
+.dataTables_length label {
+	padding-left: 10px;
+}
+
+table.display {
+	margin: 0 auto;
+	clear: both;
+	width: 100%;
+
+	/* Note Firefox 3.5 and before have a bug with border-collapse
+	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 ) 
+	 * border-spacing: 0; is one possible option. Conditional-css.com is
+	 * useful for this kind of thing
+	 *
+	 * Further note IE 6/7 has problems when calculating widths with border width.
+	 * It subtracts one px relative to the other browsers from the first column, and
+	 * adds one to the end...
+	 *
+	 * If you want that effect I'd suggest setting a border-top/left on th/td's and 
+	 * then filling in the gaps with other borders.
+	 */
+}
+
+.sorting_asc {
+	background: url('/EForms/images/admin/sort_asc.png') no-repeat
+		center right;
+}
+
+.sorting_desc {
+	background: url('/EForms/images/admin/sort_desc.png') no-repeat
+		center right;
+}
+
+.sorting {
+	background: url('/EForms/images/admin/sort_both.png') no-repeat
+		center right;
+}
+
+.sorting_asc_disabled {
+	background: url('/EForms/images/admin/sort_asc_disabled.png')
+		no-repeat center right;
+}
+
+.sorting_desc_disabled {
+	background: url('/EForms/images/admin/sort_desc_disabled.png')
+		no-repeat center right;
+}
+
+.dataTables_info {
+	width: 88%;
+	float: left;
+	font-size: 13px;
+	background: none repeat scroll 0 0 #E7F5FE;
+	height: 32px;
+	line-height: 32px;
+	/*padding-left:11px;*/
+}
+
+.top .dataTables_info {
+	float: none;
+}
+
+.example_alt_pagination div.dataTables_info {
+	width: 40%;
+}
+
+.dataTables_paginate { /*float: right;
+	text-align: right;
+	 background: none repeat scroll 0 0 #E7F5FE;
+    height: 26px;
+    line-height: 32px;
+   width:12%;
+	padding-top:6px;*/
+	background: none !important;
+}
+
+/* Pagination nested */
+.paginate_disabled_previous,.paginate_enabled_previous,.paginate_disabled_next,.paginate_enabled_next
+	{
+	height: 19px;
+	float: left;
+	cursor: pointer;
+	*cursor: hand;
+	color: #111 !important;
+}
+
+.paginate_disabled_previous:hover,.paginate_enabled_previous:hover,.paginate_disabled_next:hover,.paginate_enabled_next:hover
+	{
+	text-decoration: none !important;
+}
+
+.paginate_disabled_previous:active,.paginate_enabled_previous:active,.paginate_disabled_next:active,.paginate_enabled_next:active
+	{
+	outline: none;
+}
+
+.paginate_disabled_previous,.paginate_disabled_next {
+	color: #666 !important;
+}
+
+.paginate_disabled_previous,.paginate_enabled_previous {
+	padding-left: 23px;
+}
+
+.paginate_disabled_next,.paginate_enabled_next {
+	padding-right: 23px;
+	margin-left: 10px;
+}
+
+.paginate_disabled_previous {
+	background: url('/EForms/images/onlineAppForm/back_disabled.png')
+		no-repeat top left;
+	line-height: 20px;
+}
+
+.paginate_enabled_previous {
+	background: url('/EForms/images/onlineAppForm/back_enabled.png') no-repeat
+		top left;
+	line-height: 20px;
+}
+
+.paginate_enabled_previous:hover {
+	background: url('/EForms/images/onlineAppForm/back_enabled_hover.png')
+		no-repeat top left;
+	line-height: 20px;
+}
+
+.paginate_disabled_next {
+	background: url('/EForms/images/onlineAppForm/forward_disabled.png')
+		no-repeat top right;
+	line-height: 20px;
+}
+
+.paginate_enabled_next {
+	background: url('/EForms/images/onlineAppForm/forward_enabled.png')
+		no-repeat top right;
+	line-height: 20px;
+}
+
+.paginate_enabled_next:hover {
+	background: url('/EForms/images/onlineAppForm/forward_enabled_hover.png')
+		no-repeat top right;
+	line-height: 20px;
+}
+
+.textBox {
+	border: 1px solid #7E9DB9;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 11px;
+	height: 20px;
+	line-height: 20px;
+	width: 150px;
+	padding: 1px;
+}
+
+
+
+.paging_full_numbers { /*width: 145px;*/
+	height: 26px;
+	line-height: 22px;
+	/*padding-right:8px;*/
+	width: auto !important;
+}
+
+/*.paging_full_numbers a:active {
+	outline: none
+}
+
+.paging_full_numbers a:hover {
+	text-decoration: none;
+}
+
+.paging_full_numbers a.paginate_button,
+ 	.paging_full_numbers a.paginate_active {
+	border: 1px solid #aaa;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 2px 5px;
+	margin: 0 3px;
+	cursor: pointer;
+	*cursor: hand;
+	color: #333 !important;
+}
+
+.paging_full_numbers a.paginate_button {
+	background-color: #ddd;
+}
+
+.paging_full_numbers a.paginate_button:hover {
+	background-color: #ccc;
+	text-decoration: none !important;
+}
+
+.paging_full_numbers a.paginate_active {
+	background-color: #99B3FF;
+}*/
+.first {
+	background: url("/EForms/images/onlineAppForm/first.gif") no-repeat scroll
+		left top transparent;
+	margin-right: 3px;
+	padding: 16px 2px 3px 0;
+	width: 18px;
+	float: left;
+	display: block;
+	margin-top: 2px;
+}
+
+._firstD {
+	background: url("/EForms/images/onlineAppForm/first_end.png") no-repeat
+		scroll left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 2px;
+}
+
+.first:hover {
+	background: url("/EForms/images/onlineAppForm/first_hover.gif") no-repeat
+		scroll left top transparent;
+}
+
+.prev {
+	background: url("/EForms/images/onlineAppForm/prev_bttn.gif") no-repeat
+		scroll left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 2px;
+}
+
+._prevD {
+	background: url("/EForms/images/onlineAppForm/prev_end.png") no-repeat
+		scroll left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 2px;
+}
+
+.prev:hover {
+	background: url("/EForms/images/admin/previous_hover.gif")
+		no-repeat scroll left top transparent;
+}
+
+.next {
+	/* background: url("/EForms/images/admin/next_bttn.gif") no-repeat
+		scroll left top transparent; */
+	margin-left: 3px;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 2px;
+}
+
+._nextD {
+	background: url("/EForms/images/onlineAppForm/next_end.png") no-repeat
+		scroll left top transparent;
+	margin-left: 3px;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 2px;
+}
+
+.next:hover {
+	background: url("/EForms/images/admin/next_hover.gif") no-repeat
+		scroll left top transparent;
+}
+
+.last {
+	background: url("/EForms/images/onlineAppForm/last.gif") no-repeat scroll
+		left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 2px;
+}
+
+._lastD {
+	background: url("/EForms/images/onlineAppForm/last_end.png") no-repeat
+		scroll left top transparent;
+	margin-right: 3px;
+	height: 18px;
+	width: 18px;
+	display: block;
+	float: left;
+	margin-top: 2px;
+}
+
+.last:hover {
+	background: url("/EForms/images/onlineAppForm/last_hover.gif") no-repeat
+		scroll left top transparent;
+}
+
+th.sub_tab_head span {
+	float: left;
+	white-space: pre;
+	width: 80%;
+}
+/*css for new ui*/
+.desc {
+	background: #F6F7F9;
+	padding: 5px 10px;
+}
+
+.desc .desc-heading {
+	padding: 0;
+	color: #333;
+	font-size: 14px;
+	font-weight: bold
+}
+
+.desc .desc-text {
+	padding: 3px 0;
+	font-size: 12px;
+	color: #959596
+}
+
+.informantion-summary {
+	padding: 5px 0
+}
+
+.blue-bg {
+	background-color: #2d70b6;
+	width: 100%;
+	line-height: 40px;
+	text-align: right;
+}
+
+.green-btn {
+	background-color: #1cddb6;
+	padding: 5px 10px 5px 10px;;
+	border-radius: 3px;
+	color: #fff;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.green-btn:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+.create-icon {
+	background-image:
+		url(/EForms/images/onlineAppForm/icons/create-icon-small.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	height: 9px;
+	width: 9px;
+	padding-right: 10px;
+}
+
+.reload-icon {
+	background-image:
+		url(/EForms/images/onlineAppForm/icons/reload-icon-small.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	height: 9px;
+	width: 9px;
+	padding-right: 10px;
+}
+
+.page-heading {
+	color: #fa810e;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 10px
+}
+
+.filter-tbl {
+	width: 100%;
+}
+
+.filter-tbl td {
+	line-height: 30px;
+	padding-right: 5px;
+}
+
+.grey-bg {
+	background-color: #F6F2F3;
+	width: 100%;
+	line-height: 40px;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.orange-btn {
+	background-color: #FDA22D;
+	padding: 5px 15px;
+	border-radius: 3px;
+	color: #fff;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.orange-btn:hover {
+	text-decoration: none;
+	color: #fff;
+}
+/*table*/
+.action_listing {
+	background-color: #00aade;
+	border-radius: 3px;
+	padding: 3px 5px
+}
+
+.search {
+	background-image:
+		url(/EForms/images/onlineAppForm/icons/search-icon-small-white.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	display: inline-block;
+	heigth: 10px;
+	width: 10px;
+}
+
+.result-tbl {
+	width: 100%;
+}
+
+.result-tbl tr th {
+	background-color: #00aade;
+	color: #fff;
+	font-size: 11px;
+	font-weight: bold;
+	border-collapse: collapse;
+}
+
+.result-tbl tr td {
+	line-height: 30px;
+	padding: 0px 10px;
+	color: #333;
+	font-size: 11px;
+	border-right: 1px solid #dfdfdf;
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.result-tbl tr td a {
+	color: #0192d5;
+	font-weight: bold;
+	font-size: 11px;
+	text-decoration: none
+}
+
+.result-tbl tr td a:hover {
+	text-decoration: underline
+}
+
+.pagination-new {
+	background-color: #6999cc;
+	width: 98%;
+	line-height: 30px;
+	padding: 0 10px;
+	color: #fff;
+}
+
+.pagination-text {
+	display: inline-block;
+}
+
+.pagination-page {
+	display: inline-block;
+	float: right;
+	padding: 0 20px 0 0
+}
+
+.pagination-page .first {
+	background: url(/EForms/images/onlineAppForm/icons/first.png) no-repeat
+		left center;
+	padding: 10px 10px;
+	display: inline-block;
+	vertical-align: middle;
+	height: 16px;
+}
+
+.pagination-page .first .active:hover {
+	background: url(/EForms/images/onlineAppForm/icons/first-hover.png)
+		no-repeat left center;
+}
+
+.pagination-page .first.active {
+	background: url(/EForms/images/onlineAppForm/icons/first-hover.png)
+		no-repeat left center;
+	cursor: pointer
+}
+
+.pagination-page .last {
+	background: url(/EForms/images/onlineAppForm/icons/last.png) no-repeat
+		left center;
+	padding: 10px 10px;
+	display: inline-block;
+	vertical-align: middle
+}
+
+.pagination-page .last .active:hover {
+	background: url(/EForms/images/onlineAppForm/icons/last-hover.png)
+		no-repeat left center;
+}
+
+.pagination-page .last.active {
+	background: url(/EForms/images/onlineAppForm/icons/last-hover.png)
+		no-repeat left center;
+	cursor: pointer
+}
+
+.pagination-page .prev {
+	background: url(/EForms/images/onlineAppForm/icons/prev.png) no-repeat
+		left center;
+	padding: 10px 15px;
+	display: inline-block;
+	vertical-align: middle
+}
+
+.pagination-page .prev .active:hover {
+	background: url(/EForms/images/onlineAppForm/icons/prev-hover.png)
+		no-repeat left center;
+}
+
+.pagination-page .prev.active {
+	background: url(/EForms/images/onlineAppForm/icons/prev-hover.png)
+		no-repeat left center;
+	cursor: pointer
+}
+
+.pagination-page .next {
+	background: url(/EForms/images/onlineAppForm/icons/next.png) no-repeat
+		left center;
+	padding: 10px 25px;
+	display: inline-block;;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.pagination-page .next .active:hover {
+	background: url(/EForms/images/onlineAppForm/icons/next-hover.png)
+		no-repeat left center;
+}
+
+.pagination-page .next.active {
+	background: url(/EForms/images/onlineAppForm/icons/next-hover.png)
+		no-repeat left center;
+	cursor: pointer
+}
+
+.pagination-page .short {
+	width: 30px;
+	text-align: center;;
+	display: inline-block;
+	color: #757070;
+	font-weight: bold;
+	float: left;
+	margin: 10px 10px;
+}
+
+/*Tab Styling
+.tabs-nav {
+	background: #243b49;
+	height: 30px;
+	line-height: 30px;
+	margin: 0;
+	padding: 0;
+	font-size: 0;
+	padding-top: 7px;
+}
+
+.tabs-nav li {
+	border-radius: 5px 5px 0 0px;
+	overflow: hidden;
+}
+
+.tabs-nav a,.tabs-nav a span {
+	background: #0092d5;
+	color: #f6f8fa;
+	height: 30px;
+	line-height: 30px;
+	margin: 0;
+	padding: 0px 10px;
+	font-size: 14px;
+}
+
+.tabs-nav li.tabs-selected a {
+	background: #F6F7F9;
+	color: #0092d5;
+	height: 30px;
+	line-height: 30px;
+	margin: 0;
+	padding-top: -1px !important;
+	font-size: 14px;
+}
+
+.tabs-nav li.tabs-selected a span {
+	background: #F6F7F9;
+	color: #0092d5;
+	padding-top: 0px !important;
+}
+
+.tabs-nav a:hover,.tabs-nav a span:hover {
+	font-size: 14px;
+	background: #0092d5;
+	color: #F6F7F9;
+	height: 30px;
+	line-height: 30px;
+	margin: 0;
+	text-decoration: none;
+}
+
+!
+important
+
+.ui-tabs .ui-tabs-nav li a {
+	padding: 0 !important
+}
+
+.ui-tabs .ui-tabs-nav li {
+	margin: 0 3px !important
+}
+*/
+.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default
+	{
+	border: 0 !important;
+	background: 0 !important;
+}
+
+.ui-tooltip {
+	max-width: 25px;
+	position: absolute;
+}
+
+/*css for online assessment*/
+.accordian-heading_onlineAssessment {
+	text-indent: 10px;
+	background-color: #f8f8f8;
+	line-height: 40px;
+	min-height: 40px;
+	cursor: pointer;
+	font-size: 16px;
+	font-size: 14px;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.accordian-heading_onlineAssessment:hover {
+	background-color: #86c1e9;
+	color: #fff;
+	font-weight: 600;
+	font-family: 'Open Sans', Arial, Helvetica;
+	text-decoration: none !important
+}
+
+.accordian-heading_onlineAssessment a:hover {
+	color: #fa671d !important;
+	text-decoration: none !important
+}
+
+.accordian-heading-open_onlineAssessment {
+	background-color: #86c1e9;
+	color: #fff;
+	font-weight: 600;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.display-none_onlineAssessment {
+	display: none;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.icon-toggle-close_onlineAssessment {
+	background: url(/EForms/images/onlineAppForm/show.png) no-repeat;
+	padding-right: 15px;
+	height: 15px;
+	width: 15px;
+	float: right;
+	vertical-align: middle;
+	margin-top: 12px;
+	margin-top: 12px;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.icon-toggle-open_onlineAssessment {
+	background: url(/EForms/images/onlineAppForm/hide.png) no-repeat;
+	padding-right: 15px;
+	vertical-align: middle;
+	height: 3px;
+	width: 11px !important;
+	float: right;
+	margin-top: 18px !important;
+	margin-top: 18px;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.accordian-heading_onlineAssessment .heading_onlineAssessment {
+	float: left;
+	font-family: 'Open Sans', Arial, Helvetica;
+	display: inline-block;
+	width: 82%;
+	line-height: 23px;
+}
+
+.accordian-content_onlineAssessment table {
+	
+}
+
+.accordian-content_onlineAssessment table th {
+	font-size: 14px;
+	font-weight: 600;
+	text-indent: 10px;
+	background-color: #eff7fc;
+	height: 35px;
+	line-height: 35px;
+	border-top: 1px solid #fff;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.accordian-content_onlineAssessment table td {
+	font-size: 14px;
+	font-weight: 300;
+	text-indent: 10px;;
+	height: 35px;
+	line-height: 35px;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.accordian-content_onlineAssessment table td a {
+	color: #3295e7;
+	text-decoration: none;
+	cursor: pointer;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.accordian-content_onlineAssessment table td a:visited {
+	color: #3295e7;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.heading-link_onlineAssessment {
+	float: left;
+	display: inline-block;
+	vertical-align: top;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.heading-link_onlineAssessment a {
+	background-color: #fff;
+	height: 25px;
+	padding: 3px 10px;
+	border-radius: 3px;
+	color: #fa671d;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.accordian_onlineAssessment {
+	margin-top: 10px;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.page-heading_onlineAssessment {
+	text-align: left;
+	margin: 5px 0;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.page-heading_onlineAssessment h2 {
+	color: #fa671d;
+	font-size: 30px;
+	font-weight: 600;
+	margin: 0;
+	padding: 0;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+
+.accordian-content_onlineAssessment span {
+	padding: 10px;
+	color: #fa671d;
+	font-size: 14px;
+	font-weight: 300;
+	font-family: 'Open Sans', Arial, Helvetica;
+}
+/*css for online assessment ends*/
+.multiupload-icon {
+	background-image: url(/EForms/images/onlineAppForm/download.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	height: 9px;
+	width: 9px;
+	padding-right: 10px;
+}
+
+.upload-icon {
+	background-image: url(/EForms/images/onlineAppForm/upload.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	height: 9px;
+	width: 9px;
+	padding-right: 10px;
+}
+
+/*new assessment css*/
+@charset "utf-8";
+/* CSS Document */
+.container_oa {
+	display: block;
+	height: auto;
+	margin: 0 auto;
+}
+
+.left_oa {
+	float: left;
+}
+
+.right_oa {
+	float: right;
+}
+
+.green_oa {
+	color: #7CC576;
+}
+
+.red_oa {
+	color: #F36C4F;
+}
+
+.purple_oa {
+	color: #BC8CBE;
+}
+
+.blue_oa {
+	color: #80CBC4;
+}
+
+.pink_oa {
+	color: #F4979F;
+}
+
+.greenTop_oa {
+	border-top: 4px solid #7CC576;
+}
+
+.redTop_oa {
+	border-top: 4px solid #F36C4F;
+}
+
+.pupleTop_oa {
+	border-top: 4px solid #BC8CBE;
+}
+
+.pinkTop_oa {
+	border-top: 4px solid #F4979F;
+}
+
+.blueTop_oa {
+	border-top: 4px solid #80CBC4;
+}
+
+.heading_oa {
+	background: none repeat scroll 0 0 #86c2e7;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 43px;
+	margin-top: 1px;
+	padding: 0 1.5%;
+	height: 44px;
+}
+
+.active_oa {
+	background: none repeat scroll 0 0 #002F4B;
+}
+
+.symbol_oa {
+	font-size: 27px;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.head_title_oa {
+	display: inline-block;
+}
+
+.btn_oa {
+	display: inline-block;
+	padding-right: 13px;
+}
+
+.btn_active_oa {
+	background: none repeat scroll 0 0 #F39C11 !important;
+}
+
+a.test_btn_oa {
+	background: none repeat scroll 0 0 #418dbe;
+	color: #fff;
+	font-size: 13px;
+	padding: 5px 10px;
+	text-decoration: none;
+}
+
+.content_oa {
+	background: none repeat scroll 0 0 #dddddd;
+}
+
+.topTable_oa {
+	padding: 1% 1% 0.1%;
+}
+
+.topTable_oa td {
+	width: 20%;
+}
+
+.report_table_oa {
+	padding: 0.1% 1% 1%;
+}
+
+.table1 {
+	background: none repeat scroll 0 0 #fff;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.table1_oa td {
+	padding-bottom: 1%;
+	padding-top: 1%;
+}
+
+.align_oa {
+	line-height: 21px;
+}
+
+.table2_oa {
+	font-size: 13px;
+	line-height: 25px;
+	text-align: center;
+	width: 100%;
+	vertical-align: middle;
+}
+/*.table2 tr:nth-child(odd){
+   background-color:#ffffff;
+}
+.table2 tr:nth-child(even){
+   
+   background-color:#F5F5F5;
+}*/
+.odd1_oa {
+	background-color: #ffffff;
+}
+
+.even1_oa {
+	background-color: #F5F5F5;
+}
+
+.table2_oa a {
+	color: #459eca;
+	text-decoration: none;
+}
+
+.td_left_oa {
+	float: left;
+	padding-left: 12%;
+}
+
+.td_right_oa {
+	float: right;
+	padding-right: 14%;
+}
+
+.table2_oa th,.table2_oa td {
+	width: 33%;
+}
+
+/*new assessment css ends*/

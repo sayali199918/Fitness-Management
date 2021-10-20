@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+
+.notify{
+	position:absolute;
+	top:-300px;
+	
+	transition:all ease 1s;
+	max-width:80%
+	}
+	
+.notify.shownoti{
+	
+	top:50px;
+	
+	}

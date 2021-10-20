@@ -1,0 +1,372 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	color:#868686}
+
+.has-error .form-control{
+	border-color:#e91019
+	}
+	
+.alert-Note{
+	background-color:#f6f6f6 ;
+}
+ .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label{
+	color:#e91019 }
+
+.modal-header{
+	background-color:#099dcb;
+	color:#fff;}
+	
+.modal-header .close{
+	color:#fff;
+	opacity:1}
+	
+.modal-footer {
+    background-color: #f6f6f6;
+    border-top: 1px solid #e5e5e5;
+    padding: 15px;
+    text-align: center;
+}
+
+
+/* btn */
+
+.btn {
+	border-radius:3px }
+
+.dropdown-fullwidth .caret {
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 2px);
+}
+
+
+.btn-default{
+	color:#555}
+.btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default{
+	background-color:#fff;}
+
+
+
+.btn-default:focus, .btn-default.focus	{	background-color:#fff;}
+.btn-group.open .dropdown-toggle{
+	box-shadow:none;}
+
+a, .btn-link{
+	 color: #23b4ec;
+	 text-decoration:none;
+	 cursor:pointer
+	 }
+	
+
+a:hover, .btn-link:hover{
+	 color: #23b4ec;
+	 text-decoration:none}
+
+
+a, a:active, a:focus, .btn {
+outline: none !important;
+
+
+}
+/* btn */
+.custonform-control{
+background-color:#feffd3 !important;
+height:42px;
+border:1px solid #cccccc !important;
+color: #333 !important;
+    font-size: 16px;	
+}
+.small, small{
+	font-size:90%}
+h1 {
+  font-size: 3.5em;
+  margin: 0.35em 0;
+  font-weight: 100;
+  margin-top:0
+ 
+}
+h2 {
+  font-size: 1.7em;
+  margin-top:0
+ 
+}
+h3 {
+	 font-size: 1.4em;
+  font-weight: 100;
+  margin-top:0
+ 
+}
+
+h4{
+	font-size:1.2em;
+	font-weight: 100;
+	margin-top:0}
+
+
+section{
+	padding-top:30px;
+	padding-bottom:50px;}
+.btn{
+	transition:all 0.2s;}
+.custombtn-default {
+    background-color: #ffffff;
+    border-color: #5fc1ef;
+    color:#5fc1ef;
+}
+
+.custombtn-default:hover {
+	 background-color: #5fc1ef;
+   border-color: #5fc1ef;
+    color:#fff;
+	}
+
+.bredcrum{
+  background: none repeat scroll 0 0 #3c486e;
+  line-height: 24px;
+  color: #d3d2d2;
+  font-size: .8em;
+}
+
+.bredcrum a {
+  color: #13afeb;
+ 
+  padding: 0px 5px;
+  line-height: inherit;
+  
+  
+}
+.navbar {
+  margin-bottom: 0px; width:100%;
+  border-radius:0 !important;
+}
+.navbar-nav  a{color:#fff; font-size: 1.2em;}
+.navbar-nav {
+  margin: 7.5px -15px !important;
+}
+
+.nav > li > a:hover, .nav > li > a:focus,.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{ background-color: transparent;}
+
+
+.navbar-nav > li > .dropdown-menu {
+ transition:all 0.2s ease-in;
+ 
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+ 
+  
+}
+
+
+.open >.dropdown-menu {
+	
+	display: block;
+	
+  transform: translateY(0) !important;
+}
+
+.dropdown-menu > li > a {
+  
+  color: #aaa;
+}
+
+
+.inline-block{display:inline-block}
+
+
+
+
+button[type="button"]{/* margin: 20px 0;*/}
+.checkbox label, .radio label {
+  min-height: 20px;
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+.input-group-addon{
+	background-color:#fff;}
+
+ input[type="text"], input[type="password"]{
+ /* background: none repeat scroll 0 0 #feffd3;
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  color: #333;
+  font-size: 16px;
+  height: 42px;
+  line-height: 42px;
+  margin: 0 25px 20px 0;
+  padding: 0 10px;
+  width: 100%;
+  transition: all 0.2s;
+  background-color: #fff;*/
+}
+
+
+.center-block .fa {
+ /* background-color: #fff;
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  padding: 14px;
+  font-size: 25px;
+  cursor: pointer;
+  position: inherit;*/
+}
+
+
+/* 
+ *  Core Owl Carousel CSS File==============
+ */
+.owl-carousel {
+  display: block;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  /* position relative and z-index fix webkit rendering fonts issue */
+  position: relative;
+  z-index: 1;
+  margin-top:20px;
+}
+.owl-carousel .owl-stage {
+  position: relative;
+  -ms-touch-action: pan-Y;
+}
+.owl-carousel .owl-stage:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.owl-carousel .owl-stage-outer {
+  position: relative;
+  overflow: hidden;
+  /* fix for flashing background */
+  -webkit-transform: translate3d(0px, 0px, 0px);
+}
+.owl-carousel .owl-controls .owl-nav .owl-prev,
+.owl-carousel .owl-controls .owl-nav .owl-next,
+.owl-carousel .owl-controls .owl-dot {
+  cursor: pointer;
+  cursor: hand;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.owl-carousel.owl-loaded {
+  display: block;
+}
+.owl-carousel.owl-loading {
+  opacity: 0;
+  display: block;
+}
+.owl-carousel.owl-hidden {
+  opacity: 0;
+}
+.owl-carousel .owl-refresh .owl-item {
+  display: none;
+}
+.owl-carousel .owl-item {
+  position: relative;
+  min-height: 1px;
+  float: left;
+  -webkit-backface-visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.owl-carousel .owl-item img {
+  /*display: block;
+  width: 100%;
+  -webkit-transform-style: preserve-3d;*/
+}
+.owl-carousel.owl-text-select-on .owl-item {
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
+.owl-carousel .owl-grab {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: -o-grab;
+  cursor: -ms-grab;
+  cursor: grab;
+}
+.owl-carousel.owl-rtl {
+  direction: rtl;
+}
+.owl-carousel.owl-rtl .owl-item {
+  float: right;
+}
+
+/* No Js */
+.no-js .owl-carousel {
+  display: block;
+}
+.owl-nav {
+    text-align: center;
+}
+
+.owl-theme .owl-controls .owl-nav [class*=owl-] {
+  color: #AFC5CE;
+  font-size: 33px;
+  margin: 1px;
+  padding: 1px 2px;
+  
+  display: inline-block;
+  cursor: pointer;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+ 
+ /* 
+ *  Core Owl Carousel CSS File End==============
+ */
+ 
+ 
+ 
+ .progress{
+	 height:6px;
+	 width:80%;
+	 background-color:#ebebeb;
+	 overflow:hidden;
+	 margin-top:10px;
+	 float:left;
+	 
+	 }
+.progresstext{
+	font-size: 12px;
+    line-height: 24px;
+    margin-left: 9px;}
+	 
+	 
+	.progress-bar{
+		background-color:#5fffa2;
+		 height:6px;}
+		 
+		 
+.form-control{
+	box-shadow:none;
+	}
+	
+.form-group {
+	margin-bottom:20px;}
+	
+	
+.modal-dialog {
+    margin: 25px auto !important;
+}
+
+#user_Image_tab_table a:hover {
+	color: #fff !important;
+}

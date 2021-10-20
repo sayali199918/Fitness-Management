@@ -1,0 +1,1047 @@
+function acceptcourse() {
+
+
+
+    var y = '';
+
+    $("#ctl00_PlaceHolderMain_gvCourses").find('input').each(function () {
+        if ($(this).attr('checked') == true) {
+            x = $(this).val();
+            y = y + x + '&';
+            //alert(y);
+
+        }
+    });
+
+    if(y == ''){
+      alert("Please select a course before proceeding");
+	  return false;     
+    }
+    var mystr = y.slice(0, -1);
+
+    var course_array = mystr.split("&");
+    if (tablecheckboxid == 'CheckBoxList1') {
+        var binarystring = arraycontains(course_array, '996') + arraycontains(course_array, '997') + arraycontains(course_array, '998') + arraycontains(course_array, '999');
+    }
+    if (tablecheckboxid == 'CheckBoxList2') {
+        var binarystring = arraycontains(course_array, '984') + arraycontains(course_array, '983') + arraycontains(course_array, '982');
+    }
+    if (tablecheckboxid == 'CheckBoxList3') {
+        var binarystring = arraycontains(course_array, '977') + arraycontains(course_array, '976') + arraycontains(course_array, '975') + arraycontains(course_array, '974');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList4') {
+        var binarystring = arraycontains(course_array, '962');
+    }
+    if (tablecheckboxid == 'CheckBoxList5') {
+        var binarystring = arraycontains(course_array, '961');
+    }
+    if (tablecheckboxid == 'CheckBoxList6') {
+        var binarystring = arraycontains(course_array, '960') + arraycontains(course_array, '959');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList7') {
+        var binarystring = arraycontains(course_array, '958');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList8') {
+        var binarystring = arraycontains(course_array, '957');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList9') {
+        var binarystring = arraycontains(course_array, '956');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList10') {
+        var binarystring = arraycontains(course_array, '955');
+    }
+    if (tablecheckboxid == 'CheckBoxList11') {
+        var binarystring = arraycontains(course_array, '954');
+    }
+    if (tablecheckboxid == 'CheckBoxList12') {
+        var binarystring = arraycontains(course_array, '953');
+    }
+    if (tablecheckboxid == 'CheckBoxList13') {
+        var binarystring = arraycontains(course_array, '952');
+    }
+    if (tablecheckboxid == 'CheckBoxList14') {
+        var binarystring = arraycontains(course_array, '951');
+    }
+    if (tablecheckboxid == 'CheckBoxList15') {
+        var binarystring = arraycontains(course_array, '950') + arraycontains(course_array, '949') + arraycontains(course_array, '948');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList16') {
+        var binarystring = arraycontains(course_array, '943');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList17') {
+        var binarystring = arraycontains(course_array, '942') + arraycontains(course_array, '941') + arraycontains(course_array, '940');
+    }
+    if (tablecheckboxid == 'CheckBoxList18') {
+        var binarystring = arraycontains(course_array, '939');
+    }
+    if (tablecheckboxid == 'CheckBoxList19') {
+        var binarystring = arraycontains(course_array, '938');
+    }
+    if (tablecheckboxid == 'CheckBoxList20') {
+        var binarystring = arraycontains(course_array, '937');
+    }
+    if (tablecheckboxid == 'CheckBoxList21') {
+        var binarystring = arraycontains(course_array, '936');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList22') {
+        var binarystring = arraycontains(course_array, '935');
+    }
+    if (tablecheckboxid == 'CheckBoxList23') {
+        var binarystring = arraycontains(course_array, '934');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList24') {
+        var binarystring = arraycontains(course_array, '933') + arraycontains(course_array, '932') + arraycontains(course_array, '931');
+    }
+    if (tablecheckboxid == 'CheckBoxList25') {
+        var binarystring = arraycontains(course_array, '926');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList26') {
+        var binarystring = arraycontains(course_array, '925') + arraycontains(course_array, '924');
+    }
+    if (tablecheckboxid == 'CheckBoxList27') {
+        var binarystring = arraycontains(course_array, '922');
+    }
+    if (tablecheckboxid == 'CheckBoxList28') {
+        var binarystring = arraycontains(course_array, '921');
+    }
+    if (tablecheckboxid == 'CheckBoxList29') {
+        var binarystring = arraycontains(course_array, '920');
+    }
+    if (tablecheckboxid == 'CheckBoxList30') {
+        var binarystring = arraycontains(course_array, '919') + arraycontains(course_array, '918');
+    }
+    if (tablecheckboxid == 'CheckBoxList31') {
+        var binarystring = arraycontains(course_array, '916') + arraycontains(course_array, '915');
+    }
+    if (tablecheckboxid == 'CheckBoxList32') {
+        var binarystring = arraycontains(course_array, '914');
+    }
+    if (tablecheckboxid == 'CheckBoxList33') {
+        var binarystring = arraycontains(course_array, '913');
+    }
+    if (tablecheckboxid == 'CheckBoxList34') {
+        var binarystring = arraycontains(course_array, '912');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList35') {
+        var binarystring = arraycontains(course_array, '911');
+    }
+    if (tablecheckboxid == 'CheckBoxList36') {
+        var binarystring = arraycontains(course_array, '910');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList37') {
+        var binarystring = arraycontains(course_array, '909') + arraycontains(course_array, '908') + arraycontains(course_array,'907');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList38') {
+        var binarystring = arraycontains(course_array, '906');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList39') {
+        var binarystring = arraycontains(course_array, '905');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList40') {
+        var binarystring = arraycontains(course_array, '904');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList41') {
+        var binarystring = arraycontains(course_array, '903');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList42') {
+        var binarystring = arraycontains(course_array, '902') + arraycontains(course_array, '901');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList43') {
+        var binarystring = arraycontains(course_array, '899') + arraycontains(course_array, '898') + arraycontains(course_array, '897');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList44') {
+        var binarystring = arraycontains(course_array, '896');
+    }
+    if (tablecheckboxid == 'CheckBoxList45') {
+        var binarystring = arraycontains(course_array, '895') + arraycontains(course_array, '894') + arraycontains(course_array, '893');
+    }
+    if (tablecheckboxid == 'CheckBoxList46') {
+        var binarystring = arraycontains(course_array, '888');
+    }
+
+    if (tablecheckboxid == 'CheckBoxList47') {
+        var binarystring = arraycontains(course_array, '887');
+    }
+    if (tablecheckboxid == 'CheckBoxList48') {
+        var binarystring = arraycontains(course_array, '886') + arraycontains(course_array, '885') + arraycontains(course_array, '884');
+    }
+    if (tablecheckboxid == 'CheckBoxList49') {
+        var binarystring = arraycontains(course_array, '879');
+    }
+    if (tablecheckboxid == 'CheckBoxList50') {
+        var binarystring = arraycontains(course_array, '878');
+    }
+    if (tablecheckboxid == 'CheckBoxList51') {
+        var binarystring = arraycontains(course_array, '877');
+    }
+    if (tablecheckboxid == 'CheckBoxList52') {
+        var binarystring = arraycontains(course_array, '876') + arraycontains(course_array, '875');
+    }
+    if (tablecheckboxid == 'CheckBoxList53') {
+        var binarystring = arraycontains(course_array, '874') + arraycontains(course_array, '873') + arraycontains(course_array, '872') + arraycontains(course_array, '871');
+    }
+    if (tablecheckboxid == 'CheckBoxList54') {
+        var binarystring = arraycontains(course_array, '870');
+    }
+    if (tablecheckboxid == 'CheckBoxList55') {
+        var binarystring = arraycontains(course_array, '869');
+    }
+    if (tablecheckboxid == 'CheckBoxList56') {
+        var binarystring = arraycontains(course_array, '868');
+    }
+    if (tablecheckboxid == 'CheckBoxList57') {
+        var binarystring = arraycontains(course_array, '867') + arraycontains(course_array, '866');
+    }
+    if (tablecheckboxid == 'CheckBoxList58') {
+        var binarystring = arraycontains(course_array, '864');
+    }
+    if (tablecheckboxid == 'CheckBoxList59') {
+        var binarystring = arraycontains(course_array, '863');
+    }
+    if (tablecheckboxid == 'CheckBoxList60') {
+        var binarystring = arraycontains(course_array, '862');
+    }
+    if (tablecheckboxid == 'CheckBoxList61') {
+        var binarystring = arraycontains(course_array, '861');
+    }
+    if (tablecheckboxid == 'CheckBoxList62') {
+        var binarystring = arraycontains(course_array, '860');
+    }
+
+
+    var rownum = bin2dec(binarystring);
+
+    getrowdata(tablecheckboxid, rownum);
+    
+ // changes for universities
+     var q = '';
+
+    $("#ctl00_PlaceHolderMain_gvUniversities").find('input').each(function () {
+        if ($(this).attr('checked') == true) {
+            p = $(this).val();
+            q = q + p + ',';
+           }
+    });
+
+
+ 	if(q == ''){
+      alert("Please select University before proceeding");
+	  return false;     
+    }else{
+         q = q.slice(0,q.length-1); 
+         document.getElementById("txtCourseUniversity").value = q;
+    }
+
+// end:universities
+    
+    
+
+}
+
+
+
+
+function changetotalamount(valueindex) {
+
+    var tableid = $(prevCheckboxList).attr('id');
+    rownum = tableid.substring(12);
+
+    if ((rownum >= 18 && rownum <= 25) || (rownum >= 29 && rownum <= 30) || (rownum == 32) || (rownum == 33) || (rownum == 36) || (rownum == 43) || (rownum == 50)) {
+        if (valueindex == 2 || valueindex == 3) {
+            
+            document.getElementById('txt_Amounthidden').value = 500;
+            document.getElementById('testcentertr').style.display = 'none';
+
+        }
+
+        if (valueindex == 1) {
+
+            document.getElementById('txt_Amounthidden').value = 1500;
+            document.getElementById('testcentertr').style.display = '';
+
+        }
+    }
+}
+
+// arrays
+var categoryarray = new Array("General", "Foriegn", "NRI");
+var testcenterarray = new Array("AHMEDABAD", "ALLAHABAD", "BANGALORE ", "BHOPAL ", "BHUBANESHWAR", "CHANDIGARH ", "CHENNAI", "COIMBATORE ", "DELHI ", "ERNAKULAM", "GANGTOK", "GUWAHATI", "HYDERABAD ", "JAIPUR", "JAMSHEDPUR", "KANPUR", "KOTA ", "KOLKATA", "LUCKNOW ", "MANIPAL", "MANGALORE", "MUMBAI", "PATNA", "PUNE", "RANCHI", "VARANASI", "VIJAYAWADA");
+
+
+
+function addOption(selectbox, text, value) {
+
+    var optn = document.createElement("OPTION");
+    optn.text = text;
+    optn.value = value;
+    selectbox.options.add(optn);
+}
+
+
+
+function showdatetimepicker(fieldid) {
+
+    jQuery("#" + fieldid).datepicker({
+        yearRange: '1900:2100'
+
+    });
+
+    document.getElementById(fieldid).focus();
+
+}
+
+
+
+
+
+function doValidate() {
+
+
+    var photographFile=document.onlineAppForm.photographFile.value;
+ 	var signatureImgFile=document.onlineAppForm.signatureImgFile.value;
+    var parentSignatureImgFile=document.onlineAppForm.parentSignatureImgFile.value;
+    var thumbImgFile=document.onlineAppForm.thumbImgFile.value;
+ 
+    
+
+    if (document.getElementById("txtAppName").value == '') {
+        $('#container-11').triggerTab(1);
+        alert("Please Enter the Applicant Full Name.");
+       
+        return false;
+    }
+    if (document.getElementById("appDob").value == '') {
+         $('#container-11').triggerTab(1);
+        alert("Please Enter the Applicant Date of Birth.");
+        return false;
+    }
+    if (document.getElementById("txtAppSex").value == '0') {
+        $('#container-11').triggerTab(1);
+        alert("Please select Applicant's gender.");
+        return false;
+    }
+    if (document.getElementById("txtAppNationality").value == '0') {
+         $('#container-11').triggerTab(1);
+        alert("Please select your Nationality.");
+        return false;
+    }
+
+	if(document.getElementById("txtParentName").value == ''){
+	  	$('#container-11').triggerTab(1);
+		alert("Please enter Parent's name.");
+        return false;
+    }
+
+	if(document.getElementById("txtEmail").value == ''){
+		$('#container-11').triggerTab(1);
+		alert("Please enter email id.");
+        return false;
+    }
+
+	if(document.getElementById("txtConfirmEmail").value == ''){
+		$('#container-11').triggerTab(1);
+		alert("Please confirm email id.");
+        return false;
+    }
+
+	if(document.getElementById("txtEmail").value != document.getElementById("txtConfirmEmail").value){
+		$('#container-11').triggerTab(1);
+		alert("The confirmed email id does not match with email id.");
+        return false;
+    }
+    
+    
+
+	if(!validateEmail(document.getElementById('txtEmail').value,false)){
+	  $('#container-11').triggerTab(1);	
+	  alert('Invalid Email ID format valid Email Id - name@org.com or name@org.co.in ' );
+ 	//document.forms[0].emailId.focus();
+	return false;
+    }
+    
+    if(!validateEmail(document.getElementById('txtConfirmEmail').value,false)){
+      $('#container-11').triggerTab(1);	
+	  alert('Invalid Email ID format valid Email Id - name@org.com or name@org.co.in ' );
+ 	//document.forms[0].emailId.focus();
+	return false;
+    }
+
+
+	if(document.getElementById('txtEmail').value == document.getElementById("txtAltEmail").value){
+	$('#container-11').triggerTab(1);
+	alert("Alternate Email can not same as Email.");
+	return false;
+	}
+	
+	
+	if(document.getElementById("txtPhotopath").value == ''){
+		$('#container-11').triggerTab(1);
+		alert("Please upload latest photo.");
+        return false;
+	}
+
+	if(document.getElementById("txtSignaturepath").value == ''){
+		 $('#container-11').triggerTab(1);
+         alert("Please upload scanned signature image.");
+        return false;
+	}
+
+	if(document.getElementById("txtThumbpath").value == ''){
+		$('#container-11').triggerTab(1);
+		alert("Please upload scanned thumb impression image.");
+        return false;
+	}
+
+    if(document.getElementById("txtParentSignpath").value == ''){
+    	 $('#container-11').triggerTab(1);
+		 alert("Please upload scanned parent signature image.");
+        return false;
+	}
+
+ 
+ 
+ 	if( !( (photographFile.indexOf(".jpeg")>-1) || (photographFile.indexOf(".gif")>-1) || (photographFile.indexOf(".JPEG")>-1) || (photographFile.indexOf(".GIF")>-1) ) )
+	 {
+ 	$('#container-11').triggerTab(1);
+ 	alert("Please upload latest photo in 'jpeg' or 'gif' format.");
+ 	return false;
+ 	}
+ 
+ 	if( !( (signatureImgFile.indexOf(".jpeg")>-1) || (signatureImgFile.indexOf(".gif")>-1) || (signatureImgFile.indexOf(".JPEG")>-1) || (signatureImgFile.indexOf(".GIF")>-1) ) )
+ 	{
+ 	$('#container-11').triggerTab(1);
+ 	alert("Please upload scanned signature image in 'jpeg' or 'gif'.");
+ 	return false;
+	 }
+ 
+ 	if( !( (thumbImgFile.indexOf(".jpeg")>-1) || (thumbImgFile.indexOf(".gif")>-1) || (thumbImgFile.indexOf(".JPEG")>-1) || (thumbImgFile.indexOf(".GIF")>-1) ) )
+ 	{
+ 	$('#container-11').triggerTab(1);
+ 	alert("Please upload scanned thumb impression image in 'jpeg' or 'gif' format.");
+ 	return false;
+ 	}
+ 
+ 	
+ 	if( !( (parentSignatureImgFile.indexOf(".jpeg")>-1) || (parentSignatureImgFile.indexOf(".gif")>-1) || (parentSignatureImgFile.indexOf(".JPEG")>-1) || (parentSignatureImgFile.indexOf(".GIF")>-1) ) )
+ 	{
+ 	$('#container-11').triggerTab(1);
+ 	alert("Please upload scanned parent signature image in 'jpeg' or 'gif' format.");
+ 	return false;
+ 	}
+ 	
+	
+
+    if (document.getElementById("txtCategory").value == '0') {
+    	$('#container-11').triggerTab(3);
+        alert("Please select a Category.");
+        return false;
+    }
+
+	
+
+    if ((document.getElementById('testcentertr').style.display != 'none')) {
+        if (document.getElementById("txtTC1").value == '0') {
+            $('#container-11').triggerTab(3);
+            alert("Please select a Test Center 1.");
+            return false;
+        }
+
+        if ((document.getElementById('testcenterchoicetd2').style.display != 'none')) {
+            if (document.getElementById("txtTC2").value == '0') {
+                $('#container-11').triggerTab(3);
+                alert("Please select a Test Center 2.");
+                return false;
+            }
+            
+            if(document.getElementById("txtTC1").value == document.getElementById("txtTC2").value){
+             $('#container-11').triggerTab(3);
+             alert("Please select different Test Center 2, Test Center 2 should not same as Test Center 1.");
+             return false;
+            
+            }
+            
+            
+            
+        }
+
+    }
+
+    if (document.getElementById('testcenterchoicetd2').style.display != 'none') {
+        if (document.getElementById("txtTC1").value == '0') {
+            $('#container-11').triggerTab(3);
+            alert("Please select a Test Center 1");
+            return false;
+        }
+
+        if (document.getElementById("txtTC2").value == '0') {
+            $('#container-11').triggerTab(3);
+            alert("Please select a Test Center 2.");
+            return false;
+        }
+        
+         if(document.getElementById("txtTC1").value == document.getElementById("txtTC2").value){
+             $('#container-11').triggerTab(3);
+             alert("Please select different Test Center 2, Test Center 2 should not same as Test Center 1.");
+             return false;
+            
+            }
+           
+        
+    }
+
+
+		
+
+	if(document.getElementById('choose_dd').style.display != 'none'){
+			if(document.getElementById("txt_DD_NO").value == ''){
+			  $('#container-11').triggerTab(4);
+			  alert("Please enter the DD Number.");
+			  return false;
+            } 
+			
+			if(document.getElementById('dt_DD').value == ''){
+              $('#container-11').triggerTab(4);
+              alert("Please select the DD date");
+			  return false;
+            } 
+
+			if(document.getElementById('dd_Amount').value == ''){
+				$('#container-11').triggerTab(4);
+				alert("Please select course to know the DD Amount.");
+				return false;
+			}
+
+			if(document.getElementById('txt_DD_Drawn_Branch').value == ''){
+				$('#container-11').triggerTab(4);
+				alert("Please enter the DD Drawn Bank Branch Name.");
+				return false;
+			}
+
+            if(document.getElementById('txt_DD_Issue_Branch').value == ''){
+				$('#container-11').triggerTab(4);
+				alert("Please enter the DD Issuing Bank Branch Name.");
+				return false;
+			}
+			
+			if(document.getElementById('txt_DD_Code').value == ''){
+				$('#container-11').triggerTab(4);
+				alert("Please enter the DD Code.");
+				return false;
+			}	
+
+	}
+
+	
+
+
+    
+    if(document.getElementById("acceptanceCHK").checked == false){
+        $('#container-11').triggerTab(4);
+        alert("Please accept the Terms and Conditions.");
+		return false;
+    }
+
+
+	
+return true;
+}
+
+
+
+function view(id) {
+    document.getElementById('choose_dd').style.display = "none";
+    document.getElementById('choose_netbank').style.display = "none";
+    document.getElementById('choose_challan').style.display = "none";
+    ge = document.getElementById('choose_' + id.value);
+
+    document.getElementById("payment_mode").value = id.value;
+	//alert(id);
+	//alert(document.getElementById("payment_mode").value);
+	if(id.value == "dd"){
+      document.getElementById("dd_Amount").value = document.getElementById("txt_Amount").value
+    }
+
+    if(id.value == "netbank"){
+	  document.getElementById("onlineAmount").value = document.getElementById("txt_Amount").value;	
+	  document.getElementById("billing_cust_name").value = document.getElementById("txtAppName").value;
+	  
+	  var address_1 = document.getElementById("txtAddress1").value;
+	  var address_2 = document.getElementById("txtAddress2").value;
+	  var address_3 = document.getElementById("txtAddress3").value;
+	  
+	  var address = address_1 + "," + address_2 + ","+address_3;
+	  
+	    document.getElementById("isRedirect").value = "N";
+	  	document.getElementById("billing_cust_address").value = address
+		document.getElementById("billing_cust_city").value = document.getElementById("txtCity").value;
+		document.getElementById("billing_cust_state").value = ""			
+		document.getElementById("billing_zip_code").value = document.getElementById("txtPincode").value;	
+		document.getElementById("billing_cust_country").value = "";
+		document.getElementById("billing_cust_tel").value = document.getElementById("txtMobile").value;
+		document.getElementById("billing_cust_email").value = document.getElementById("txtEmail").value;
+		
+		
+		
+		document.getElementById("delivery_cust_name").value = document.getElementById("txtAppName").value;			
+		document.getElementById("delivery_cust_address").value = address
+		document.getElementById("delivery_cust_city").value = document.getElementById("txtCity").value;
+		document.getElementById("delivery_cust_state").value = ""
+		document.getElementById("delivery_zip_code").value = document.getElementById("txtPincode").value;
+		document.getElementById("delivery_cust_country").value =""			
+		document.getElementById("delivery_cust_tel").value = document.getElementById("txtMobile").value;
+		document.getElementById("delivery_cust_notes").value = "SUB-MERCHANT TEST";
+		  
+	  
+    }
+
+    ge.style.display = "block";
+}
+
+var tablecheckboxid;
+var prevCheckboxList;
+
+
+function doCourseSelectionTasks(checkboxList) {
+    tablecheckboxid = $(checkboxList).attr('id');
+    //alert(tablecheckboxid);
+    if (typeof prevCheckboxList != 'undefined' && prevCheckboxList != checkboxList) {
+        $(prevCheckboxList).find('input').each(function () {
+            $(this).attr('checked', false);
+        });
+    }
+    prevCheckboxList = checkboxList;
+}
+
+//added by sourabh
+
+
+
+function arraycontains(str, arrayelement) {
+    for (var i = 0; i < str.length; i++) {
+        if (str[i] == arrayelement) {
+            return '1';
+        }
+    }
+    return '0';
+
+}
+
+
+
+function getrowdata(groupcode, n) {
+    //alert(n);
+    var groupcodeattr;
+    var coursecodeattr;
+    var dobattr;
+    var amountattr;
+
+    var count = 1;
+
+    $("#table" + groupcode + " #" + groupcode + "_r" + n).find('td').each(function () {
+
+        var x = $(this).html();
+
+        if (count == 1) {
+            groupcodeattr = x;
+			//alert(x);
+        }
+        if (count == 3) {
+            coursecodeattr = x
+        }
+        if (count == 4) {
+            categorycode = x
+        }
+        if (count == 6) {
+
+            testcenterattr = x
+
+        }
+        if (count == 8) {
+            dobattr = x
+        }
+        if (count == 9) {
+            amountattr = x
+        }
+
+        count++;
+    });
+    validate(groupcodeattr, coursecodeattr, testcenterattr, dobattr, amountattr, categorycode)
+}
+
+
+function bin2dec(init) {
+    var power = init.length;
+    var output = 0;
+    for (i = 0; i <= power; i++) {
+        if (init.charAt(i) == 0) {
+            var preout = 0;
+        } else {
+            var xty = power - i - 1;
+            var preout = Math.pow(2, xty);
+        }
+        var output = output + preout;
+    }
+    return output;
+}
+
+
+
+function validate(groupcodeattr, coursecodeattr, testcenterattr, dobattr, amountattr, categorycode) {
+
+    var selecttestempty1 = "";
+    selecttestempty1 += "1. <select style=\"width: 300px;\"  class=\" Country_field\" name=\"txtTC1\" id=\"txtTC1\">";
+    selecttestempty1 += "	<option value=\"0\" selected=\"selected\">---Select---<\/option>";
+    selecttestempty1 += "";
+    selecttestempty1 += "";
+    selecttestempty1 += "<\/select>";
+
+    var selecttestempty2 = "";
+    selecttestempty2 += "2. <select style=\"width: 300px;\"  class=\" Country_field\" name=\"txtTC2\" id=\"txtTC2\">";
+    selecttestempty2 += "	<option value=\"0\" selected=\"selected\">---Select---<\/option>";
+    selecttestempty2 += "	";
+    selecttestempty2 += "";
+    selecttestempty2 += "<\/select> ";
+
+    var categoryselectstr = "";
+    categoryselectstr += "<select id=\"txtCategory\" name=\"txtCategory\" class=\" Country_field\"  onchange='changetotalamount(this.value)'>";
+    categoryselectstr += "       ";
+    categoryselectstr += "          <option value=\"0\">-----Select-----<\/option>";
+    categoryselectstr += "       ";
+    categoryselectstr += "         <\/select>";
+
+    document.getElementById('categoryselecttd').innerHTML = categoryselectstr;
+    document.getElementById('testcenterchoicetd1').innerHTML = selecttestempty1;
+    document.getElementById('testcenterchoicetd2').innerHTML = selecttestempty2;
+
+    document.getElementById('txtCourseGroup').value = groupcodeattr;
+    document.getElementById('txtCourses').value = coursecodeattr;
+    document.getElementById('txt_Amount').value = amountattr;
+    document.getElementById('dob_check').value = dobattr;
+
+	document.getElementById("dd_Amount").value = document.getElementById("txt_Amount").value;
+	document.getElementById("onlineAmount").value = document.getElementById("txt_Amount").value;	
+    
+
+    var testcenterattr_array = testcenterattr.split(",");
+    //alert("array length = "+testcenterattr_array.length);
+	//alert(testcenterattr);
+if(testcenterattr=="")
+{
+	document.getElementById('testcenterchoicetd2').style.display = 'none';
+                document.getElementById('testcentertr').style.display = 'none';
+}
+		
+	else{
+    if (testcenterattr_array.length == 1) {
+
+        for (var i = 0; i < testcenterattr_array.length; ++i) {
+            var tempvalue = parseInt(testcenterattr_array[i]) - 1;
+            var x = testcenterarray[tempvalue];
+            if (x) {
+                addOption(document.getElementById('txtTC1'), x, i + 1);
+                document.getElementById('testcenterchoicetd2').style.display = 'none';
+                document.getElementById('testcentertr').style.display = '';
+            }
+
+        }
+    } else {
+
+        for (var i = 0; i < testcenterattr_array.length; ++i) {
+            var tempvalue = parseInt(testcenterattr_array[i]) - 1;
+            var x = testcenterarray[tempvalue];
+            if (x) {
+                addOption(document.getElementById('txtTC1'), x, i + 1);
+                addOption(document.getElementById('txtTC2'), x, i + 1);
+                document.getElementById('testcentertr').style.display = '';
+                document.getElementById('testcenterchoicetd2').style.display = '';
+            } else {
+                document.getElementById('testcentertr').style.display = 'none';
+                document.getElementById('testcenterchoicetd2').style.display = 'none';
+
+            }
+
+        }
+    }
+}
+    var categorycode_array = categorycode.split(",");
+
+    for (var i = 0; i < categorycode_array.length; ++i) {
+        var tempvaluec = parseInt(categorycode_array[i]) - 1;
+        var xc = categoryarray[tempvaluec];
+
+        addOption(document.getElementById('txtCategory'), xc, i + 1);
+    }
+
+    CompareDates("dob_check", "appDob");
+
+}
+
+
+function CompareDates(dobattr, appdob) {
+    var str1 = document.getElementById(appdob).value;
+    var str2 = document.getElementById(dobattr).value;
+    var mon1 = parseInt(str1.substring(0, 2), 10);
+    var dt1 = parseInt(str1.substring(3, 5), 10);
+    var yr1 = parseInt(str1.substring(6, 10), 10);
+    var dt2 = parseInt(str2.substring(0, 2), 10);
+    var mon2 = parseInt(str2.substring(3, 5), 10);
+    var yr2 = parseInt(str2.substring(6, 10), 10);
+    var date1 = new Date(yr1, mon1, dt1);
+    var date2 = new Date(yr2, mon2, dt2);
+
+
+    if (date2 < date1) {
+        alert("Applicant's Date of Birth cannot be greater than " + str2);
+        return false;
+    }
+
+}
+
+function onlyAlpha_forName(key,e)
+{
+
+if (navigator.appName =="Microsoft Internet Explorer"){
+	var oKey = event.keyCode;
+	
+	
+
+	
+	if((oKey > 64 && oKey < 91) || (oKey > 96 && oKey < 123) || (oKey == 32) || (oKey == 46) || (oKey == 39))
+	{
+		return true;
+	}
+	else
+	{
+		//alert ('Only Alphanumeric in this field.');
+	}
+}else{
+
+	var oKey = e.charCode;
+	
+	
+	if((oKey > 64 && oKey < 91) || (oKey > 96 && oKey < 123) || (oKey == 0) || (oKey == 32) || (oKey == 46) || (oKey == 39))
+	{
+		return true;
+	}
+	else
+	{
+		
+	}
+}
+	
+	return false;
+}
+
+function isNumber(key,event) {
+ 	var keyCode;
+	var isIE;
+
+	if(navigator.appName == "Microsoft Internet Explorer" || navigator.appName == "Netscape"){  
+		keyCode = event.keyCode;
+		
+		isIE = 1;
+		if(navigator.appName == "Netscape"){
+		    keyCode = event.charCode;		   
+			isIE = 0;
+		}
+	}else{
+		keyCode = event.charCode;
+		isIE = 0;
+	}
+		  
+			if(isIE == 1 ){
+			if(!((keyCode >= 48 && keyCode <= 57) ))
+			{
+			event.returnValue = false;
+				}
+			}
+			else{
+			if(!((keyCode >= 48 && keyCode <= 57) || keyCode == 0))
+			{
+			
+				event.preventDefault();								
+			}
+						
+	  }
+}
+
+
+
+
+function onlyAlphaNumeric(key,e)
+{
+
+if (navigator.appName =="Microsoft Internet Explorer"){
+	var oKey = event.keyCode;
+	
+	
+
+	
+	if((oKey > 64 && oKey < 91) || (oKey > 96 && oKey < 123) || (oKey == 32) || (oKey == 46) || (oKey == 39) || (oKey >= 48 && oKey <= 57))
+	{
+		return true;
+	}
+	else
+	{
+		//alert ('Only Alphanumeric in this field.');
+	}
+}else{
+
+	var oKey = e.charCode;
+	
+	
+	if((oKey > 64 && oKey < 91) || (oKey > 96 && oKey < 123) || (oKey == 0) || (oKey == 32) || (oKey == 46) || (oKey == 39) || (oKey >= 48 && oKey <= 57))
+	{
+		return true;
+	}
+	else
+	{
+		
+	}
+}
+	
+	return false;
+}
+
+
+
+
+
+function onlyEmail(key,e)
+{
+	if (navigator.appName =="Microsoft Internet Explorer"){
+	var oKey = event.keyCode;
+	
+
+	
+	
+	if(oKey == 46 || oKey == 95 || (oKey > 47 && oKey <58) || (oKey >= 64 && oKey < 91) || (oKey > 96 && oKey < 123))
+	{
+		return true;
+	}
+	else
+	{
+		
+	}}else{
+	
+	var oKey = e.charCode;
+
+	
+	if(oKey == 46 || oKey == 95 || (oKey > 47 && oKey <58) || (oKey >= 64 && oKey < 91) || (oKey > 96 && oKey < 123 || oKey==0))
+	{
+		return true;
+	}
+	else
+	{
+		//alert ('Only Alphanumeric in this field.');
+	}
+	
+	
+	
+	
+	}
+	
+	return false;
+}
+
+function validateEmail(addr,db) {
+
+if (addr == '') return true;
+var invalidChars = '\/\'\\ ";:?!()[]\{\}^|<>#$!~`^';
+for (i=0; i<invalidChars.length; i++) {
+   if (addr.indexOf(invalidChars.charAt(i),0) > -1) {
+      if (db) alert('email address contains invalid characters');
+      return false;
+   }
+}
+for (i=0; i<addr.length; i++) {
+   if (addr.charCodeAt(i)>127) {
+      if (db) alert("email address contains non ascii characters.");
+      return false;
+   }
+}
+
+var atPos = addr.indexOf('@',0);
+if (atPos == -1) {
+   if (db) alert('email address must contain an @');
+   return false;
+}
+if (atPos == 0) {
+   if (db) alert('email address must not start with @');
+   return false;
+}
+if (addr.indexOf('@', atPos + 1) > - 1) {
+   if (db) alert('email address must contain only one @');
+   return false;
+}
+if (addr.indexOf('.', atPos) == -1) {
+   if (db) alert('email address must contain a period in the domain name');
+   return false;
+}
+if (addr.indexOf('@.',0) != -1) {
+   if (db) alert('period must not immediately follow @ in email address');
+   return false;
+}
+if (addr.indexOf('.@',0) != -1){
+   if (db) alert('period must not immediately precede @ in email address');
+   return false;
+}
+if (addr.indexOf('..',0) != -1) {
+   if (db) alert('two periods must not be adjacent in email address');
+   return false;
+}
+var suffix = addr.substring(addr.lastIndexOf('.')+1);
+if (suffix.length != 2 && suffix != 'com' && suffix != 'net' && suffix != 'org' && suffix != 'edu' && suffix != 'int' && suffix != 'mil' && suffix != 'gov' & suffix != 'arpa' && suffix != 'biz' && suffix != 'aero' && suffix != 'name' && suffix != 'coop' && suffix != 'info' && suffix != 'pro' && suffix != 'museum') {
+   if (db) alert('invalid primary domain in email address');
+   return false;
+}
+return true;
+}
+
+
+function getViewDetails_old(){
+
+  			   document.getElementById("appName").value =arrInrVal.get(0);
+			   document.getElementById("appDOB").value =arrInrVal.get(1);
+			   document.getElementById("appSex").value =arrInrVal.get(2);
+			   document.getElementById("appNationality").value =arrInrVal.get(3);
+			   document.getElementById("appParentName").value =arrInrVal.get(4);
+			   document.getElementById("appFullAddress").value =arrInrVal.get(5);
+			   document.getElementById("appTelephone").value =arrInrVal.get(6);
+			   document.getElementById("appMobile").value =arrInrVal.get(7);
+			   document.getElementById("appEmail").value =arrInrVal.get(8);
+			   document.getElementById("appAlternateEmail").value =arrInrVal.get(9);
+			   document.getElementById("appPresentStudInsitute").value =arrInrVal.get(10);
+               document.getElementById("appQualifyingExam").value =arrInrVal.get(11);
+               document.getElementById("appBoardUniversity").value =arrInrVal.get(12);
+               document.getElementById("appYearOfPassing").value =arrInrVal.get(13);
+               document.getElementById("appCourses").value ='Cources:'+arrInrVal.get(14)+' (Group'+arrInrVal.get(15)+')';
+               document.getElementById("appCategoury").value =arrInrVal.get(16);
+               document.getElementById("appTestCentreChoices").value =arrInrVal.get(17);
+               document.getElementById("appCourseCost").value =arrInrVal.get(18);
+               document.getElementById("appPaymentMode").value =arrInrVal.get(19);
+               document.getElementById("appPaymentStatus").value =arrInrVal.get(20);
+               document.getElementById("appPhotoImgPath").src =arrInrVal.get(22);
+               document.getElementById("appSignatureImgPath").src =arrInrVal.get(23);
+               document.getElementById("appThumbImgPath").src =arrInrVal.get(24);
+    
+}

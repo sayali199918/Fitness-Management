@@ -1,0 +1,1538 @@
+/*setTimeout("if(document.getElementById('footer')!=null && document.getElementById('footerHolder')!=null){	var child = document.getElementById('footerHolder');	var parent = document.getElementById('footer');	parent.removeChild(child);}",500);
+
+var countries = new Array();
+var states = new Array();
+var districts = new Array();
+countries = ['2,Afghanistan', '3,Albania', '4,Algeria', '5,Ambia', '6,American Samoa', '7,Andorra', '8,Angola', '9,Anguilla', '10,Antigua And Barbuda', '11,Argentina', '12,Armenia', '13,Aruba', '14,Australia', '15,Austria', '16,Azerbaijan', '17,Bahamas', '18,Bahrain', '19,Bangladesh', '20,Barbados', '21,Belarus', '22,Belgium', '23,Belize', '24,Benin', '25,Bermuda', '26,Bhutan', '27,Bolivia', '28,Bosnia And Herzegovina', '29,Botswana', '30,Bouvet Island', '31,Brazil', '32,Brunei', '33,Bulgaria', '34,Burkina Faso', '35,Burundi', '36,Cambodia', '37,Cameroon', '38,Canada', '39,Canary Island', '40,Cape Verde', '41,Cayman Islands', '42,Central African Republic', '43,Chad', '44,Chile', '45,China', '46,Colombia', '47,Comoros', '49,Cook Islands', '50,Costa Rica', '51,Cote Dlvoire', '52,Croatia', '53,Cuba', '54,Curacao', '55,Cyprus', '56,Czech Republic', '48,Democratic Republic Of Congo', '57,Denmark', '58,Djibouti', '59,Dominica', '60,Dominican Republic', '61,East Timor', '62,Ecuador', '63,Egypt', '64,El Salvador', '65,Equatorial Guinea', '66,Eritrea', '67,Estonia', '68,Ethiopia', '69,Falkland Islands', '70,Faroe Islands', '71,Fiji', '72,Finland', '73,France', '74,French Guiana', '75,Gabon', '76,Gambia', '77,Georgia', '78,Germany', '79,Ghana', '80,Gibraltar', '81,Greece', '82,Greenland', '83,Grenada', '84,Guadeloupe', '85,Guam', '86,Guatemala', '87,Guernsey', '88,Guinea', '89,Guinea-Bissau', '90,Guyana', '91,Haiti', '92,Honduras', '93,Hong Kong', '94,Hungary', '95,Iceland', '1,India', '96,Indonesia', '97,Iran', '98,Iraq', '99,Ireland', '100,Isle Of Man', '101,Israel', '102,Italy', '225,Ivory Coast', '103,Jamaica', '104,Japan', '105,Jersey', '106,Jordan', '107,Kazakhstan', '108,Kenya', '109,Kiribati', '112,Kuwait', '113,Kyrgyzstan', '114,Laos', '115,Latvia', '116,Lebanon', '117,Lesotho', '118,Liberia', '119,Libya', '120,Liechtenstein', '121,Lithuania', '122,Luxembourg', '123,Macau', '124,Macedonia', '125,Madagascar', '126,Malawi', '127,Malaysia', '128,Maldives', '129,Mali', '130,Malta', '131,Marshall Island', '132,Martinique', '133,Mauritania', '134,Mauritius', '135,Mexico', '136,Moldova', '226,Monaco', '137,Mongolia', '227,Montenegro', '138,Montserrat', '139,Morocco', '140,Mozambique', '141,Myanmar', '142,Namibia', '143,Nauru', '144,Nepal', '145,Netherlands', '146,New Caledonia', '147,New Zealand', '148,Nicaragua', '149,Niger', '150,Nigeria', '151,Niue', '110,North Korea', '152,Norway', '153,Oman', '154,Pakistan', '230,Palau', '155,Panama', '156,Papua New Guinea', '157,Paraguay', '158,Peru', '159,Philippines', '160,Poland', '161,Portugal', '162,Puerto Rico', '163,Qatar', '224,Republic Of Congo', '164,Reunion', '165,Romania', '166,Russia', '198,Rwanda', '181,Saint Barthelemy', '182,Saint Helena', '183,Saint Kitts And Nevis', '184,Saint Lucia', '185,Saint Martin', '186,Saint Vincent And The Grenadines', '167,Samoa', '228,San Marino', '168,Sao Tome And Principe', '169,Saudi Arabia', '231,Scotland', '170,Senegal', '229,Serbia', '171,Seychelles', '172,Sierra Leone', '173,Singapore', '174,Slovakia', '175,Slovenia', '176,Solomon Islands', '177,Somalia', '178,South Africa', '111,South Korea', '179,Spain', '180,Sri Lanka', '187,Sudan', '188,Suriname', '189,Swaziland', '190,Sweden', '191,Switzerland', '192,Syria', '193,Tahiti', '194,Taiwan', '195,Tajikistan', '196,Tanzania', '197,Thailand', '199,Togo', '200,Tonga', '201,Trinidad And Tobago', '202,Tunisia', '203,Turkey', '204,Turkmenistan', '205,Turks And Caicos Island', '206,Tuvalu', '208,Uganda', '209,Ukraine', '207,United Arab Emirates', '210,United Kingdom', '212,United States Of America', '211,Uruguay', '213,Uzbekistan', '214,Vanuatu', '215,Vatican City', '216,Venezuela', '217,Vietnam', '218,Virgin Islands (British)', '219,Virgin Islands (Us)', '220,Yemen', '221,Yugoslavia', '222,Zambia', '223,Zimbabwe' ];
+ states[1] = ['1,Andaman & Nicobar', '2,Andhra Pradesh', '3,Arunachal Pradesh', '4,Assam', '5,Bihar', '6,Chandigarh', '7,Chhattisgarh', '8,Dadra and Nagar Haveli', '9,Daman and Diu', '10,Delhi', '11,Goa', '12,Gujarat', '13,Haryana', '14,Himachal Pradesh', '15,Jammu and Kashmir', '16,Jharkhand', '17,Karnataka', '18,Kerala', '19,Lakshadweep', '20,Madhya Pradesh', '21,Maharashtra', '22,Manipur', '23,Meghalaya', '24,Mizoram', '25,Nagaland', '26,Orissa', '27,Puducherry', '28,Punjab', '29,Rajasthan', '30,Sikkim', '31,Tamil Nadu', '32,Tripura', '33,Uttar Pradesh', '34,Uttarakhand', '35,West Bengal' ];
+ states[38] = ['201,Alberta ', '202,British Columbia ', '203,Manitoba ', '204,New Brunswick ', '205,Newfoundland and Labrador ', '206,Northwest Territories ', '207,Nova Scotia ', '208,Nunavut', '209,Ontario ', '210,Prince Edward Island ', '211,Quebec', '212,Saskatchewan ', '213,Yukon Territory' ];
+ states[45] = ['901,Anhui', '928,Beijing', '929,Chongqing', '902,Fujian', '903,Gansu', '904,Guangdong', '923,Guangxi', '905,Guizhou', '906,Hainan', '907,Hebei', '908,Heilongjiang', '909,Henan', '932,Hong Kong', '910,Hubei', '911,Hunan', '912,Jiangsu', '913,Jiangxi', '914,Jilin', '915,Liaoning', '933,Macau', '924,Nei Mongol', '925,Ningxia', '916,Qinghai', '917,Shaanxi', '918,Shandong', '930,Shanghai', '919,Shanxi', '920,Sichuan', '931,Tianjin', '926,Xinjiang Uygur', '927,Xizang', '921,Yunnan', '922,Zhejiang' ];
+ states[78] = ['301,Baden-Wurttemberg', '302,Bavaria', '303,Berlin', '304,Brandenburg', '305,Bremen', '306,Hamburg', '307,Hesse', '308,Lower Saxony', '309,Mecklenburg-Vorpommern', '310,North Rhine-Westphalia', '311,Rhineland-Palatinate', '312,Saarland', '313,Saxony', '314,Saxony-Anhalt', '315,Schleswig-Holstein', '316,Thuringia' ];
+ states[102] = ['1001,Abruzzo', '1002,Aosta Valley', '1003,Apulia', '1004,Basilicata', '1005,Calabria', '1006,Campania', '1007,Emilia-Romagna', '1008,Friuli-Venezia Giulia', '1009,Lazio', '1010,Liguria', '1011,Lombardy', '1012,Marche', '1013,Molise', '1014,Piedmont', '1015,Sardinia', '1016,Sicily', '1017,Trentino-Alto Adige', '1018,Tuscany', '1019,Umbria', '1020,Veneto' ];
+ states[127] = ['601,Johor', '602,Kedah', '603,Kelantan', '604,Kuala Lumpur', '605,Labuan', '606,Malacca', '607,Negeri Sembilan', '608,Pahang', '611,Penang', '609,Perak', '610,Perlis', '612,Putrajaya', '613,Sabah', '614,Sarawak', '615,Selangor', '616,Terengganu' ];
+ states[135] = ['751,Aguascalientes', '752,Baja California', '753,Baja California Sur', '754,Campeche', '755,Chiapas', '756,Chihuahua', '757,Coahuila de Zaragoza', '758,Colima', '760,Durango', '759,Federal District', '761,Guanajuato', '762,Guerrero', '763,Hidalgo', '764,Jalisco', '765,Mexico', '766,Michoacan de Ocampo', '767,Morelos', '768,Nayarit', '769,Nuevo Leon', '770,Oaxaca', '771,Puebla', '772,Queretaro de Arteaga', '773,Quintana Roo', '774,San Luis Potosi', '775,Sinaloa', '776,Sonora', '777,Tabasco', '778,Tamaulipas', '779,Tlaxcala', '780,Veracruz-Llave', '781,Yucatan', '782,Zacatecas' ];
+ states[145] = ['1301,Drenthe', '1302,Flevoland', '1303,Friesland', '1304,Gelderland', '1305,Groningen', '1306,Limburg', '1307,North Brabant', '1308,North Holland', '1309,Overijssel', '1312,South Holland', '1310,Utrecht', '1311,Zeeland' ];
+ states[173] = ['501,Singapore' ];
+ states[178] = ['401,Eastern Cape Province', '402,Free State Province', '403,Gauteng Province', '404,KwaZulu-Natal Province', '405,Limpopo Province', '406,Mpumalanga Province', '408,North West Province', '407,Northern Cape Province', '409,Western Cape Province' ];
+ states[194] = ['701,Chang-hua', '704,Chi-lung', '702,Chia-i', '705,Hsin-chu', '707,Hua-lien', '708,I-lan', '709,Kao-hsiung', '711,Miao-li', '712,Nan-ou', '713,Peng-hu', '714,Ping-tung', '715,Tai-chung', '716,Tai-nan', '717,Tai-pei', '718,Tai-tung', '719,Tao-yuan', '720,Yun-lin' ];
+ states[197] = ['801,Amnat Charoen', '802,Ang Thong', '877,Bangkok', '803,Buriram', '804,Chachoengsao', '805,Chai Nat', '806,Chaiyaphum', '807,Chanthaburi', '808,Chiang Mai', '809,Chiang Rai', '810,Chon Buri', '811,Chumphon', '812,Kalasin', '813,Kamphaeng Phet', '814,Kanchanaburi', '815,Khon Kaen', '816,Krabi', '817,Krung Thep Mahanakhon (Bangkok)', '818,Lampang', '819,Lamphun', '820,Loei', '821,Lop Buri', '822,Mae Hong Son', '823,Maha Sarakham', '824,Mukdahan', '825,Nakhon Nayok', '826,Nakhon Pathom', '827,Nakhon Phanom', '828,Nakhon Ratchasima', '829,Nakhon Sawan', '830,Nakhon Si Thammarat', '831,Nan', '832,Narathiwat', '833,Nong Bua Lamphu', '834,Nong Khai', '835,Nonthaburi', '836,Pathum Thani', '837,Pattani', '878,Pattaya', '838,Phangnga', '839,Phatthalung', '840,Phayao', '841,Phetchabun', '842,Phetchaburi', '843,Phichit', '844,Phitsanulok', '845,Phra Nakhon Si Ayutthaya', '846,Phrae', '847,Phuket', '848,Prachin Buri', '849,Prachuap Khiri Khan', '850,Ranong', '851,Ratchaburi', '852,Rayong', '853,Roi Et', '854,Sa Kaeo', '855,Sakon Nakhon', '856,Samut Prakan', '857,Samut Sakhon', '858,Samut Songkhram', '859,Sara Buri', '860,Satun', '861,Sing Buri', '862,Sisaket', '863,Songkhla', '864,Sukhothai', '865,Suphan Buri', '866,Surat Thani', '867,Surin', '868,Tak', '869,Trang', '870,Trat', '871,Ubon Ratchathani', '872,Udon Thani', '873,Uthai Thani', '874,Uttaradit', '875,Yala', '876,Yasothon' ];
+ states[212] = ['101,Alabama ', '102,Alaska ', '103,Arizona ', '104,Arkansas ', '105,California ', '106,Colorado ', '107,Connecticut ', '108,Delaware ', '109,Florida ', '110,Georgia ', '111,Hawaii ', '112,Idaho ', '113,Illinois ', '114,Indiana ', '115,Iowa ', '116,Kansas ', '117,Kentucky ', '118,Louisiana ', '119,Maine ', '120,Maryland ', '121,Massachusetts ', '122,Michigan ', '123,Minnesota ', '124,Mississippi ', '125,Missouri ', '126,Montana ', '127,Nebraska ', '128,Nevada ', '129,New Hampshire ', '130,New Jersey ', '131,New Mexico ', '132,New York ', '133,North Carolina ', '134,North Dakota ', '135,Ohio ', '136,Oklahoma ', '137,Oregon ', '138,Pennsylvania ', '214,Puerto Rico', '139,Rhode Island ', '140,South Carolina ', '141,South Dakota ', '142,Tennessee ', '143,Texas ', '144,Utah ', '145,Vermont ', '146,Virginia ', '147,Washington ', '215,Washington DC', '148,West Virginia ', '149,Wisconsin ', '150,Wyoming ' ];
+
+ districts[1] = ['330,Port Blair*' ];
+ districts[2] = ['17,Anantapur', '41,Banganapalle', '44,Bapatla', '68,Bhimavaram', '97,Chapirevula', '109,Chirala', '112,Chittoor', '159,Eluru', '192,Gudivada', '186,Guntur', '211,Hyderabad', '223,Jagtial', '122,Kadapa', '261,Machilipatnam', '244,Madanapalle', '249,Mahabubnagar', '256,Mangalagiri', '285,Nagarkurnool', '290,Nalgonda', '292,Nandyal', '295,Narasaraopet', '303,Nellore', '305,New Guntur', '308,Nirmal', '463,Nizamabad', '310,Ongole', '342,Rajahmundry', '343,Rajampet', '356,Ravulapalem', '382,Siddipet', '398,Srikakulam', '403,Suryapet', '407,Tandur', '409,Tenali', '423,Tirupathi', '449,Vijayawada', '452,Visakhapatnam', '453,Vizianagaram', '456,Warangal' ];
+ districts[4] = ['83,Bongaigaon', '147,Dibrugarh', '148,Dispur*', '189,Guwahati', '233,Jorhat', '384,Silchar', '408,Tezpur', '419,Tinsukia' ];
+ districts[5] = ['20,Araria', '22,Arrah', '27,Aurangabad', '45,Barachakia', '88,Barh', '61,Bhagalpur', '75,Bihar Sharif', '81,Bodh Gaya', '98,Chapra', '130,Darbhanga', '174,Gaya', '270,Mokama', '272,Motihari', '281,Muzaffarpur', '323,Patna', '362,Samastipur', '394,Sitamarhi', '395,Siwan' ];
+ districts[6] = ['460,Chandigarh', '96,Chandigarh' ];
+ districts[7] = ['89,Balpur', '67,Bhilai Nagar', '78,Bilaspur', '152,Durg', '464,Pratapgarh', '339,Raigarh', '341,Raipur', '346,Rajnandgaon' ];
+ districts[8] = ['125,Dadra', '385,Silvassa' ];
+ districts[9] = ['128,Daman', '150,Diu' ];
+ districts[10] = ['138,Delhi', '181,Greater Noida', '304,New Delhi', '306,NOIDA' ];
+ districts[11] = ['177,Goa Velha', '245,Madgaon', '258,Mapusa', '259,Marmagao', '313,Panaji', '327,Ponda', '446,Vasco da Gama' ];
+ districts[12] = ['3,Ahmedabad', '14,Amreli', '16,Anand', '18,Ankleshwar', '65,Bharuch', '66,Bhavnagar', '73,Bhuj', '91,Cambay', '126,Dahod', '134,Dehgam', '144,Dholka', '154,Dwarka', '171,Gandhinagar', '178,Godhra', '208,Himatnagar', '225,Jamnagar', '234,Junagadh', '264,Mehsana', '283,Nadiad', '1107,Nanpura', '300,Navsari', '320,Patan', '329,Porbandar', '345,Rajkot', '400,Surat', '402,Surendranagar', '438,Vadodara', '440,Vallabh Vidhyanagar', '441,Valsad', '443,Vapi', '455,Vyara' ];
+ districts[13] = ['11,Ambala', '33,Bahadurgarh', '31,Ballabhgarh', '70,Bhiwani', '100,Charkhi Dadri', '161,Faridabad', '187,Gurgaon', '210,Hansi', '209,Hisar', '255,Manesar', '312,Palwal', '314,Panchkula', '316,Panipat', '351,Ratangarh', '396,Sonipat' ];
+ districts[14] = ['476,Baddi', '79,Bilaspur', '141,Dharampur', '142,Dharamsala', '197,Hamirpur', '480,Nehan', '465,Rajgarh', '349,Rampur', '387,Shimla' ];
+ districts[15] = ['224,Jammu', '238,Leh', '399,Srinagar', '431,Udhampur' ];
+ districts[16] = ['29,Asurbandh', '82,Bokaro Steel City', '127,Daltonganj', '136,Deoghar', '139,Dhanbad', '183,Gumla', '226,Jamshedpur', '324,Patratu', '337,Ranchi' ];
+ districts[17] = ['58,Belgaum', '59,Bellary', '40,Bengaluru', '74,Bidar', '94,Chamrajnagar', '107,Chikmagaluru', '110,Chitradurga', '133,Davanagere', '143,Dharwad', '169,Gadag', '182,Gulbarga', '190,Gulbarga', '185,Gundlupet', '205,Hassan', '204,Hubli', '246,Madikeri', '257,Mangalore', '282,Mysore', '338,Raichur', '388,Shimoga', '378,Shivani', '386,Sindhanur', '427,Thirthahalli', '432,Udupi' ];
+ districts[18] = ['12,Ammakandakara', '26,Ashtamichira', '104,Cherunniyoor', '155,Ernakulam', '113,Kochi', '90,Kozhikode', '265,Melattur', '311,Palai', '335,Punalur', '336,Quilon', '428,Thiruvananthapuram', '416,Thodupuzha', '414,Thrikkannamangal', '415,Thrissur', '439,Vaikom', '459,Wayanad' ];
+ districts[20] = ['19,Anuppur', '25,Ashok Nagar', '35,Balaghat', '55,Barwani', '60,Betul', '71,Bhopal', '85,Burhanpur', '105,Chhatarpur', '106,Chhindwara', '124,Dabra', '129,Damoh', '132,Datia', '137,Dewas', '140,Dhar', '184,Guna', '193,Gwalior', '200,Harda', '213,Indore', '215,Jabalpur', '228,Jhabua', '254,Mandsaur', '278,Murwara', '297,Narsinghgarh', '296,Narsinghpur', '302,Neemuch', '317,Panna', '474,Pasla', '340,Raisen', '344,Rajgarh', '468,Ratangarh', '352,Ratlam', '358,Rewa', '363,Sanawad', '368,Satna', '370,Sehore', '371,Seoni', '372,Shajapur', '374,Sheopur', '391,Singrauli', '393,Sironj', '426,Tikamgarh', '434,Ujjain', '448,Vidisha' ];
+ districts[21] = ['4,Ahmednagar', '7,Akola', '13,Amravati', '28,Aurangabad', '46,Baramati', '63,Bhandara', '62,Bhavani', '69,Bhiwandi', '119,Bramhapuri', '84,Buldana', '101,Chandrapur', '108,Chiplun', '145,Dhule', '151,Dombivli', '170,Gadchiroli', '179,Gondiya', '221,Jalgaon', '479,Kolhapur ', '242,Latur', '243,Lonavla', '248,Mahabaleswar', '262,Mahad', '266,Mira-Bhayandar', '471,Miraj', '276,Mumbai', '288,Nagpur', '291,Nanded', '293,Nandurbar', '298,Nashik', '299,Navi Mumbai', '315,Pandharpur', '318,Panvel', '326,Pimpri Chinchwad', '332,Pune', '353,Ratnagiri', '365,Sangamner', '364,Sangli', '367,Satara', '373,Shegaon', '375,Shevgaon', '389,Shirala', '379,Sholapur', '381,Shrigonda', '380,Shrirampur', '377,Shrivardhan', '410,Thane', '435,Ulhasnagar', '445,Vasai', '451,Virar', '458,Wani', '457,Wardha' ];
+ districts[22] = ['214,Imphal', '241,Lamka' ];
+ districts[23] = ['376,Shillong' ];
+ districts[24] = ['5,Aizwal' ];
+ districts[26] = ['116,Balangir', '36,Balasore', '50,Bargarh', '52,Baripada', '72,Bhubaneswar', '472,Bramhapur', '123,Cuttack', '173,Ganjam', '333,Puri', '354,Raurkela' ];
+ districts[27] = ['250,Mahe', '328,Puducherry' ];
+ districts[28] = ['15,Amritsar', '43,Banaur', '51,Barnala', '80,Bilgha', '162,Faridkot', '166,Ferozepur Cantt.', '167,Ferozepur City', '188,Guruharsahai', '194,Hoshiarpur', '222,Jagraon', '219,Jalalabad', '220,Jalandhar', '240,Ludhiana', '253,Malout', '268,Moga', '269,Mohali', '274,Muktsar', '275,Mullanpur', '294,Nangal', '309,Nurmahal', '319,Pasla', '321,Pathankot', '322,Patiala', '405,Talwara' ];
+ districts[29] = ['6,Ajmer', '10,Alwar', '42,Banswara', '56,Banswara', '47,Baran', '53,Barmer', '57,Beawar', '64,Bharatpur', '77,Bikaner', '198,Hanumangarh', '202,Harsawa', '216,Jaipur', '218,Jaisalmer', '229,Jhalawar', '231,Jhunjhunu', '232,Jodhpur', '252,Mahwa', '273,Mount Abu', '301,Nawalgarh', '331,Pratapgarh', '334,Pushkar', '466,Rajgarh', '467,Rajgarh', '469,Ratangarh', '383,Sikar', '392,Sirohi', '397,Sriganganagar', '401,Suratgarh', '412,Thathawata', '429,Udaipur' ];
+ districts[30] = ['172,Gangtok' ];
+ districts[31] = ['21,Arcot', '23,Aruppukkottai', '102,Chengalpattu', '103,Chennai', '114,Coimbatore', '120,Coonoor', '121,Cuddalore', '149,Dindigul', '156,Erode', '191,Gudalur', '462,Gudalur', '461,Gudalur', '477,Hosur', '235,Karur', '247,Madurai', '284,Nagapattinam', '286,Nagercoil', '347,Ramanathapuram', '348,Rameshwaram', '361,Salem', '366,Sathyamangalam', '411,Thanjavur', '417,Thoothukudi', '418,Tindivanam', '421,Tiruchirappalli', '422,Tirunelveli', '420,Tirupattur', '424,Tirupur', '413,Tiruvallur', '425,Tiruvarur', '433,Udhagamandalam', '442,Vandavasi', '447,Vellore', '450,Viluppuram', '454,Virudhachalam' ];
+ districts[32] = ['1,Agartala', '430,Udaipur' ];
+ districts[33] = ['2,Agra', '8,Aligarh', '9,Allahabad', '30,Azamgarh', '34,Bahraich', '37,Balia', '38,Balrampur', '39,Banda', '49,Bareilly', '76,Bijnor', '87,Bulandshahr', '86,Buxar', '99,Charkhari', '111,Chitrakoot Dham Karwi', '157,Etah', '158,Etawah', '160,Faizabad', '163,Farrukhabad', '164,Fatehgarh', '165,Fatehpur Sikri', '168,Firozabad', '175,Ghaziabad', '176,Ghazipur', '180,Gorakhpur', '201,Hardoi', '206,Hastinapur', '207,Hathras', '217,Jais', '227,Jaunpur', '230,Jhansi', '236,Kanpur', '237,Lalitpur', '239,Lucknow', '251,Mahoba', '260,Mathura', '263,Meerut', '267,Mirzapur', '271,Moradabad', '280,Muzaffarnagar', '287,Nagina', '307,Nizamabad', '325,Pilibhit', '355,Rae Bareli', '470,Ratangarh', '357,Renukoot', '369,Saharanpur', '404,Sitapur', '436,Unnao', '444,Varanasi' ];
+ districts[34] = ['92,Chamoli Gopeshwar', '93,Champawat', '135,Dehradun', '196,Haldwani', '203,Haridwar', '277,Mussoorie', '289,Nainital', '350,Ranikhet', '359,Rishikesh', '360,Roorkee', '478,Rudrapur' ];
+ districts[35] = ['24,Asansol', '32,Baharampur', '117,Balurghat', '48,Bardhaman', '54,Barrackpur', '118,Brahmapur', '95,Chandannagar', '115,Contai', '131,Darjeeling', '146,Dhulian', '153,Durgapur', '195,Haldia', '212,Halisahar', '199,Howrah', '279,Murshidabad', '473,Pasla', '390,Siliguri', '406,Tamluk', '437,Uttarpara' ];
+ districts[101] = ['10026,Birmingham', '10107,Huntsville', '10147,Mobile', '10149,Montgomery' ];
+ districts[102] = ['10008,Anchorage' ];
+ districts[103] = ['10038,Chandler', '10090,Gilbert', '10091,Glendale', '10140,Mesa', '10178,Peoria', '10181,Phoenix', '10216,Scottsdale', '10237,Tempe', '10243,Tucson' ];
+ districts[104] = ['10129,Little Rock' ];
+ districts[105] = ['10007,Anaheim', '10019,Bakersfield', '10024,Berkeley', '10032,Burbank', '10044,Chula Vista', '10053,Concord', '10055,Corona', '10057,Costa Mesa', '10059,Daly City', '10065,Downey', '10067,El Monte', '10071,Elk Grove', '10073,Escondido', '10076,Fairfield', '10079,Fontana', '10084,Fremont', '10085,Fresno', '10086,Fullerton', '10088,Garden Grove', '10092,Glendale', '10099,Hayward', '10106,Huntington Beach', '10110,Inglewood', '10111,Irvine', '10123,Lancaster', '10130,Long Beach', '10131,Los Angeles', '10148,Modesto', '10150,Moreno Valley', '10161,Norwalk', '10162,Oakland', '10163,Oceanside', '10167,Ontario', '10168,Orange', '10171,Oxnard', '10173,Palmdale', '10175,Pasadena', '10184,Pomona', '10193,Rancho Cucamonga', '10195,Richmond', '10197,Riverside', '10200,Roseville', '10201,Sacramento', '10203,Salinas', '10206,San Bernardino', '10207,San Buenaventura', '10208,San Diego', '10209,San Francisco', '10210,San Jose', '10211,Santa Ana', '10212,Santa Clara', '10213,Santa Clarita', '10214,Santa Rosa', '10219,Simi Valley', '10231,Stockton', '10232,Sunnyvale', '10239,Thousand Oaks', '10242,Torrance', '10245,Vallejo', '10247,Victorville', '10249,Visalia', '10254,West Covina' ];
+ districts[106] = ['10012,Arvada', '10016,Aurora', '10049,Colorado Springs', '10062,Denver', '10080,Fort Collins', '10122,Lakewood', '10191,Pueblo', '10238,Thornton', '10257,Westminster' ];
+ districts[107] = ['10029,Bridgeport', '10098,Hartford', '10153,New Haven', '10229,Stamford', '10253,Waterbury' ];
+ districts[109] = ['10034,Cape Coral', '10047,Clearwater', '10054,Coral Springs', '10081,Fort Lauderdale', '10087,Gainesville', '10101,Hialeah', '10103,Hollywood', '10114,Jacksonville', '10142,Miami', '10146,Miramar', '10169,Orlando', '10172,Palm Bay', '10177,Pembroke Pines', '10185,Pompano Beach', '10186,Port St. Lucie', '10228,St. Petersburg', '10235,Tallahassee', '10236,Tampa' ];
+ districts[110] = ['10013,Athens', '10014,Atlanta', '10015,Augusta', '10052,Columbus', '10215,Savannah' ];
+ districts[111] = ['10104,Honolulub' ];
+ districts[112] = ['10027,Boise' ];
+ districts[113] = ['10017,Aurora', '10043,Chicago', '10069,Elgin', '10116,Joliet', '10151,Naperville', '10179,Peoria', '10199,Rockford', '10225,Springfield' ];
+ districts[114] = ['10075,Evansville', '10082,Fort Wayne', '10109,Indianapolisa', '10221,South Bend' ];
+ districts[115] = ['10037,Cedar Rapids', '10063,Des Moines' ];
+ districts[116] = ['10118,Kansas City', '10165,Olathe', '10170,Overland Park', '10241,Topeka', '10258,Wichita' ];
+ districts[117] = ['10127,Lexington', '10132,Louisville' ];
+ districts[118] = ['10021,Baton Rouge', '10121,Lafayette', '10154,New Orleans', '10218,Shreveport' ];
+ districts[120] = ['10020,Baltimore' ];
+ districts[121] = ['10028,Boston', '10033,Cambridge', '10133,Lowell', '10224,Springfield', '10261,Worcester' ];
+ districts[122] = ['10009,Ann Arbor', '10064,Detroit', '10078,Flint', '10094,Grand Rapids', '10124,Lansing', '10230,Sterling Heights', '10251,Warren' ];
+ districts[123] = ['10145,Minneapolis', '10227,St. Paul' ];
+ districts[124] = ['10113,Jackson' ];
+ districts[125] = ['10108,Independence', '10117,Kansas City', '10223,Springfield', '10226,St. Louis' ];
+ districts[126] = ['10025,Billings' ];
+ districts[127] = ['10128,Lincoln', '10166,Omaha' ];
+ districts[128] = ['10100,Henderson', '10126,Las Vegas', '10160,North Las Vegas', '10194,Reno' ];
+ districts[129] = ['10136,Manchester' ];
+ districts[130] = ['10070,Elizabeth', '10115,Jersey City', '10156,Newark', '10176,Paterson' ];
+ districts[131] = ['10003,Albuquerque' ];
+ districts[132] = ['10031,Buffalo', '10155,New York City', '10198,Rochester', '10233,Syracuse', '10262,Yonkers' ];
+ districts[133] = ['10036,Cary', '10040,Charlotte', '10066,Durham', '10077,Fayetteville', '10096,Greensboro', '10102,High Point', '10192,Raleigh', '10260,Winston-Salem' ];
+ districts[135] = ['10002,Akron', '10045,Cincinnati', '10048,Cleveland', '10051,Columbus', '10060,Dayton', '10240,Toledo' ];
+ districts[136] = ['10159,Norman', '10164,Oklahoma City', '10244,Tulsa' ];
+ districts[137] = ['10074,Eugene', '10187,Portland', '10202,Salem' ];
+ districts[138] = ['10005,Allentown', '10072,Erie', '10180,Philadelphia', '10182,Pittsburgh' ];
+ districts[139] = ['10189,Providence' ];
+ districts[140] = ['10039,Charleston', '10050,Columbia' ];
+ districts[141] = ['10220,Sioux Falls' ];
+ districts[142] = ['10041,Chattanooga', '10046,Clarksville', '10120,Knoxville', '10139,Memphis', '10152,Nashville' ];
+ districts[143] = ['10001,Abilene', '10006,Amarillo', '10010,Arlington', '10018,Austin', '10022,Beaumont', '10030,Brownsville', '10035,Carrollton', '10056,Corpus Christi', '10058,Dallas', '10061,Denton', '10068,El Paso', '10083,Fort Worth', '10089,Garland', '10093,Grand Prairie', '10105,Houston', '10112,Irving', '10119,Killeen', '10125,Laredo', '10134,Lubbock', '10137,McAllen', '10138,McKinney', '10141,Mesquite', '10143,Midland', '10174,Pasadena', '10183,Plano', '10205,San Antonio', '10250,Waco', '10259,Wichita Falls' ];
+ districts[144] = ['10190,Provo', '10204,Salt Lake City', '10255,West Jordan', '10256,West Valley City' ];
+ districts[146] = ['10004,Alexandria', '10011,Arlington', '10042,Chesapeake', '10097,Hampton', '10157,Newport News', '10158,Norfolk', '10188,Portsmouth', '10196,Richmond', '10248,Virginia Beach' ];
+ districts[147] = ['10023,Bellevue', '10217,Seattle', '10222,Spokane', '10234,Tacoma', '10246,Vancouver' ];
+ districts[149] = ['10095,Green Bay', '10135,Madison', '10144,Milwaukee' ];
+ districts[201] = ['475,Airdrie', '20015,Beaumont', '20022,Bonnyville', '20028,Brazeau', '20029,Breton', '20040,Calgary', '20042,Camrose', '20043,Canmore', '20083,Didzbury', '20084,Drayton Valley', '20094,Edmonton', '20105,Ft. Saskatchewan', '20115,Grande Prairie', '20126,Hanna', '20130,Hinton', '20137,Irricana', '20152,Lacombe', '20160,Leduc', '20163,Lethbridge', '20177,McLennan', '20178,Medicine Hat', '20213,Olds', '20214,Onoway', '20246,Provost', '20250,Red Deer', '20278,Spruce Grove', '20279,St. Albert', '20289,Strathcona County', '20290,Strathmore', '20295,Swan Hills', '20298,Sylvan Lake', '20299,Taber', '20314,Turner Valley', '20319,Vermillion', '20339,Wood Buffalo' ];
+ districts[202] = ['20037,Burnaby', '20038,Cache Creek', '20047,Castlegar', '20051,Chemainus', '20055,Chilliwack', '20056,City of Colwood', '20058,City of Port Moody', '20059,City of Richmond', '20061,Clearwater', '20068,Coquitlam', '20075,Cranbrook', '20080,Dawson Creek', '20082,Delta', '20098,Fernie', '20135,Invermere', '20141,Kamloops', '20143,Kaslo', '20153,Langley', '20170,Lumby', '20174,Maple Ridge', '20182,Merritt', '20186,Mission', '20194,Nanaimo', '20195,Nelson', '20199,New Westminster', '20206,North Cowichan', '20209,North Vancouver', '20220,Osoyoos', '20226,Parksville', '20228,Peace River', '20229,Penticton', '20234,Port Alberni', '20239,Port Hardy', '20244,Prince George', '20245,Prince Rupert', '20255,Saanich', '20272,Sooke', '20277,Sparwood', '20293,Surrey', '20301,Terrace', '20313,Tumbler', '20317,Vancouver', '20320,Vernon', '20321,Victoria', '20332,Whistler' ];
+ districts[203] = ['20018,Birtle', '20025,Brandon', '20074,Cranberry Portage', '20079,Dauphin', '20101,Flin Flon', '20271,Snow Lake', '20283,Steinbach', '20285,Stonewall', '20296,Swan River', '20302,The Pas', '20304,Thompson', '20338,Winnipeg' ];
+ districts[204] = ['20045,Cap-Pele', '20104,Fredericton', '20113,Grand Bay-Westfield', '20114,Grand Falls', '20180,Memramcook', '20185,Miramichi', '20187,Moncton', '20217,Oromocto', '20238,Port Elgin', '20256,Sackville', '20257,Saint John', '20258,Saint Stephen', '20268,Shippagan', '20294,Sussex', '20311,Tracadie-Sheila' ];
+ districts[205] = ['20008,Argentia', '20019,Bishops Falls', '20023,Botwood', '20031,Brigus', '20069,Corner Brook', '20150,Labrador City', '20192,Mount Pearl', '20225,Paradise', '20241,Portaux Basques', '20281,St. Johns' ];
+ districts[206] = ['20128,Hay River', '20134,Inuvik', '20343,Yellowknife' ];
+ districts[207] = ['20004,Amherst', '20007,Annapolis', '20009,Argyle', '20013,Baddeck', '20030,Bridgewater', '20044,Cape Breton', '20052,Chester', '20072,County of Kings', '20078,Cumberland County', '20091,East Hants', '20121,Halifax', '20127,Hants County', '20136,Inverness County', '20144,Kentville', '20171,Lunenburg', '20172,Lunenburg County', '20173,Mahone Bay', '20197,New Glasgow', '20198,New Minas', '20227,Parrsboro', '20232,Pictou', '20233,Pictou County', '20248,Queens', '20253,Richmond', '20265,Shelburne', '20284,Stellarton', '20312,Truro', '20336,Windsor', '20342,Yarmouth' ];
+ districts[209] = ['20001,Ajax', '20010,Atikokan', '20014,Barrie', '20017,Belleville', '20020,Blandford-Blenheim', '20021,Blind River', '20024,Brampton', '20026,Brant', '20027,Brantford', '20032,Brock', '20033,Brockville', '20036,Burlington', '20039,Caledon', '20041,Cambridge', '20050,Chatham-Kent', '20053,Chesterville', '20060,Clarington', '20064,Cobourg', '20065,Cochrane', '20066,Collingwood', '20070,Cornwall', '20077,Cumberland', '20081,Deep River', '20086,Dundas', '20087,Durham', '20088,Dymond', '20089,Ear Falls', '20090,East Gwillimbury', '20092,East Zorra-Tavistock', '20095,Elgin', '20096,Elliot Lake', '20099,Flamborough', '20102,Fort Erie', '20103,Fort Frances', '20106,Gananoque', '20109,Georgina', '20110,Glanbrook', '20111,Gloucester', '20112,Goulbourn', '20117,Gravenhurst', '20118,Grimsby', '20119,Guelph', '20120,Haldimand-Norfork', '20122,Halton', '20123,Halton Hills', '20124,Hamilton', '20125,Hamilton-Wentworth', '20129,Hearst', '20132,Huntsville', '20133,Ingersoll', '20138,James', '20142,Kanata', '20145,Kincardine', '20146,King', '20147,Kingston', '20148,Kirkland Lake', '20149,Kitchener', '20154,Larder Lake', '20159,Leamington', '20161,Lennox-Addington', '20165,Lincoln', '20166,Lindsay', '20167,London', '20169,Loyalist Township', '20176,Markham', '20181,Merrickville', '20183,Metro Toronto', '20184,Milton', '20196,Nepean', '20200,Newmarket', '20201,Niagara', '20202,Niagara Falls', '20203,Niagara-on-the-Lake', '20205,North Bay', '20207,North Dorchester', '20208,North Dumfries', '20210,North York', '20211,Norwich', '20212,Oakville', '20215,Orangeville', '20216,Orillia', '20218,Osgoode', '20219,Oshawa', '20221,Ottawa', '20222,Ottawa-Carleton', '20223,Owen Sound', '20224,Oxford', '20230,Peterborough', '20231,Pickering', '20235,Port Bruce', '20236,Port Burwell', '20237,Port Colborne', '20240,Port Hope', '20243,Prince Edward', '20249,Quinte West', '20252,Renfrew', '20254,Richmond Hill', '20260,Sarnia', '20262,Sault Ste. Marie', '20263,Scarborough', '20264,Scugog', '20269,Sioux Lookout', '20270,Smiths Falls', '20274,Souix Lookout CoC', '20276,South-West Oxford', '20280,St. Catharines', '20282,St. Thomas', '20286,Stoney Creek', '20287,Stratford', '20291,Sudbury', '20300,Temagami', '20305,Thorold', '20306,Thunder Bay', '20307,Tillsonburg', '20308,Timmins', '20310,Toronto', '20316,Uxbridge', '20318,Vaughan', '20323,Wainfleet', '20324,Wasaga Beach', '20325,Waterloo', '20326,Waterloo (Region)', '20327,Welland', '20328,Wellesley', '20329,West Carleton', '20330,West Lincoln', '20333,Whitby', '20335,Wilmot', '20337,Windsor', '20340,Woolwich', '20344,York' ];
+ districts[210] = ['20002,Alberton', '20048,Charlottetown', '20071,Cornwall', '20188,Montague', '20275,Souris', '20288,Stratford', '20292,Summerside' ];
+ districts[211] = ['20003,Alma', '20005,Amos', '20006,Anjou', '20012,Aylmer', '20016,Beauport', '20034,Bromptonville', '20035,Brosssard', '20049,Chateauguay', '20054,Chicoutimi', '20057,City of Dorval', '20062,Coaticook', '20063,Coaticook (MR)', '20085,Drummondville', '20100,Fleurimont', '20107,Gaspe - Office of Tourism', '20108,Gatineau', '20131,Hull', '20139,Joliette', '20140,Jonquiere', '20151,Lachine', '20156,LaSalle', '20155,Lasalle', '20157,Laurentides', '20158,Laval', '20162,Lennoxville', '20164,Levis', '20168,Longueuil', '20175,Marieville', '20189,Montreal City', '20190,Montreal Region', '20191,Montreal-Est', '20193,Mount Royal', '20247,Quebec', '20259,Saint-Leonard', '20267,Sherbrooke', '20273,Sorel', '20303,Thetford Mines', '20322,Victoriaville' ];
+ districts[212] = ['20011,Avonlea', '20067,Colonsay', '20073,Craik', '20076,Creighton', '20093,Eastend', '20097,Esterhazy', '20116,Gravelbourg', '20179,Melfort', '20204,Nipawin', '20242,Prince Albert', '20251,Regina', '20261,Saskatoon', '20266,Shell Lake', '20297,Swift Current', '20309,Tisdale', '20315,Unity', '20331,Weyburn', '20341,Wynyard', '20345,Yorkton' ];
+ districts[213] = ['20046,Carcross', '20334,Whitehorse' ];
+ districts[1001] = ['30001,LAquila' ];
+ districts[1002] = ['30002,Aosta/Aoste' ];
+ districts[1003] = ['30003,Bari' ];
+ districts[1004] = ['30004,Potenza' ];
+ districts[1005] = ['30005,Catanzaro' ];
+ districts[1006] = ['30006,Naples' ];
+ districts[1007] = ['30007,Bologna' ];
+ districts[1008] = ['30008,Trieste' ];
+ districts[1009] = ['30009,Rome' ];
+ districts[1010] = ['30010,Genoa' ];
+ districts[1011] = ['30011,Milan' ];
+ districts[1012] = ['30012,Ancona' ];
+ districts[1013] = ['30013,Campobasso' ];
+ districts[1014] = ['30014,Turin' ];
+ districts[1015] = ['30015,Cagliari' ];
+ districts[1016] = ['30016,Palermo' ];
+ districts[1017] = ['30017,Trento' ];
+ districts[1018] = ['30018,Florence' ];
+ districts[1019] = ['30019,Perugia' ];
+ districts[1020] = ['30020,Venice' ];
+ districts[1100] = ['40000,Dundee City' ];
+ districts[1301] = ['60000,Assen', '60001,Coevorden', '60002,Emmen', '60003,Hoogeveen', '60004,Meppel' ];
+ districts[1302] = ['60005,Almere', '60006,Lelystad' ];
+ districts[1303] = ['60007,Bolsward', '60008,Dokkum', '60009,Drachten', '60010,Franeker', '60011,Harlingen', '60012,Heerenveen', '60013,Hindeloopen', '60014,IJlst', '60015,Leeuwarden', '60016,Sloten', '60017,Sneek', '60018,Stavoren', '60019,Workum' ];
+ districts[1304] = ['60020,Apeldoorn', '60021,Arnhem', '60022,Buren', '60023,Culemborg', '60024,Doetinchem', '60025,Ede', '60026,Groenlo', '60027,Harderwijk', '60028,Hattem', '60029,Huissen', '60030,Nijkerk', '60031,Nijmegen', '60032,Tiel', '60033,Wageningen', '60034,Winterswijk', '60035,Zaltbommel', '60036,Zutphen' ];
+ districts[1305] = ['60037,Appingedam', '60038,Delfzijl', '60039,Groningen', '60040,Winschoten' ];
+ districts[1306] = ['60041,Geleen', '60042,Heerlen', '60043,Kerkrade', '60044,Maastricht', '60045,Roermond', '60046,Sittard', '60047,Stein', '60048,Thorn', '60049,Valkenburg aan de Geul', '60050,Venlo', '60051,Weert' ];
+ districts[1307] = ['60054,s-Hertogenbosch', '60052,Bergen op Zoom', '60053,Breda', '60055,Eindhoven', '60056,Geertruidenberg', '60057,Grave', '60058,Helmond', '60059,Heusden', '60060,Oosterhout', '60061,Oss', '60062,Ravenstein', '60063,Roosendaal', '60064,Tilburg', '60065,Waalwijk' ];
+ districts[1308] = ['60066,Alkmaar', '60067,Amstelveen', '60068,Amsterdam', '60069,Den Helder', '60070,Edam', '60071,Enkhuizen', '60072,Haarlem', '60073,Heerhugowaard', '60074,Hilversum', '60075,Hoofddorp (mun. Haarlemmermeer)', '60076,Hoorn', '60077,Laren', '60079,Medemblik', '60080,Muiden', '60081,Naarden', '60078,Purmerend', '60082,Schagen', '60083,Weesp', '60084,Zaanstad' ];
+ districts[1309] = ['60085,Almelo', '60086,Deventer', '60087,Enschede', '60088,Hengelo', '60089,Oldenzaal', '60090,Zwolle' ];
+ districts[1310] = ['60101,Amersfoort', '60102,Leersum', '60103,Nieuwegein', '60104,Utrecht', '60105,Veenendaal', '60106,Woerden', '60107,Zeist' ];
+ districts[1311] = ['60108,Flushing (Vlissingen)', '60109,Goes', '60110,Hulst', '60111,Middelburg', '60112,Sluis', '60113,Terneuzen', '60114,Veere', '60115,Zierikzee' ];
+
+function populateCountries() {
+	/* 
+	var countryCombo = document.getElementById('txtCountry');
+	 
+	 countryCombo.options.length=0;
+	 var i=1;
+	 countryCombo.options[0] = new Option("India","1");
+
+	 var stateCombo = document.getElementById('State');
+	 stateCombo.options.length=0;
+	 var i=1;
+	 stateCombo.options[0] = new Option("Madhya Pradesh","20");
+	
+	 var districtCombo = document.getElementById('District');
+	 districtCombo.options.length=0;
+	 var i=1;
+	 districtCombo.options[0] = new Option("---Select---","");
+	 districtCombo.options[1] = new Option("BHOPAL","71");
+	 districtCombo.options[2] = new Option("GWALIOR","193");
+	 districtCombo.options[3] = new Option("INDORE","213");
+	 districtCombo.options[4] = new Option("JABALPUR","215");
+	 districtCombo.options[5] = new Option("REWA","358");
+	 districtCombo.options[6] = new Option("SAGAR","699");
+	 districtCombo.options[7] = new Option("SATNA","368");
+	 districtCombo.options[8] = new Option("UJJAIN ","434");
+	
+	var assessmentList = document.getElementById('assessment');
+	for ( var i = 0; i < assessmentList.options.length; i++) {
+		assessmentList.options[i].title = assessmentList.options[i].text;
+	}
+	var countryCombo = document.getElementById('txtCountry');
+	if (countryCombo != null) {
+		countryCombo.options[0] = new Option("---Select---", "");
+		for ( var fieldCount = 0; fieldCount < countries.length; fieldCount++) {
+			var country = countries[fieldCount];
+			var countryId = country.split(",")[0];
+			var countryName = country.split(",")[1];
+			countryCombo.options[i] = new Option(countryName, countryId);
+			i++;
+		}
+	}
+	
+}
+function fnGetDependentStates(countryId) {
+	document.getElementById('District').options.length = 1;
+	if (countryId == "") {
+		document.getElementById('State').options.length = 1;
+	} else {
+		var stateCombo = document.getElementById('State');
+		stateCombo.options.length = 0;
+		var i = 1;
+		stateCombo.options[0] = new Option("---Select---", "");
+		if (states[countryId] != null && states[countryId] != "") {
+			for ( var fieldCount = 0; fieldCount < states[countryId].length; fieldCount++) {
+				var state = states[countryId][fieldCount];
+				var stateId = state.split(",")[0];
+				var stateName = state.split(",")[1];
+				stateCombo.options[i] = new Option(stateName, stateId);
+				i++;
+			}
+		}
+	}
+}
+function fnGetDependentDistricts(stateId) {
+	if (stateId == "") {
+		document.getElementById('District').options.length = 1;
+	} else {
+		var districtCombo = document.getElementById('District');
+		districtCombo.options.length = 0;
+		var i = 1;
+		districtCombo.options[0] = new Option("---Select---", "");
+		if (districts[stateId] != null && districts[stateId] != "") {
+			for ( var fieldCount = 0; fieldCount < districts[stateId].length; fieldCount++) {
+				var district = districts[stateId][fieldCount];
+				var districtId = district.split(",")[0];
+				var districtName = district.split(",")[1];
+				districtCombo.options[i] = new Option(districtName, districtId);
+				i++;
+			}
+		}
+	}
+}*/
+function fnGetCountries(assessmentId)
+{
+var http_request=fnGetXMLHttpObject();
+if(http_request!=null){
+	var orgId=document.getElementById("orgId").value;
+	var parameters = "getCountryList@@"+assessmentId+"@@"+orgId;
+	var pValidationServlet = "/ASM/CandidateDataValidationServlet"; 
+	http_request.open('POST',pValidationServlet,false);       
+	http_request.onreadystatechange = function() {}; 	 	                    
+	http_request.onreadystatechange = function() { fnPopulateDataNew(http_request,'txtCountry'); }; 	 	                    
+	http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");               
+	http_request.send("para="+parameters);
+			}
+}
+function fnGetStates(countryId)
+{
+var assessmentId=document.getElementById('txtAssessment').value
+var http_request=fnGetXMLHttpObject();
+if(http_request!=null){
+	var orgId=document.getElementById("orgId").value;
+	var parameters = "getStateList@@"+assessmentId+"@@"+countryId+"@@"+orgId;
+	var pValidationServlet = "/ASM/CandidateDataValidationServlet"; 
+	http_request.open('POST',pValidationServlet,false);       
+	http_request.onreadystatechange = function() {}; 	 	                    
+	http_request.onreadystatechange = function() { fnPopulateDataNew(http_request,'State'); }; 	 	                    
+	http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");               
+	http_request.send("para="+parameters);
+			}
+}
+function fnGetCities(stateId)
+{
+var assessmentId=document.getElementById('txtAssessment').value
+var countryId=document.getElementById('txtCountry').value
+var http_request=fnGetXMLHttpObject();
+if(http_request!=null){
+var orgId=document.getElementById("orgId").value;
+	var parameters = "getCityList@@"+assessmentId+"@@"+countryId+"@@"+stateId+"@@"+orgId;
+	var pValidationServlet = "/ASM/CandidateDataValidationServlet"; 
+	http_request.open('POST',pValidationServlet,false);       
+	http_request.onreadystatechange = function() {}; 	 	                    
+	http_request.onreadystatechange = function() { fnPopulateDataNew(http_request,'District'); }; 	 	                    
+	http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");               
+	http_request.send("para="+parameters);
+			}
+}
+
+function fnPopulateDataNew(http_request,htmlfieldName)
+{
+var length=document.getElementById(htmlfieldName).options.length;
+for(var i=0; i<length; i++)
+{
+document.getElementById(htmlfieldName).remove(1);
+}
+document.getElementById(htmlfieldName).style.display='';
+	if (http_request.readyState == 4) {
+		if (http_request.status == 200) {
+			if(http_request.responseText != null) {
+				var responseDoc = "";
+				var docs = "";
+				if(http_request.responseXML!=null){
+					responseDoc = http_request.responseXML;
+					docs = responseDoc.getElementsByTagName("Row");
+				}else{
+					responseDoc = http_request.responseText;
+					docs = $(responseDoc).find("Row");
+				}
+	       		for(var i=0; i<docs.length;i++)
+	       		{
+	       			var docFields=docs[i].getElementsByTagName("Field");
+	       			if(docFields[0].firstChild!=null){
+	       				var value=docFields[0].getAttribute("fieldname");
+	       				var text=docFields[0].firstChild.nodeValue;
+	       				document.getElementById(htmlfieldName).options[parseInt(i)+1] = new Option(text, value);
+	       			}
+			    }
+			}
+		}
+	}
+}
+function getSearchData() {
+	var testSlotBookingTabNo=document.getElementById('slotBkngTabId').value;
+	var tabId=parseInt(testSlotBookingTabNo.split("-")[1])-28+1;
+	    tabId=2;
+	document.getElementById("testCenterReferral").value = "";
+	
+	var orgID = document.getElementById('orgId').value;
+	var formID = document.getElementById('formId').value;
+	var appSeqNo = "";
+	if(document.getElementById('app_seq_no')!=null){
+		appSeqNo = document.getElementById('app_seq_no').value;
+	}else{
+		appSeqNo = document.getElementById("userID").value;
+	}
+	if (document.getElementById("txtAssessment").value == ''
+			|| document.getElementById("txtAssessment").value == '0') {
+		alert("Please select Assessment");
+		return false;
+	} else {
+		var assessmentId = document.getElementById("txtAssessment").value;
+	}
+	if (document.getElementById("subject").value == ''
+			|| document.getElementById("subject").value == '0') {
+		alert("Please select a Subject");
+		return false;
+	} else {
+		var testSubject = document.getElementById("subject").value;
+		document.getElementById("hdnSubject").value = testSubject;
+	}
+	if (document.getElementById("testDate").value == ''
+			|| document.getElementById("testDate").value == '0') {
+		alert("Please select a test date");
+		return false;
+	} else {
+		var testDate = document.getElementById("testDate").value;
+		var tempDate = testDate.split("-");
+		testDate = tempDate[1] + "/" + tempDate[2] + "/" + tempDate[0];
+		document.getElementById("hdnTestDate").value = testDate;
+	}
+	var countryInfo = "";
+	var stateInfo = "";
+	var districtInfo = "";
+	if(document.getElementById("locationDetails").style.display!='none'){
+		if (document.getElementById("txtCountry") != null) {
+			if (document.getElementById("txtCountry").value != 0) {
+				countryInfo = document.getElementById("txtCountry").value;
+			}else{
+				alert("Please select country");
+				return false;
+			} 
+		}
+		if (document.getElementById("State") != null) {
+			if (document.getElementById("State").value != "0") {
+				stateInfo = document.getElementById("State").value;
+			}else{
+				alert("Please select state");
+				return false;
+			} 
+		}
+	
+		if (document.getElementById("District") != null){
+			if(document.getElementById("District").value != "0") {
+				districtInfo = document.getElementById("District").value;
+			}else{
+				alert("Please select city");
+				return false;
+			}
+		}
+		
+	}
+	var http_request = fnGetXMLHttpObject();
+	var parameters = orgID + "@@" + formID + "@@" + testDate + "@@" + countryInfo
+			+ "@@" + stateInfo + "@@" + districtInfo + "@@" + testSubject + "@@"
+			+ assessmentId+"@@"+appSeqNo;
+	// alert("parameters: "+parameters);
+	if (http_request != null) {
+		var pValidationServlet = "/ASM/CandidateDataValidationServlet";
+		http_request.open('POST', pValidationServlet, true);
+		http_request.onreadystatechange = function() {
+			fnPopulateTestSlotData(http_request, assessmentId,tabId);
+		};
+		http_request.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded");
+		http_request.send("OrgFormParams=getTestXML&para="+parameters);
+	}
+	// init_thickbox();
+}
+function fnPopulateTestSlotData(http_request, assessmentId,tabId) {
+	if (http_request.readyState == 4) {
+		if (http_request.status == 200) {
+			if (http_request.responseText != null) {
+				$('#bookingMessage').remove();
+				var table = document.getElementById("testslots_tbody");
+				for ( var i = table.rows.length - 1; i > 0; i--) {
+					table.deleteRow(i);
+				}
+				document.getElementById("showedResults").style.display = "none";
+				document.getElementById("totalRecords").style.display = "none";
+				document.getElementById("pageNavPosition").style.display = "none";
+				// document.getElementById("chosenDate").style.display="block";
+				document.getElementById("ctl00_PlaceHolderMain_testslots").style.display = "block";
+				/*var responseDoc = http_request.responseXML;
+				// alert("responseDoc: "+responseDoc);
+				var prefDoc = responseDoc.getElementsByTagName("_PREF");*/
+				var responseDoc = "";
+				var prefDoc = "";
+				var responseString = "";
+				if(http_request.responseXML!=null){
+					responseDoc = http_request.responseXML;
+					prefDoc = responseDoc.getElementsByTagName("_PREF");
+				}else{
+					responseDoc = http_request.responseText;
+					responseDoc =responseDoc.replace(/_PREF/gi,"PREF");
+					prefDoc = $(responseDoc).find("PREF");
+				}
+				if(prefDoc!=undefined && prefDoc.length>0){
+					if (prefDoc[0].firstChild != null) {
+						var pref = prefDoc[0].firstChild.nodeValue;
+						if (pref == 'Yes') {
+							if (document.getElementById('locationDetails') != null)
+								document.getElementById('locationDetails').style.display='none';
+						} else {
+							if (document.getElementById('locationDetails') != null) {
+								document.getElementById('locationDetails').style.display='';
+							}
+						}
+					}
+				}
+				/*var docs = responseDoc.getElementsByTagName("TESTCENTER");
+				var noOfDocuments = docs.length;*/
+				var docsForBookedStatus= "";
+				if(http_request.responseXML!=null){
+					docsForBookedStatus = responseDoc.getElementsByTagName("BOOKEDTC");
+				}else{
+					docsForBookedStatus = $(responseDoc).find("BOOKEDTC");
+				}
+				
+				if(docsForBookedStatus!=undefined && docsForBookedStatus.length>0){
+					var tcName=docsForBookedStatus[0].getAttribute("TC_NAME");
+					var cityName=docsForBookedStatus[0].getAttribute("CITY_NAME");
+					var stateName=docsForBookedStatus[0].getAttribute("STATE_NAME");
+					var countryName=docsForBookedStatus[0].getAttribute("COUNTRY_NAME");
+					var examDate=docsForBookedStatus[0].getAttribute("EXAM_DATE");
+					var startTime=docsForBookedStatus[0].getAttribute("START_TIME");
+					var endTime=docsForBookedStatus[0].getAttribute("END_TIME");
+					var subjectName=docsForBookedStatus[0].getAttribute("SUBJECT_NAME");
+					var slotBookingLevel=docsForBookedStatus[0].getAttribute("BOOKING_LEVEL");
+					var assessmentName=docsForBookedStatus[0].getAttribute("ASSESSMENT_NAME");
+					
+					responseString="You have booked your slot from "+startTime+" to "+endTime+" on "+examDate;
+					if(slotBookingLevel!="Test Center Level"){
+						responseString+=" at "+cityName+" for "+subjectName+" subject."
+					}else{
+						responseString+=" at "+tcName+", "+cityName+" for "+subjectName+" subject."
+					}
+				}
+				
+				var docs= "";
+				if(http_request.responseXML!=null){
+					docs = responseDoc.getElementsByTagName("TESTCENTER");
+				}else{
+					docs = $(responseDoc).find("TESTCENTER");
+				}
+				var noOfDocuments = docs.length;
+				if (noOfDocuments <= 0) {
+					if (document.getElementById('locationDetails') != null) {
+						document.getElementById('locationDetails').style.display='';
+					}
+					if(responseString!=null && responseString!=""){
+						document.getElementById('tcDataView').innerHTML='<div class="bookingMessage" id="bookingMessage" style="font-size: 13px;font-weight: normal;background-color: #FFFFCB;font-size: 11px;padding: 5px;font-weight: bold;color: #000000;position: relative;border: 1px solid #B9CAD4;">'
+							+responseString+'</div>'+document.getElementById('tcDataView').innerHTML;
+					}
+					document.getElementById('testslots_tbody').innerHTML = document
+							.getElementById('testslots_tbody').innerHTML
+							+ "<tr id=\"noRecords\"><td colspan='3' id='noSlots'><b>No Test Centers Available</b></td></tr>";
+				} else {
+					if(responseString!=null && responseString!=""){
+						document.getElementById('tcDataView').innerHTML='<div class="bookingMessage" id="bookingMessage" style="font-size: 13px;font-weight: normal;background-color: #FFFFCB;font-size: 11px;padding: 5px;font-weight: bold;color: #000000;position: relative;border: 1px solid #B9CAD4;">'
+							+responseString+'</div>'+document.getElementById('tcDataView').innerHTML;
+					}
+					
+					for (count = 0; count < noOfDocuments; count++) {
+						var row = document.getElementById('testslots_tbody')
+								.insertRow(count + 1);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						cell1.style.width = '55%';
+						cell2.style.width = '30%';
+						cell2.style.align = 'center';
+						
+						cell3.style.width = '25%';
+						var tcId = docs[count].getAttribute("TCID");
+						var tcName = docs[count].getAttribute("TCNAME");
+						tcName = tcName.replace(/\'/g, '');
+						var tcAddress = docs[count].getAttribute("TCADDRESS");
+						var tcCountry = docs[count].getAttribute("TCCOUNTRY");
+						var tcState = docs[count].getAttribute("TCSTATE");
+						var tcDistrict = docs[count].getAttribute("TCDISTRICT");
+						var tcRefName = document.getElementById("testCenterReferral").value;
+					
+						cell1.innerHTML = "<table width='100%'><tr><td id='tcIdForHallTicket'><b>"+ tcName+ "</b><br/>"+ tcAddress+ ", "+ tcState + ", " + tcCountry + "</td><td>" +"</td></tr></table>";
+						// }
+						var docsSlot = docs[count].getElementsByTagName("SLOT");
+						for (slotCount = 0; slotCount < docsSlot.length; slotCount++) {
+							var docsSlotStartTime = docsSlot[slotCount].getElementsByTagName("STARTTIME");
+							for (slotStartCount = 0; slotStartCount < docsSlotStartTime.length; slotStartCount++) {
+								var startTimeValue = docsSlotStartTime[slotStartCount].firstChild.nodeValue;
+							}
+							var docsSlotEndTime = docsSlot[slotCount].getElementsByTagName("ENDTIME");
+							for (slotEndCount = 0; slotEndCount < docsSlotEndTime.length; slotEndCount++) {
+								var endTimeValue = docsSlotEndTime[slotEndCount].firstChild.nodeValue;
+							}
+					
+							cell2.innerHTML = "<table align='center'><tr><td width='28%'></td><td style='text-align:center'>"+ startTimeValue + " to " + endTimeValue+ "</td><td width='15%'></td></tr></table>";
+							var docsAvailableSeats = docsSlot[slotCount].getElementsByTagName("AVAILABLESEATS");
+							for (slotAvailableSeatsCount = 0; slotAvailableSeatsCount < docsAvailableSeats.length; slotAvailableSeatsCount++) {
+								var AvailableSeatValue = docsAvailableSeats[slotAvailableSeatsCount].firstChild.nodeValue;
+							}
+							var docsSlotID = docsSlot[slotCount].getElementsByTagName("SLOTID");
+							for (slotIDCount = 0; slotIDCount < docsSlotID.length; slotIDCount++) {
+								if(docsSlotID[slotIDCount].firstChild!=null && docsSlotID[slotIDCount].firstChild.nodeValue!=null){
+									var SlotIdValue = docsSlotID[slotIDCount].firstChild.nodeValue;
+								}
+							}
+							
+							cell3.innerHTML = '<table width="100%"><tr><td>'
+									+ AvailableSeatValue
+									+ ' Seats </td><td><div align="right" class="detailsbutt1"><img src="images/onlineAppForm/book.gif" style="cursor: pointer;cursor:hand;" onclick="fnBookSeat(\''
+									+ tcName + '\',\'' + startTimeValue
+									+ '\',\'' + endTimeValue + '\',\'' + tcId
+									+ '\',\'' + assessmentId
+									+ '\');" /></div></td></tr></table>';
+						}
+					}
+					var pager = new Pager('ctl00_PlaceHolderMain_testslots', 10);
+					pager.init();
+					pager.showPageNav('pager', 'pageNavPosition');
+					pager.showPage(1);
+					document.getElementById("showedResults").style.display = "";
+					document.getElementById("totalRecords").style.display = "";
+					document.getElementById("pageNavPosition").style.display = "";
+					
+				}
+				setTimeout("showTab("+tabId+")", 2000);
+			}
+		}
+	}
+	setTimeout("showTab("+tabId+")", 2000);
+}
+function showTab(curTab){
+
+	$('#container-11').triggerTab(parseInt(curTab));
+	}
+function fnHideDetails() {
+	document.getElementById('ctl00_PlaceHolderMain_testslots').style.display = 'none';
+	document.getElementById("showedResults").style.display = "none";
+	document.getElementById("totalRecords").style.display = "none";
+	document.getElementById("pageNavPosition").style.display = "none";
+}
+function fnBookSeat(bookedTestCenterName, boookedStartDate, bookedEndDate,
+		bookedTcId, assessmentId) {
+	var orgID = document.getElementById("orgId").value;
+	var formID = document.getElementById("formId").value;
+	// alert("bookedTcId:"+bookedTcId+" orgID:"+orgID+" formID:"+formID+"
+	// bookedSlotId:"+bookedSlotId);
+	var appSeqNo = "";
+	if(document.getElementById('app_seq_no')!=null){
+		appSeqNo = document.getElementById('app_seq_no').value;
+	}else{
+		appSeqNo = document.getElementById("userID").value;
+	}
+	// alert("appSeqNo:"+appSeqNo+" boookedStartDate:"+boookedStartDate+"
+	// bookedEndDate:"+bookedEndDate);
+	// alert("Selected Date:"+document.getElementById("txtChosenDate").value);
+	var testFinalDate = document.getElementById("hdnTestDate").value;
+	var testSubject = document.getElementById("hdnSubject").value;
+	if (confirm("Are you sure you want to book this slot for " + testFinalDate
+			+ "?")) {
+		var http_request = fnGetXMLHttpObject();
+		var parameters = orgID + "," + formID + "," + bookedTcId + ","
+				+ boookedStartDate + "," + bookedEndDate + "," + appSeqNo + ","
+				+ testFinalDate + "," + assessmentId + "," + testSubject;
+		if (http_request != null) {
+			var pValidationServlet = "/ASM/BookSlotServlet";
+			http_request.open('POST', pValidationServlet, true);
+			http_request.onreadystatechange = function() {
+				fnAlertSlot(http_request, bookedTestCenterName, testFinalDate,
+						boookedStartDate, bookedEndDate,appSeqNo);
+			};
+			http_request.setRequestHeader("Content-Type",
+					"application/x-www-form-urlencoded");
+			http_request.send("OrgFormParams=" + parameters);
+		}
+	} else {
+	}
+}
+function fnAlertSlot(http_request, bookedTestCenterName, testFinalDate,
+		boookedStartDate, bookedEndDate,appSeqNo) {
+	if (http_request.readyState == 4) {
+		if (http_request.status == 200) {
+			if (http_request.responseText != null) {
+				var responseDoc = http_request.responseText;
+				if (responseDoc == 'success') {
+					alert("Slot booked successfully for "
+							+ bookedTestCenterName + " on " + testFinalDate
+							+ " from " + boookedStartDate + " to "
+							+ bookedEndDate);
+					document.getElementById('userid').value = appSeqNo;
+					document.loginForm.method="POST";
+					document.loginForm.action="/EForms/loginAction.do?subAction=DisplayProfile";
+					document.loginForm.submit();
+				} else if (responseDoc == 'failure') {
+					alert("Could not book slot. Please try again.")
+				} else {
+					alert(responseDoc);
+				}
+			}
+		}
+	}
+}
+function fnGetScoreCard() {
+	var orgId = document.hallTicketForm.orgId.value;
+	var formId = document.hallTicketForm.formId.value;
+	var assessmentId = document.getElementById('assessmentforsc').value;
+	var checkSum = document.getElementById('checksum').value;
+	//checkSum = encodeURIComponent(checkSum);
+	var appSeqNo = "";
+	if(document.getElementById('app_seq_no')!=null){
+		appSeqNo = document.getElementById('app_seq_no').value;
+	}else{
+		appSeqNo = document.getElementById("userID").value;
+	}
+	var newWin = window.open("/EForms/jsp/HallTicket.jsp", "newWin",
+			"height=500,width=700,resizable=yes,scrollbars=yes");
+	newWin.document
+			.write("<html><body><form id='scform' name='scform' action='/EForms/ScoreCardServlet' method ='post'><input type='hidden' id='scappSeqNo' name='scappSeqNo' value='"
+					+ appSeqNo
+					+ "'><input type='hidden' id='scassessmentId' name='scassessmentId' value='"
+					+ assessmentId
+					+ "'><input type='hidden' id='scorgId' name='scorgId' value='"
+					+ orgId
+					+ "'><input type='hidden' id='sccheckSum' name='sccheckSum' value='"
+					+ checkSum
+					+ "'><input type='hidden' id='scformId' name='scformId' value='"
+					+ formId + "'></form></body></html>");
+	newWin.document.getElementById('scform').submit();
+}
+function fnGetQuestionPaper(assessmentId,driveId,subjectId,appSeqNo) {
+	var orgId = document.getElementById('orgId').value;
+	var formId = document.getElementById('formId').value;
+	var checkSum = document.getElementById('checksum').value;
+	var qpTabNo=document.getElementById('qpPblishTabId').value;
+	var tabId=parseInt(qpTabNo.split("-")[1])-28+1;
+	
+	/*var parameter = "getAssessmentQPHTMLPath@@" + driveId + "@@" + subjectId + "@@" + appSeqNo + "@@" + assessmentId + "@@" + checkSum + "@@" + formId+ "@@" +orgId;
+	//var token_key = $("#token").val();
+	$.ajax({
+		url : 'CandidateDataValidationServlet',
+		type : 'POST',
+		datatype: 'html',
+		data : {
+			para : parameter,
+		},
+	}).done(function(data) {
+		window.open(data, "_blank","height=500,width=700,resizable=yes,scrollbars=yes");
+	}).fail(function() {
+		alert('Failed to retrive data. Please try again later.');
+	}).always(function() {
+		jQuery.unblockUI();
+	});*/
+	
+	var http_request = fnGetXMLHttpObject();
+	var parameters = "getAssessmentQPHTMLPath@@" + driveId + "@@" + subjectId + "@@" + appSeqNo + "@@" + assessmentId + "@@" + checkSum + "@@" + formId+ "@@" +orgId;
+	if (http_request != null) {
+		var pValidationServlet = "/ASM/CandidateDataValidationServlet";
+		http_request.open('POST', pValidationServlet, true);
+		http_request.onreadystatechange = function() {
+			if (http_request.readyState == 4 && http_request.status == 200 && http_request.responseText != null) {
+				if(http_request.responseText.indexOf("Error@@")!=-1){
+					alert(http_request.responseText.split("@@")[1]);
+				}else{
+					window.open(http_request.responseText, "_blank","height=500,width=700,resizable=yes,scrollbars=yes");
+				}
+			}
+		};
+		http_request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		http_request.send("para=" + parameters);
+	}
+
+
+	
+	/*var newWin = window.open("/ASM/jsp/HallTicket.jsp", "newWin",
+			"height=500,width=700,resizable=yes,scrollbars=yes");
+	newWin.document
+			.write("<html><body><form id='qpform' name='qpform' action='/ASM/QPDownloadServlet' method ='post'><input type='hidden' id='qpappSeqNo' name='qpappSeqNo' value='"
+					+ appSeqNo
+					+ "'><input type='hidden' id='qpsubject' name='qpsubject' value='"
+					+ subjectId
+					+ "'><input type='hidden' id='qpdriveId' name='qpdriveId' value='"
+					+ driveId
+					+ "'><input type='hidden' id='qpassessmentId' name='qpassessmentId' value='"
+					+ assessmentId
+					+ "'><input type='hidden' id='qporgId' name='qporgId' value='"
+					+ orgId
+					+ "'><input type='hidden' id='qpcheckSum' name='qpcheckSum' value='"
+					+ checkSum
+					+ "'><input type='hidden' id='qpformId' name='qpformId' value='"
+					+ formId + "'></form></body></html>");
+	newWin.document.getElementById('qpform').submit();
+	setTimeout("showTab("+tabId+")", 2000);*/
+}
+function fnGetSubjectsForAssessment(assessmentId) {
+	var fieldHTMLName='subject';
+	document.getElementById("ctl00_PlaceHolderMain_testslots").style.display = "none";
+	var orgid = document.getElementById('orgId').value;
+	var checkSum = document.getElementById('checksum').value;
+	checkSum = encodeURIComponent(checkSum);;
+	var appSeqNo = "";
+	var formid = document.getElementById('formId').value;
+	if(document.getElementById('app_seq_no')!=null){
+		appSeqNo = document.getElementById('app_seq_no').value;
+	}else{
+		appSeqNo = document.getElementById("userID").value;
+	}
+	var http_request = fnGetXMLHttpObject();
+	var parameters = "getSubjectsForAssessment@@" + assessmentId + "@@" + formid + "@@" + orgid + "@@" + appSeqNo + "@@" + checkSum + "@@" + fieldHTMLName;
+	if (http_request != null) {
+		var pValidationServlet = "/ASM/CandidateDataValidationServlet";
+		http_request.open('POST', pValidationServlet, true);
+		http_request.onreadystatechange = function() {
+			fnPopulateDataNew(http_request,'subject');};
+		http_request.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded");
+		http_request.send("para=" + parameters);
+	}
+}
+/*function selectSubject() {
+	if (document.getElementById('subject').options.length > 1) {
+		document.getElementById('subject').options.selectedIndex = 1;
+		fnGetDatesForAssessment(document.getElementById('subject').value,
+				'testDate', 'testDate')
+	} else {
+		setTimeout("selectSubject()", 200);
+	}
+}*/
+function fnGetDatesForAssessment(subjectId) {
+	var fieldHTMLName='testDate';
+	document.getElementById("ctl00_PlaceHolderMain_testslots").style.display = "none";
+	var orgid = document.getElementById('orgId').value;
+	
+	
+	var assessmentId = document.getElementById('txtAssessment').value;
+	
+	var http_request = fnGetXMLHttpObject();
+	var parameters = "getDatesForAssessment@@" + assessmentId + "@@" + orgid+ "@@" + subjectId + "@@" + fieldHTMLName;
+	if (http_request != null) {
+		var pValidationServlet = "/ASM/CandidateDataValidationServlet";
+		http_request.open('POST', pValidationServlet, true);
+		http_request.onreadystatechange = function() {
+			fnPopulateDataNew(http_request,'testDate');
+		};
+		http_request.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded");
+		http_request.send("para=" + parameters);
+	}
+}
+
+function fnShowHallTicket(pdfPath,subjectId,driveId,assessmentId,formId,courseId,isHalltickentDownloaded,htType) {
+
+	//var newWin = window.open(pdfPath, "newWin", "height=10,width=10,resizable=yes,scrollbars=yes");
+	//newWin.close();
+	//new Image().src=pdfPath;
+	//window.open(pdfPath,"_self");
+	if(isHalltickentDownloaded==0){
+		var appSeqNo=document.getElementById("app_seq_no").value;
+		var orgId=document.getElementById("orgId").value;
+		
+		var http_request=fnGetXMLHttpObject();
+		var parameters = "setHTDownloadedFlag@@"+subjectId+"@@"+courseId+"@@"+assessmentId+"@@"+driveId+"@@"+appSeqNo+"@@"+orgId+"@@"+formId+"@@"+htType;
+		if(http_request!=null){
+			var pValidationServlet = "/ASM/CandidateDataValidationServlet"; 
+					   
+			http_request.open('POST',pValidationServlet,true);       
+			http_request.onreadystatechange = function() { fnToDownloadHT(http_request,pdfPath); }; 	 	                    
+			http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");               
+			http_request.send("para="+parameters);
+		}
+	}else{
+	    // window.open(pdfPath,'Download'); 
+		var appSeqNo=document.getElementById("app_seq_no").value;
+		var orgId=document.getElementById("orgId").value;
+	     var newWin = window.open("/ASM/jsp/HallTicket.jsp", "newWin", "height=500,width=700,resizable=yes,scrollbars=yes");
+			newWin.document
+					.write("<html><body><form id='hallticketDownloadForm' name='hallticketDownloadForm' action='/ASM/GenerateHallTicketServlet' method ='post'>" +
+							"<input type='hidden' id='downloadPath' name='downloadPath' value='true'>" +
+							"<input type='hidden' id='asm_orgId' name='asm_orgId' value='"+orgId+"'>" +
+							"<input type='hidden' id='asm_app_seq_no' name='asm_app_seq_no' value='"+appSeqNo+"'>" +
+							"<input type='hidden' id='asm_form_id' name='asm_form_id' value='"+formId+"'>" +
+							"<input type='hidden' id='pdfPath' name='pdfPath' value='"+pdfPath+"'></form></body></html>");
+
+			// alert(newWin.document.getElementById('hallticketform').innerHTML);
+			newWin.document.getElementById('hallticketDownloadForm').submit();
+	}	
+}
+
+function fnToDownloadHT(http_request,pdfPath){
+	if (http_request.readyState == 4){
+		if (http_request.status == 200) {
+			if(http_request.responseText != null){
+				//window.open(pdfPath,'Download');
+				var newWin = window.open("/ASM/jsp/HallTicket.jsp", "newWin", "height=500,width=700,resizable=yes,scrollbars=yes");
+				
+				var formId = document.getElementById('formId').value;
+				var appSeqNo = document.getElementById("app_seq_no").value;
+				var orgId = document.getElementById("orgId").value;
+				
+				newWin.document
+						.write("<html><body><form id='hallticketDownloadForm' name='hallticketDownloadForm' action='/ASM/GenerateHallTicketServlet' method ='post'>" +
+								"<input type='hidden' id='downloadPath' name='downloadPath' value='true'>" +
+								"<input type='hidden' id='asm_orgId' name='asm_orgId' value='"+orgId+"'>" +
+								"<input type='hidden' id='asm_app_seq_no' name='asm_app_seq_no' value='"+appSeqNo+"'>" +
+								"<input type='hidden' id='asm_form_id' name='asm_form_id' value='"+formId+"'>" +
+								"<input type='hidden' id='pdfPath' name='pdfPath' value='"+pdfPath+"'></form></body></html>");
+
+				// alert(newWin.document.getElementById('hallticketform').innerHTML);
+				newWin.document.getElementById('hallticketDownloadForm').submit();
+			}
+		}
+	}
+}
+
+
+function fnShowHallTicketOld(assmntId,appSeqNo) {
+	var htTab=document.getElementById('hallTcktTabId').value;
+	var tabId=parseInt(htTab.split("-")[1])-28+1;
+	var orgid = document.getElementById('orgId').value;
+	var formid =  document.getElementById('formId').value;
+	var checkSum = document.getElementById('checksum').value;
+	checkSum = checkSum;
+	var http_request=fnGetXMLHttpObject();
+	var parameters = "validateCandidateForExportHt@@"+orgid+"@@"+formid+"@@"+checkSum+"@@"+assmntId+"@@"+appSeqNo;
+	if(http_request!=null){
+		var pValidationServlet = "/ASM/CandidateDataValidationServlet"; 
+				   
+		http_request.open('POST',pValidationServlet,true);       
+		http_request.onreadystatechange = function() { exportHtForCandidate(http_request,appSeqNo,assmntId,orgid,formid,checkSum,tabId); }; 	 	                    
+		http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");               
+		http_request.send("para="+parameters);
+	}
+}
+function exportHtForCandidate(http_request,appSeqNo,assmntId,orgid,formid,checkSum,tabId)
+{
+	if (http_request.readyState == 4){
+		if (http_request.status == 200) {
+			if(http_request.responseText != null){
+	            if (http_request.responseText=="OK"){
+	            
+	            	var newWin = window.open("/ASM/jsp/HallTicket.jsp", "newWin", "height=500,width=700,resizable=yes,scrollbars=yes");
+	newWin.document
+			.write("<html><body><form id='hallticketform' name='hallticketform' action='/ASM/HallTicketServlet' method ='post'><input type='hidden' id='appSeqNo' name='appSeqNo' value='"
+					+ appSeqNo
+					+ "'><input type='hidden' id='assmentId' name='assmentId' value='"
+					+ assmntId
+					+ "'><input type='hidden' id='orgid' name='orgid' value='"
+					+ orgid
+					+ "'><input type='hidden' id='formid' name='formid' value='"
+					+ formid
+					+ "'><input type='hidden' id='checkSum' name='checkSum' value='"
+					+ checkSum +"'></form></body></html>");
+
+	// alert(newWin.document.getElementById('hallticketform').innerHTML);
+	newWin.document.getElementById('hallticketform').submit();
+					
+	            }else{
+	            	
+	            	alert(http_request.responseText);
+	            	return false;
+	            	
+	            }
+	        }
+         }
+     }
+setTimeout("showTab("+tabId+")", 2000);
+}
+
+function fnGenerateHallTicket(appSeqNo, subjectId, driveId, assessmentId,formId,courseId) {
+	var htTab=document.getElementById('hallTcktTabId').value;
+	var tabId=parseInt(htTab.split("-")[1])-28+1;
+	if (confirm("Are you sure you want to generate your hall ticket?")) {
+	var orgID = document.getElementById('orgId').value;
+	var formID =document.getElementById('formId').value;
+	var http_request=fnGetXMLHttpObject();
+		var parameters = orgID + "," + formID + "," + appSeqNo + ","
+				+ subjectId + "," + driveId+","+assessmentId+","+courseId + ",Stage1";
+				if (http_request != null) {
+						var pValidationServlet = "/ASM/GenerateHallTicketServlet";
+						http_request.open('POST', pValidationServlet, true);
+						http_request.onreadystatechange = function() {
+							fnAlertHallticket(http_request,appSeqNo,tabId);
+						};
+						http_request.setRequestHeader("Content-Type",
+								"application/x-www-form-urlencoded");
+						http_request.send("OrgFormParams=" + parameters);					
+				}
+	} else {
+	}
+}
+function fnAlertHallticket(http_request,appSeqNo,tabId) {
+	if (http_request.readyState == 4) {
+		if (http_request.status == 200) {
+			if (http_request.responseText != null) {
+				var responseDoc = http_request.responseText;
+				if (responseDoc == 'success') {
+					alert("Hall ticket generated successfully");
+					document.getElementById('userid').value = appSeqNo;
+					document.loginForm.action = "/EForms/loginAction.do?subAction=DisplayProfile#fragment-31";
+					document.loginForm.method = "POST";
+					document.loginForm.submit();
+				} else if (responseDoc == 'failure') {
+					alert("Hall Ticket could not be generated. Please try again.")
+				} else {
+					alert(responseDoc);
+				}
+			}
+		}
+	}
+setTimeout("showTab("+tabId+")", 2000);
+}
+function fnGetXMLHttpObject() {
+	var http_req = null;
+	if (window.XMLHttpRequest) {
+		http_req = new XMLHttpRequest();
+		if (http_req.overrideMimeType) {
+			http_req.overrideMimeType('text/xml');
+		}
+		return http_req;
+	} else if (window.ActiveXObject) {
+		try {
+			http_req = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			try {
+				http_req = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e) {
+			}
+		}
+		return http_req;
+	}
+	return http_req;
+}
+function trimAll(sString) {
+	while (sString.substring(0, 1) == ' ') {
+		sString = sString.substring(1, sString.length);
+	}
+	while (sString.substring(sString.length - 1, sString.length) == ' ') {
+		sString = sString.substring(0, sString.length - 1);
+	}
+	return sString;
+}
+function fnChangeTestTab() {
+	document.getElementById("testSlotBookedId").style.display = "none";
+	document.getElementById("fragment-31").style.display = "none";
+	document.getElementById("testSlotId").style.display = "block";
+	document.getElementById("fragment-29").style.display = "block";
+}
+function replace(str) {
+	var str1 = "";
+	var newstr = str.replace(/<!\[CDATA\[/, str1);
+	newstr = newstr.replace(/\]\]>/, str1);
+	// alert("new string: "+newstr);
+	return newstr;
+}
+function fnViewCandidateFullProfile(appSeqNo,formId,orgId){
+
+var windowOptions = 'history=no,scrollbars=1,resizable=1';
+var newWin = window.open('jsp/viewOnlineFormApp.jsp', 'CandidateProfile', windowOptions);
+newWin.document.write("<html><body><form id='hallticketform' name='hallticketform' action='/EForms/loginAction.do?subAction=displayProfile' method ='post'><input type='hidden' id='userid' name='userid' value='"+appSeqNo+"'><input type='hidden' id='formId' name='formId' value='"+formId+"'><input type='hidden' id='orgId' name='orgId' value='"+orgId+"'></form></body></html>");
+newWin.document.getElementById('hallticketform').submit();
+
+
+}
+//setTimeout("populateCountries()",500);
+
+function createDiv(){
+	
+
+	var newTable = jQuery('<table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding:0px;"></table>');
+	
+	var newRow = jQuery('<tr style="padding-left:0px;"></tr>');
+	var newTd = jQuery('<td height="10" style="padding-left:0px;"></td>');
+	var newInnerDiv = jQuery('<div style="height: 180px; border-bottom: 1px solid #aac0cc;padding:15px;width:100%" ></div>');
+	var newInnerTable = jQuery('<table width="100%" border="0" cellspacing="5" cellpadding="0" style="padding:0px;">');
+	var newInnerRow = jQuery('<tr height="71"></tr>');
+	var newInnerTd=jQuery('<td align="right" style="padding-left:0px;"><span class="mandatory">*</span><strong>Assessment:</strong></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="left" style="padding-left:0px;"><select name="assessment" id="txtAssessment" style="background: #FFFFCB;display:block;width:200px;" Class="Country_field" onchange="javascript:fnGetSubjectsForAssessment(this.value);fnGetCountries(this.value);"><option value="0" >---Select---</option></select></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="right" style="padding-left:0px;"><span class="mandatory">*</span><strong>Subject:</strong></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="left" style="padding-left:0px;"><select class="Country_field" id="subject" name="subject" style="background: #FFFFCB;width:200px;" onchange="javascript:fnGetDatesForAssessment(this.value);" ><option value="0" selected="selected">---Select---</option></select></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="right" style="padding-left:0px;"><span class="mandatory">*</span><strong>Test Date:</strong></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="left" style="padding-left:0px;"><select class="Country_field" id="testDate" name="testDate" style="background: #FFFFCB;width:200px;" onchange="fnHideDetails();" ><option value="0" selected="selected">---Select---</option></select></td><br></br>');
+	newInnerRow.append(newInnerTd);
+	newInnerTable.append(newInnerRow);
+	newInnerRow=jQuery('<tr></tr>');
+	newInnerTd=jQuery('<td height="8" style="padding-left:0px;"></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTable.append(newInnerRow);
+	newInnerRow=jQuery('<tr id="locationDetails"></tr>');
+	newInnerTd=jQuery('<td align="right" style="padding-left:0px;"><span class="mandatory">*</span><strong>Country:</strong></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="left" style="padding-left:0px;"><div id="other_txtCountry_div"><select class="Country_field" id="txtCountry" name="txtCountry" style="background: #FFFFCB;width: 200px;" onchange="javascript:fnHideDetails(); fnGetStates(this.value)" ><option value="0" selected="selected">---Select---</option></select></div></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="right" style="padding-left:0px;"><span class="mandatory">*</span><strong>State:</strong></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="left" style="padding-left:0px;"><div id="other_txtState_div"><select class="Country_field" id="State" name="State" style="background: #FFFFCB;width: 200px;display: block" onchange="javascript:fnHideDetails();fnGetCities(this.value)"  ><option value="0" selected="selected">---Select---</option></select><select class="Country_field" id="txtState" name="txtState" style="width: 150px;display:none;" ><option value="0" selected="selected">---Select---</option></select></div></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="right" style="padding-left:0px;"><span class="mandatory">*</span><strong>City:</strong></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td align="left" style="padding-left:0px;"><div id="other_txtDistrict_div"><select	class="Country_field" id="District" name="District" style="background: #FFFFCB;width: 200px;display: block" onchange="fnHideDetails();"><option value="0" selected="selected">---Select---</option></select><select class="Country_field" id="txtDistrict" name="txtDistrict" style="width: 150px;display:none;" ><option value="0" selected="selected">---Select---</option></select></div></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTable.append(newInnerRow);
+	newInnerRow=jQuery('<tr></tr>');
+	newInnerTd=jQuery('<td height="5" style="padding-left:0px;"></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTable.append(newInnerRow);
+	newInnerRow=jQuery('<tr></tr>');
+	newInnerTd=jQuery('<td colspan="6" align="center" height="45" style="padding-left:0px;"><a href="#nogo"><img src="images/onlineAppForm/butt_search.gif" width="63" height="18" onclick="javascript:getSearchData();" /></a></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTable.append(newInnerRow);
+	newInnerDiv.append(newInnerTable);
+	newTd.append(newInnerDiv);
+	newRow.append(newTd);
+	newTable.append(newRow);
+	newRow = jQuery('<tr style="padding:0px;"></tr>');
+	newTd = jQuery('<td valign="top" style="padding-left:0px;"></td>');
+	newInnerDiv = jQuery('<div class="innerdatadiv" style="padding:0px;" id="tcDataView"></div>');
+	newInnerTable = jQuery('<table cellspacing="0" cellpadding="0" border="0" width="100%" id="ctl00_PlaceHolderMain_testslots" class="tablelist" style="display: none;padding:0px;"></table>');
+	var newTbody = jQuery('<tbody id="testslots_tbody" ></tbody>');
+	newInnerRow=jQuery('<tr></tr>');
+	newInnerTd=jQuery("<td class='tdheader' height='25px' style='padding-left:54px;'>Test Center</td><td class='tdheader' style='text-align:center' height='25px'>Slots</td><td class='tdheader' width='200px' height='25px'>Available Seats</td>");
+	newInnerRow.append(newInnerTd);	
+	newTbody.append(newInnerRow);
+	newInnerTable.append(newTbody);
+	newInnerDiv.append(newInnerTable);
+	var input = jQuery('<input type="hidden" name="pageSelected" id="pageSelected" />');
+	newInnerDiv.append(input);
+	
+	var newInnerDiv2 = jQuery('<table width="100%" style="padding:0px;"><tr><td id="showedResults"  width="45%" align="left" style="display: none;padding-left:21px;"><td id="pageNavPosition" width="10%" align="center" style="display: none;padding-left:0px;"><td id="totalRecords" width="45%%" align="right" style="display: none;padding-left:0px;padding-right:10px;"></tr></table>');
+	newInnerDiv.append(newInnerDiv2);
+	
+	var newScript = jQuery('<script type="text/javascript">var pager = new Pager("ctl00_PlaceHolderMain_testslots",'+10+');pager.init();pager.showPageNav("pager", "pageNavPosition");pager.showPage(1);</script>');
+	newInnerDiv.append(newScript);
+	newTd.append(newInnerDiv);
+	newRow.append(newTd);
+	newTable.append(newRow);
+	newRow = jQuery('<tr></tr>');
+	newTd = jQuery('<td height="10" style="padding-left:0px;">&nbsp;</td>');
+	newRow.append(newTd);
+	newTable.append(newRow);
+	if(document.getElementById('asmSlotBooking')!=null){
+	setTimeout("getAssessments()", 500);
+	jQuery('#asmSlotBooking').append(newTable);
+	
+	}
+	//alert(document.getElementById('hallTicket'));
+	if(document.getElementById('hallTicket')!=null){
+		setTimeout("createDivForHT()", 1000);
+		
+		}
+}
+
+function getAssessmentsForHT()
+{
+	setTimeout("hideDesc()",500);
+	var http_request=fnGetXMLHttpObject();
+	if(http_request!=null){
+		var appSeqNo=document.getElementById("app_seq_no").value;
+	var formId=document.getElementById("formId").value;
+	var orgId=document.getElementById("orgId").value;
+	var parameters = "getAssessmentListForHT@@"+appSeqNo+"@@"+formId+"@@"+orgId;
+	var pValidationServlet = "/ASM/CandidateDataValidationServlet"; 
+	http_request.open('POST',pValidationServlet,false);       
+	http_request.onreadystatechange = function() {}; 	 	                    
+	http_request.onreadystatechange = function() { fnPopulateDataNew(http_request,'txtAssessmentHT'); }; 	 	                    
+	http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");               
+	http_request.send("para="+parameters);
+			}
+}	
+
+function createDivForHT(){
+
+	var htDiv = $("#hallTicket");
+	
+	if(htDiv !=undefined){
+	var newTable = jQuery('<table width="100%" border="0" cellspacing="0" cellpadding="0" id="searchBox"></table>');
+	
+	var newRow = jQuery('<tr></tr>');
+	var newTd = jQuery('<td height="10" style="padding-left:0px;"></td>');
+	var newInnerDiv = jQuery('<div style="height: 150px; border-bottom: 1px solid #aac0cc;" ></div>');
+	var newInnerTable = jQuery('<table width="100%" border="0" cellspacing="5" cellpadding="0" style="margin-top: 15px; margin-bottom: 15px;">');
+	var newInnerRow = jQuery('<tr></tr>');
+	var newInnerTd=jQuery('<td align="right" width="50%" style="padding:15px;padding-left:0px;"><span class="mandatory">*</span><strong style="font-size:13px;">Assessment:</strong></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTd=jQuery('<td><select name="assessment" id="txtAssessmentHT" style="background: #FFFFCB;display:block;width:200px;" Class="Country_field"><option value="0" >---Select---</option></select></td>');
+	newInnerRow.append(newInnerTd);
+			
+	newInnerTable.append(newInnerRow);
+	newInnerRow=jQuery('<tr height="45"></tr>');
+	newInnerTd=jQuery('<td colspan="6" align="center" style="padding-left:0px;"><a href="#nogo"><img src="images/onlineAppForm/butt_search.gif" width="63" height="18" onclick="javascript:getHTSearchData();" /></a></td>');
+	newInnerRow.append(newInnerTd);
+	newInnerTable.append(newInnerRow);
+	newInnerDiv.append(newInnerTable);
+	newTd.append(newInnerDiv);
+	newRow.append(newTd);
+	newTable.append(newRow);
+	
+	/*var input = jQuery('<input type="hidden" name="pageSelected" id="pageSelected" />');
+	newInnerDiv.append(input);
+	
+	var newInnerDiv2 = jQuery('<table width="100%"><tr><td id="showedResults"  width="45%" align="left" style="display: none;"><td id="pageNavPosition" width="10%" align="center" style="display: none;"><td id="totalRecords" width="45%%" align="right" style="display: none;"></tr></table>');
+	newInnerDiv.append(newInnerDiv2);
+	
+	var newScript = jQuery('<script type="text/javascript">var pager = new Pager("ctl00_PlaceHolderMain_testslots",'+10+');pager.init();pager.showPageNav("pager", "pageNavPosition");pager.showPage(1);</script>');
+	newInnerDiv.append(newScript);
+	newTd.append(newInnerDiv);
+	newRow.append(newTd);
+	newTable.append(newRow);
+	newRow = jQuery('<tr></tr>');
+	newTd = jQuery('<td height="10">&nbsp;</td>');
+	newRow.append(newTd);
+	newTable.append(newRow);*/
+	
+	 if(document.getElementById('hallTicket')!=null)
+		{
+			setTimeout("getAssessmentsForHT()", 500);
+			jQuery('#hallTicket').append(newTable);
+		}
+	}
+}
+
+function getHTSearchData() {
+	var hallTicketTabNo=document.getElementById('hallTcktTabId').value;
+	var tabId=parseInt(hallTicketTabNo.split("-")[1])-28+1;
+	    tabId=2;
+	//document.getElementById("testCenterReferral").value = "";
+	
+	var orgID = document.getElementById('orgId').value;
+	var formID = document.getElementById('formId').value;
+	var appSeqNo = "";
+	if(document.getElementById('app_seq_no')!=null){
+		appSeqNo = document.getElementById('app_seq_no').value;
+	}else{
+		appSeqNo = document.getElementById("userID").value;
+	}
+	if (document.getElementById("txtAssessmentHT").value == ''
+			|| document.getElementById("txtAssessmentHT").value == '0') {
+		alert("Please select Assessment");
+		return false;
+	} else {
+		var assessmentId = document.getElementById("txtAssessmentHT").value;
+	}
+	
+	var http_request = fnGetXMLHttpObject();
+	var parameters = "getHTSearchData@@"+orgID + "@@" + formID + "@@" + assessmentId + "@@" + appSeqNo;
+				
+	if (http_request != null) {
+		var pValidationServlet = "/ASM/CandidateDataValidationServlet";
+		http_request.open('POST', pValidationServlet, true);
+		http_request.onreadystatechange = function() {
+			fnPopulateHTData(http_request, assessmentId,tabId);
+		};
+		http_request.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded");
+		http_request.send("para=" + parameters);
+	}
+
+}
+
+function fnPopulateHTData(http_request, assessmentId,tabId){
+	if (http_request.readyState == 4) {
+		if (http_request.status == 200) {
+			if (http_request.responseText != null) {
+				if(document.getElementById('htDiv')!=null && document.getElementById('htDiv')!=undefined){
+					jQuery('#htDiv').html('');
+				}
+				var responseDoc = "";
+				var docs = "";
+				var rows;
+				if(http_request.responseXML!=null){
+					responseDoc = http_request.responseXML;
+					docs = responseDoc.getElementsByTagName("RESPONSE");
+					rows=docs[0].getElementsByTagName("ROW");
+				}else{
+					responseDoc = http_request.responseText;
+					docs = $(responseDoc).find("Row");
+					rows=docs;
+				}
+				var htType=$(responseDoc).attr("HTTYPE");
+				//var rows = docs[0].getElementsByTagName("ROW");
+				var div=jQuery('<div id="htDiv"></div>');
+				var table=jQuery('<table id="htTable" class="tablelist" width="100%" border="0" cellspacing="0" cellpadding="0"></table>');
+				var header='';
+				var newRow='';
+				
+			
+				
+				if(htType=='Assessment'){
+					header=jQuery('<tr height="25px;"><th>Assessment</th><th>Action</th></tr>');
+				}
+				else if(htType=='Course'){
+					header=jQuery('<tr height="25px;"><th>Assessment</th><th>Course</th><th>Action</th></tr>');
+				}
+				else if(htType=='Subject'){
+					header=jQuery('<tr height="25px;"><th>Assessment</th><th>Course</th><th>Subject</th><th>Action</th></tr>');
+				}
+				else {
+					header=jQuery('<tr height="25px;"><th>Assessment</th><th>Course</th><th>Subject</th><th>Action</th></tr>');
+				}
+				
+				
+				
+				for(var i=0;i<rows.length;i++)
+					{
+					
+						var assName = $(rows[i]).find("ASSESSMENTNAME").text();
+						var courseName = $(rows[i]).find("COURSENAME").text();
+						var subjectName = $(rows[i]).find("SUBJECTNAME").text();
+						var linkText = $(rows[i]).find("FUNCTIONLINK").text();
+						var linkFunction = $(rows[i]).find("FUNCTION").text();
+						
+						
+						
+						
+						while(linkFunction.indexOf('&quot;')!=-1){
+							linkFunction=linkFunction.replace('&quot;','\"');
+							}
+						
+						
+						
+						if(htType=='Assessment'){
+							newRow=newRow+'<tr><td>'+assName+'</td><td><a onclick='+linkFunction+' title="'+linkText+'"><span style="line-height: 20px; display: inline-block; padding: 0px 10px 10px; border-radius: 5px; background: rgb(244, 247, 254) none repeat scroll 0% 0%; border: 1px solid rgb(148, 165, 175); color: rgb(0, 0, 0); height: 23px; cursor: pointer;">'+linkText+'</span></a></td></tr>';
+						}
+						else if(htType=='Course'){
+							newRow=newRow+'<tr><td>'+assName+'</td><td>'+courseName+'</td><td><a onclick='+linkFunction+' title="'+linkText+'"><span style="line-height: 20px; display: inline-block; padding: 0px 10px 10px; border-radius: 5px; background: rgb(244, 247, 254) none repeat scroll 0% 0%; border: 1px solid rgb(148, 165, 175); color: rgb(0, 0, 0); height: 23px; cursor: pointer;">'+linkText+'</span></a></td></tr>';
+						}
+						else if(htType=='Subject'){
+							newRow=newRow+'<tr><td>'+assName+'</td><td>'+courseName+'</td><td>'+subjectName+'</td><td><a onclick='+linkFunction+' title="'+linkText+'"><span style="line-height: 20px; display: inline-block; padding: 0px 10px 10px; border-radius: 5px; background: rgb(244, 247, 254) none repeat scroll 0% 0%; border: 1px solid rgb(148, 165, 175); color: rgb(0, 0, 0); height: 23px; cursor: pointer;">'+linkText+'</span></a></td></tr>';
+						}
+						else {
+							newRow=newRow+'<tr><td>'+assName+'</td><td>'+courseName+'</td><td>'+subjectName+'</td><td><a onclick='+linkFunction+' title="'+linkText+'"><span style="line-height: 20px; display: inline-block; padding: 0px 10px 10px; border-radius: 5px; background: rgb(244, 247, 254) none repeat scroll 0% 0%; border: 1px solid rgb(148, 165, 175); color: rgb(0, 0, 0); height: 23px; cursor: pointer;">'+linkText+'</span></a></td></tr>';
+						}
+					
+					}
+				table.append(header);
+				//alert(newRow);
+				table.append($(newRow));
+				div.append(table);
+				$("#searchBox").after(div);
+			}
+		}
+	}
+}
+
+
+
+
+$(function(){
+			if(document.getElementById('table_sorter_book_center')!=null)
+			{
+			fixheader("table_sorter_book_center");
+			$("#table_sorter_book_center").tablesorter({ 
+		        headers: { 
+		            3: { 
+		                sorter: false 
+		            }, 
+		            4: { 
+		                sorter: false 
+		            }, 
+		            7: { 
+		                sorter: false 
+		            }, 
+		            8: { 
+		                sorter: false 
+		            }
+		        } 
+		    });
+			
+			fixheader("table_sorter_drive_scheduling");
+			$("#table_sorter_drive_scheduling").tablesorter({ 
+		        headers: { 
+		            2: { 
+		                sorter: false 
+		            }, 
+		            3: { 
+		                sorter: false 
+		            } 
+		        } 
+		    });
+			
+			fixheader("table_sorter_user_mapping");
+			$("#table_sorter_user_mapping").tablesorter({ 
+		        headers: { 
+		            3: { 
+		                sorter: false 
+		            }, 
+		            4: { 
+		                sorter: false 
+		            } 
+		        } 
+		    });
+			$('#container-11').tabs();
+            	jQuery('.next').click(  
+			    	function(){
+				    	
+			        		var xTab = 28;
+				     	 	var buttonid = jQuery(this).attr("id");
+				     	 	//alert("buttonid::"+buttonid);
+				     	 	var ntab = buttonid.slice(-1);
+				     	 	//alert("ntab::"+ntab);
+				     	 	var tabIndx = (parseInt(xTab)+parseInt(ntab))
+				         	var currfrag = "fragment-" + tabIndx;
+						 	var nextfrag = "fragment-" + (++tabIndx);
+						 	jQuery("#" + nextfrag).css("display","block");
+						 	jQuery("#" + currfrag).css("display","none");
+						 	jQuery("." + nextfrag).addClass("tabs-selected");
+						 	jQuery("." + currfrag).removeClass("tabs-selected");
+						return false;
+				 		
+				     });
+		
+		}
+		});
+		
+		
+function createEvaluationList()
+{
+	var http_request=fnGetXMLHttpObject();
+	var newTable = jQuery('<table id="evaluationdownList" width="100%" border="0" cellspacing="0" cellpadding="0"></table><br><br>');
+	var newRow = jQuery('<tr></tr>');
+	var newTd = jQuery('<td width="15%"><b>Select Evaluation</b></td><td class=""><select name="evaluation" id="txtEvaluation" style="background: #FFFFCB;display:block;width:200px;" Class="Country_field"><option value="0" >---Select---</option></select></td><td valign="bottom" width="60%"><a onclick="javascript:createEvaluationDiv();" style="cursor:pointer;cursor:hand;"> <img src="images/onlineAppForm/getdetails.gif" title = "Get Evaluation Download Links"/></a> </td>');
+	newRow.append(newTd);                                                                                                                                                                                                                                 
+	
+				                                                                                                                                                                                                                                                                                                                      
+	newTable.append(newRow);
+	if(document.getElementById('evalQpAndAnswerSheetDiv')!=null)
+	{
+		setTimeout("getEvaluations()", 500);
+		jQuery('#evalQpAndAnswerSheetDiv').append(newTable)
+		
+	}
+
+}		
+		
+function createEvaluationDiv()
+{
+	$(document.getElementById('evaluationdownloadList')).remove();
+	var http_request=fnGetXMLHttpObject();
+	var assessmenId=document.getElementById('txtEvaluation').value;
+	if(assessmenId=='' || assessmenId==0)
+	{
+	alert("Please selecet an evaluation");
+	return false;
+	}
+	if(http_request!=null)
+		{
+		var appSeqNo=document.getElementById("app_seq_no").value;
+		var formId=document.getElementById("formId").value;
+		var orgId=document.getElementById("orgId").value;
+		var parameters = "getEvaluationDownloadList@@"+appSeqNo+"@@"+formId+"@@"+orgId+"@@"+assessmenId;
+		var pValidationServlet = "/ASM/CandidateDataValidationServlet"; 
+		http_request.open('POST',pValidationServlet,false);       
+		http_request.onreadystatechange = function() {}; 	 	                    
+		http_request.onreadystatechange = function() { fnPopulateEvaluationDiv(http_request,'txtEvaluation'); }; 	 	                    
+		http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");               
+		http_request.send("para="+parameters);
+		}
+}
+function fnPopulateEvaluationDiv(http_request,fieldName)	
+{	
+if (http_request.readyState == 4) 
+	{
+		if (http_request.status == 200) 
+		{
+			if (http_request.responseText != null) 
+			{
+			var newTable = jQuery('<table id="evaluationdownloadList" width="100%" border="0" cellspacing="0" cellpadding="0" class="tablelist"></table><br></br><br></br>');
+			var newRow = jQuery('<tr></tr>');
+			var newTd = jQuery('<td colspan="3" class="sectionheading">Download List</td>');
+			newRow.append(newTd);
+			newTable.append(newRow);
+			var newRow = jQuery('<tr id="tr_0"></tr>');
+			var newTd = jQuery('<td id="td_0" class="tdheader" width="60%">Subject</td><td id="td_1" class="tdheader">Question Paper</td><td id="td_2" class="tdheader">AnswerSheet</td>');
+			newRow.append(newTd);
+			newTable.append(newRow);
+			/*var responseDoc= http_request.responseXML;
+				var docs = responseDoc.getElementsByTagName("Row");*/
+				var responseDoc = "";
+				var docs = "";
+				if(http_request.responseXML!=null){
+					responseDoc = http_request.responseXML;
+					docs = responseDoc.getElementsByTagName("Row");
+				}else{
+					responseDoc = http_request.responseText;
+					docs = $(responseDoc).find("Row");
+				}
+	       		for(var i=0; i<docs.length;i++)
+	       		{
+	       			var id=i+1;
+	       			var subjectName='';
+	       			var qpFunction='';
+	       			var answersheetLink='';
+	       			 var qpfunctionArray='';
+	       			var docFields=docs[i].getElementsByTagName("Field");
+	       			if(docFields[0].firstChild!=null){
+	       				subjectName=docFields[0].firstChild.nodeValue;
+	       			}
+	       			if(docFields[1].firstChild!=null){
+	       				qpfunctionArray=docFields[1].firstChild.nodeValue.split(",");
+	       				qpFunction='fndownloadEvaluationQp("'+qpfunctionArray[0]+'","'+qpfunctionArray[1]+'","'+qpfunctionArray[2]+'",'+qpfunctionArray[3]+','+qpfunctionArray[4]+')';
+	       			}
+	       			else
+	       			{
+	       				qpFunction="N.A";
+	       			}
+	       			if(docFields[2].firstChild!=null)
+	       			{
+	       				answersheetLink=docFields[2].firstChild.nodeValue;
+	       			}
+	       			else
+	       			{
+	       			answersheetLink="N.A";
+	       			}
+	       			var newRow = jQuery('<tr id="tr_'+id+'"></tr>');
+					var newTd = "<td id='td_0' >"+subjectName+"</td><td id='td_1'><a onclick='javascript:"+qpFunction+";' style='cursor pointer;cursor and;'><img src='images/download_icon.jpg' title = 'Download Question Paper'/></a></td><td id='td_2'><a onclick=\"javascript:downloadAnswerSheet('"+answersheetLink+"');\" style='cursor pointer;cursor and;'><img src='images/download_icon.jpg'/></a></td>";
+					newRow.append(newTd);
+					newTable.append(newRow);
+					jQuery('#evalQpAndAnswerSheetDiv').append(newTable)
+
+					}
+			}
+		}
+	}
+}
+function fndownloadEvaluationQp(appSeqNo,answersheetCode,driveId,subjectId,assessmentId)
+{
+
+	var orgId = document.getElementById('orgId').value;
+	var formId = document.getElementById('formId').value;
+	var checkSum = document.getElementById('checksum').value;
+	var qpTabNo=document.getElementById('qpPblishTabId').value;
+	var tabId=parseInt(qpTabNo.split("-")[1])-28+1;
+	
+	
+	var newWin = window.open("/ASM/jsp/HallTicket.jsp", "newWin",
+			"height=500,width=700,resizable=yes,scrollbars=yes");
+	newWin.document
+			.write("<html><body><form id='qpform' name='qpform' action='/ASM/QPDownloadServlet' method ='post'><input type='hidden' id='qpappSeqNo' name='qpappSeqNo' value='"
+					+ appSeqNo
+					+ "'><input type='hidden' id='qpsubject' name='qpsubject' value='"
+					+ subjectId
+					+ "'><input type='hidden' id='qpdriveId' name='qpdriveId' value='"
+					+ driveId
+					+ "'><input type='hidden' id='qpassessmentId' name='qpassessmentId' value='"
+					+ assessmentId
+					+ "'><input type='hidden' id='qporgId' name='qporgId' value='"
+					+ orgId
+					+ "'><input type='hidden' id='qpcheckSum' name='qpcheckSum' value='"
+					+ checkSum
+					+ "'><input type='hidden' id='qpformId' name='qpformId' value='"
+					+ formId + "'><input type='hidden' id='qpanswerSheetCode' name='qpanswerSheetCode' value='"
+					+ answersheetCode + "'></form></body></html>");
+	newWin.document.getElementById('qpform').submit();
+	setTimeout("showTab("+tabId+")", 2000);
+}
+	
+function downloadAnswerSheet(link)
+{
+var newWin = window.open(link, "newWin",
+			"height=500,width=700,resizable=yes,scrollbars=yes");
+}				
+
+function getAssessments()
+{
+	setTimeout("hideDesc()",500);
+	var http_request=fnGetXMLHttpObject();
+	if(http_request!=null){
+		var appSeqNo=document.getElementById("app_seq_no").value;
+	var formId=document.getElementById("formId").value;
+	var orgId=document.getElementById("orgId").value;
+	var parameters = "getAssessmentList@@"+appSeqNo+"@@"+formId+"@@"+orgId;
+	var pValidationServlet = "/ASM/CandidateDataValidationServlet"; 
+	http_request.open('POST',pValidationServlet,false);       
+	http_request.onreadystatechange = function() {}; 	 	                    
+	http_request.onreadystatechange = function() { fnPopulateDataNew(http_request,'txtAssessment'); }; 	 	                    
+	http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");               
+	http_request.send("para="+parameters);
+			}
+}	  
+
+function getEvaluations()
+{
+setTimeout("hideDesc()",500);
+var http_request=fnGetXMLHttpObject();
+if(http_request!=null)
+		{
+		var appSeqNo=document.getElementById("app_seq_no").value;
+		var formId=document.getElementById("formId").value;
+		var orgId=document.getElementById("orgId").value;
+		var parameters = "getEvaluationList@@"+appSeqNo+"@@"+formId+"@@"+orgId;
+		var pValidationServlet = "/ASM/CandidateDataValidationServlet"; 
+		http_request.open('POST',pValidationServlet,false);       
+		http_request.onreadystatechange = function() {}; 	 	                    
+		http_request.onreadystatechange = function() { fnPopulateDataNew(http_request,'txtEvaluation'); }; 	 	                    
+		http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");               
+		http_request.send("para="+parameters);
+		}
+}
+
+function hideDesc(){
+
+$( "#tabs li > a > span " ).each(function( index ) {
+    if($(this).html() == 'Hall Ticket'){
+        var fg = $(this).parent().attr("href");
+        fg = fg.substring(1,fg.length);
+       $("#"+fg).find(".info_header_grid").html("Hall Ticket");
+    }
+	 if($(this).html() == 'Evaluation Publish'){
+        var fg = $(this).parent().attr("href");
+        fg = fg.substring(1,fg.length);
+       $("#"+fg).find(".info_header_grid").html("Evaluation Publish");
+    }
+});
+}

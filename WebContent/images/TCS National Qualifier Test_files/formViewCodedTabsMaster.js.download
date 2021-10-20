@@ -1,0 +1,3586 @@
+function showNote(sel, msg) {
+	var $note = $(sel + '>#show-msg-note-pre');
+	if ($note.length)
+		$note.html(msg).show();
+	else
+		$(
+				'<div id="show-msg-note-pre" style ="display: inline-block;background: #fff599;color: #333;padding: 1px 8px;font-size: 15px;border-radius: 4px;margin-top: 20px;"></div>')
+				.append(msg).prependTo(sel);
+}
+function showConfirm(msg, OK, Cancel) {
+	var cnf = $('#cnf-msg-alert').length ? $('#cnf-msg-alert')
+			: $('<div id="cnf-msg-alert" class="modal" tabindex="-1" role="dialog"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h3 style="color:#ffffff" class="modal-title">Please Confirm</h3> <button type="button" class="close" style="margin-top: -20px;" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body"> </div> <div class="modal-footer"> <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button> <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> </div> </div> </div> </div>');
+	cnf.find('button:contains("OK")').click(OK);
+	cnf.find('button:contains("Cancel")').click(Cancel);
+	cnf.find('.modal-body').html(msg).end().modal();
+
+}
+
+$(document).on(
+		"click",
+		".selCourseBack",
+		function() {
+			var httab = $(this).attr("data-ht-tab");
+			$('.halTktSecTabTxt').eq(httab).removeClass('halTktSecTabTxtAct')
+					.addClass('halTktSecTabTxtVis');
+			$('.halTktSecTabIndxBdr').eq(httab).removeClass(
+					'halTktSecTabIndxBdrAct')
+					.addClass('halTktSecTabIndxBdrVis');
+			$('.halTktSecTabIndxTxt').eq(httab).removeClass(
+					'halTktSecTabIndxTxtAct')
+					.addClass('halTktSecTabIndxTxtVis');
+			$('.halTktSecTabTxt').eq(httab - 1).removeClass(
+					'halTktSecTabTxtVis').addClass('halTktSecTabTxtAct');
+			$('.halTktSecTabIndxBdr').eq(httab - 1).removeClass(
+					'halTktSecTabIndxBdrVis')
+					.addClass('halTktSecTabIndxBdrAct');
+			$('.halTktSecTabIndxTxt').eq(httab - 1).removeClass(
+					'halTktSecTabIndxTxtVis')
+					.addClass('halTktSecTabIndxTxtAct');
+			$(".halTktCont").hide();
+			$(".halTktCont").eq(httab - 1).show();
+		});
+
+$(document).on("click", ".weekChg", function() {
+	var count = $(this).parents('.halTktCalender').find('.weekCount').html();
+	if ($(this).hasClass('weekDec')) {
+		if (count > 1) {
+			$('.weekCount').html(Number(count) - 1);
+		}
+	} else if ($(this).hasClass('weekInc')) {
+		if (count < 4) {
+			$('.weekCount').html(Number(count) + 1);
+		}
+	}
+});
+
+// -----added
+
+var selectedDate = "";
+var eDate = "";
+function fnGetTabForLBA(fragmentCount, tabDesc, tabId) {
+	if (($('#tabLayout').val() == 'verticalWithIcon')
+			|| ($('#tabLayout').val() == 'verticalWithoutIcon')) {
+		var xWidth = $('#container').width();
+		xWidth = xWidth - 200;
+		if ($(window).width() >= 768)
+			var newDiv = "<div id=\"fragment-"
+					+ fragmentCount
+					+ "\"class=\"tabs-container tabs-hide\" style = \"float:left; width:"
+					+ xWidth
+					+ "px;\"><input type=\"hidden\" id=\"PageForLBA\" value=\"1\">";
+		else
+			var newDiv = "<div id=\"fragment-"
+					+ fragmentCount
+					+ "\"class=\"tabs-container tabs-hide col-sm-12 col-xs-12\"><input type=\"hidden\" id=\"PageForLBA\" value=\"1\">";
+	} else {
+		var newDiv = "<div id=\"fragment-"
+				+ fragmentCount
+				+ "\"class=\"tabs-container tabs-hide\"><input type=\"hidden\" id=\"PageForLBA\" value=\"1\">";
+	}
+
+	newDiv = newDiv
+			+ "<div class=\"container-fluid\" ><h3 class=\"margintop20 orangecolor\"><span id='"
+			+ tabId + "_Tab_Description' class=\"sansSB\">" + tabDesc
+			+ "</span></h3>";
+	newDiv = newDiv
+			+ "<div id=\"CodedSearch_LBA\" class=\"mainblueSubtab clearfix pull-right\" style=\"margin-bottom: 10px; display: table; \">";
+
+	newDiv = newDiv
+			+ "<div class=\"input-group col-md-9 col-sm-10  pull-left col-xs-9\">";
+	newDiv = newDiv
+			+ "<input placeholder=\"Search.. \"  style=\"display:none;\" data-statickey=\"Search..\" data-statickeytype=\"placeholder\" aria-label=\"Text input with segmented button dropdown\" class=\"form-control searchinput\" id=\"searchInput_LBA\" type=\"text\">";
+	newDiv = newDiv
+			+ "<div id=\"searchLBA\" class=\"input-group-addon\" title=\"Search\" data-statickey=\"Search\" data-statickeytype=\"title\" style=\"cursor:pointer; display:none;\" onclick=\"fnGetLBADataSearch('searchInput_LBA');\">";
+	newDiv = newDiv + "<i class=\"fa fa-search blueTxt\"></i>";
+	newDiv = newDiv + "</div>";
+	newDiv = newDiv + "</div>";
+	newDiv = newDiv
+			+ "<div class=\"input-group col-md-2 col-sm-1 pull-right col-xs-2\" style=\"display:inline-block;\">";
+	newDiv = newDiv
+			+ "<div id=\"refreshLBA\" style=\"border: 1px solid lightgray; display:none;\" title=\"Refresh\" data-statickey=\"Refresh\" data-statickeytype=\"title\" onclick=\"fnGetLBADataRefresh();\" class=\"btn pull-right\"><i class=\"fa fa-refresh blueTxt\"></i>";
+	newDiv = newDiv + "</div>";
+	newDiv = newDiv + "</div>";
+
+	/*
+	 * newDiv=newDiv+"<div class=\"input-group col-md-2 col-sm-1 col-xs-4
+	 * pull-right col-xs-2\">"; newDiv=newDiv+"<div style=\"border: 1px solid
+	 * lightgray;\" onclick=\"fnGetLBADataRefresh();\" class=\"btn pull-right\"><i
+	 * class=\"fa fa-refresh blueTxt\"></i></div>"; newDiv=newDiv+"</div>";
+	 */
+
+	newDiv = newDiv + "</div>";
+	newDiv = newDiv + "</div>";
+
+	newDiv = newDiv + "<div id=\"LBAdiv\" ></div>";
+	newDiv = newDiv + "</div>";
+	// newDiv=newDiv+"<input type="hidden" name="oaTypeSelected"
+	// id="oaTypeSelected" value="live">"
+	$('#container-11').append(newDiv);
+
+	document.getElementById('searchInput_LBA').addEventListener('keydown',
+			function(e) {
+				if (e.keyCode == 13)
+					fnGetLBADataSearch('searchInput_LBA');
+			});
+
+}
+function fnGetLBADataSearch(searchBoxId) {
+	fnGetLBAData('lba', searchBoxId, '1');
+
+}
+function fnGetLBADataRefresh() {
+	// alert('in refresh');
+	document.getElementById('searchInput_LBA').value = '';
+	fnGetLBAData('lba', '', '1');
+}
+function fnGetLBAData(type, ParamsAdd, pageNo) {
+	var orgId = $('#orgId').val();
+	var formId = $('#formId').val();
+	var checksum = $('#checksum').val();
+	var entityId = $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#' + applnSequenceField).val();
+	var assNameSearch = (ParamsAdd == 'searchInput_LBA') ? $('#' + ParamsAdd)
+			.val() : "";
+
+	$('#LBAdiv').html("");
+	var newDiv = "";
+
+	if (pageNo == 1)
+		var startIndex = 0;
+	else
+		var startIndex = pageNo + 0;
+
+	$
+			.ajax({
+				type : "POST",
+				url : "/EForms/CodedTabsServlet",
+				data : {
+					orgId : orgId,
+					formId : formId,
+					checkSum : checksum,
+					appSeqNo : appSeqNo,
+					entityId : entityId,
+					applnSequenceField : applnSequenceField,
+					pageNo : pageNo,
+					actionTaken : 'getLBAAssessments',
+					assNameSearch : assNameSearch,
+					sessChk : sessChk
+				},
+				dataType : "json",
+				success : function(result) {
+					console.log(result);
+
+					if (!result || $.isEmptyObject(result)) {
+						newDiv = '<div class="currentAssessment tabCont act"><div class="noSubsDataTxt margintop10"><div style="margin: 0 auto; text-align: center;font-size: 14px;" data-statickey="Either you have not subscribed to any assessments OR you do not have any action to perform for the assessment."> Either you have not subscribed to any assessments OR you do not have any action to perform for the assessment. </div></div></div>';
+						$('#LBAdiv').append(newDiv);
+						$("#refreshLBA").show("fast");
+						$("#searchInput_LBA").show("fast");
+						$("#searchLBA").show("fast");
+
+						if (typeof window.fnGetLBADataPostFunctionForNoResponse == 'function') {
+
+							fnGetLBADataPostFunctionForNoResponse();
+						}
+					} else {
+
+						if (typeof window.fnGetLBADataPreFunctionForValidResponse == 'function') {
+
+							fnGetLBADataPreFunctionForValidResponse();
+						}
+
+						$("#refreshLBA").show("fast");
+						$("#searchInput_LBA").show("fast");
+						$("#searchLBA").show("fast");
+
+						newDiv = newDiv
+								+ "<div class=\"currentAssessment tabCont act\">";
+						newDiv = newDiv + "<div class=\"tabsContent\">";
+						var assCount = 0;
+						var alsubj = 0, clsubj = 0, slsubj = 0;
+						var noOfAssessments = Object.keys(result).length;
+
+						for ( var key in result) {
+							var htDivGeneratedFlag = false;
+
+							if (assCount < 10) {
+								newDiv = "";
+								var HTMode = result[key].HTMode;
+								var assessmentId = result[key].assessmentId;
+								var courseCount = result[key]["courses"].length;
+								var assessmentName = result[key].assessmentName;
+								var removeSpecialchar = assessmentName.replace(
+										">", "&gt");
+								var finalassessmentName = removeSpecialchar
+										.replace("<", "&lt");
+
+								if (result[key].HTLevel == "Assessment") {
+
+									var courses = result[key].courses;
+									var lba_tcname_visibility = result[key].lba_tcname_vis;
+									var lba_tcaddr_visibility = result[key].lba_tcaddr_vis;
+									var lba_timeslot_visibility = result[key].lba_timeslot_vis;
+									var lba_htname1 = " ";
+									var lba_htname = ""
+									if (result[key].ht_name_lba != ""
+											|| result[key].ht_name_lba != undefined) {
+										lba_htname = result[key].ht_name_lba;
+										lba_htname = lba_htname1
+												.concat(lba_htname);
+									}
+
+									clsubj++;
+									var courses = result[key].courses;
+
+									newDiv = newDiv
+											+ "<section class=\"historySec marginTop20\" style=\"padding: 0px !important\">";
+									newDiv = newDiv
+											+ "<div class=\"historySecHead grandParent\">";
+									newDiv = newDiv + "<div class=\"cells\">";
+
+									// newDiv=newDiv+"<div
+									// class=\"pull-left\"><div
+									// class=\"image-container\"><img
+									// src=\"/OnlineAssessment/logo-ion.png\"
+									// class=\"\"
+									// onerror=\"this.src='/EForms/images/onlineAppForm/default_user_group.png'\"
+									// width=\"50\" height=\"50\"></div></div>";
+
+									newDiv = newDiv
+											+ "<span class=\"historySecHead01\">"
+											+ finalassessmentName + "</span>";
+
+									for ( var course in courses) {
+
+										var subjects = courses[course].subjects;
+										for ( var subject in subjects) {
+											if (subjects[subject].isSlotBooked == 'Yes'
+													&& subjects[subject].isValidDateForHallticket == "Yes") {
+
+												if (lba_htname != ""
+														|| lba_htname != undefined) {
+													newDiv = newDiv
+															+ "<div class=\"downloadHallTicketButton accordianButton\"><div class=\"halTktCatBtmIcon01 deactivated\" title=\""
+															+ lba_htname
+															+ "\" data-staticKey=\"Download Hall Ticket\" data-staticKeyType=\"title\"><a href=\"#\" onclick=\"fnGenerateLBAHallTicket("
+															+ subjects[subject].subjectId
+															+ ",'"
+															+ subjects[subject].isHallticketDownloaded
+															+ "',"
+															+ result[key].assessmentId
+															+ ","
+															+ courses[course].courseId
+															+ ",'"
+															+ result[key].HTMode
+															+ "','"
+															+ subjects[subject].driveId
+															+ "')\"><i class=\"fa fa-download\" aria-hidden=\"true\"></i><span data-staticKey=\"Hall Ticket\">"
+															+ lba_htname
+															+ "</span></a></div></div>";
+													htDivGeneratedFlag = true;
+													break;
+												} else {
+													newDiv = newDiv
+															+ "<div class=\"downloadHallTicketButton accordianButton\"><div class=\"halTktCatBtmIcon01 deactivated\" title=\"Download Hall Ticket\" data-staticKey=\"Download Hall Ticket\" data-staticKeyType=\"title\"><a href=\"#\" onclick=\"fnGenerateLBAHallTicket("
+															+ subjects[subject].subjectId
+															+ ",'"
+															+ subjects[subject].isHallticketDownloaded
+															+ "',"
+															+ result[key].assessmentId
+															+ ","
+															+ courses[course].courseId
+															+ ",'"
+															+ result[key].HTMode
+															+ "','"
+															+ subjects[subject].driveId
+															+ "')\"><i class=\"fa fa-download\" aria-hidden=\"true\"></i><span data-staticKey=\"Hall Ticket\"> Hall Ticket</span></a></div></div>";
+													htDivGeneratedFlag = true;
+													break;
+												}
+											}
+										}
+										if (htDivGeneratedFlag)
+											break;
+									}
+
+									newDiv = newDiv + "</div>";
+									newDiv = newDiv + "<div class=\"cells\">";
+									newDiv = newDiv
+											+ "<span class=\"historySecHead04 antiRotate90\" data-tooltip=\"tooltip\" title=\"Expand/Collapse\"></span>";
+									newDiv = newDiv + "</div>";
+									newDiv = newDiv
+											+ "<div class=\"clear\"></div>";
+									newDiv = newDiv + "</div>";
+									newDiv = newDiv
+											+ "<div class=\"accordContentWrapper\">";
+
+									for ( var course in courses) {
+
+										var subCnt = result[key]["courses"][course]["subjects"].length;
+
+										var subjects = courses[course].subjects;
+
+										if (courseCount == 1 && subCnt == 1) {
+											newDiv = newDiv
+													+ "<div class=\"historySecCont\" style=\"display: block;\">";
+											newDiv = newDiv
+													+ "<div class=\"col-md-12\">";
+											newDiv = newDiv
+													+ "<div class=\"halTktCatCont hal-cl\">";
+											newDiv = newDiv
+													+ "<div class=\"subjectCont clearfix\">";
+											newDiv = newDiv
+													+ "<div class=\"clear\"></div>";
+											newDiv = newDiv
+													+ "<div class=\"wrapCont\">";
+										}
+
+										else {
+											newDiv = newDiv
+													+ "<div class=\"historySecCont\" style=\"display: block;\">";
+											newDiv = newDiv
+													+ "<div class=\"col-md-12\">";
+											newDiv = newDiv
+													+ "<div class=\"halTktCatCont hal-cl\">";
+											newDiv = newDiv
+													+ "<div class=\"innerCont\">";
+											newDiv = newDiv
+													+ "<div class=\"innerContHead\">";
+											newDiv = newDiv
+													+ "<div class=\"left text\">"
+													+ courses[course].courseName
+													+ "</div>";
+											newDiv = newDiv
+													+ "<div class=\"accordianArrowIconWrapper\"><span class=\"accordianArrowIcon antiRotate90\"></span></div>";
+
+											/*
+											 * To Display Hall Tiicket for(var
+											 * subject in subjects){
+											 * if(subjects[subject].isSlotBooked ==
+											 * 'Yes' &&
+											 * subjects[subject].isValidDateForHallticket ==
+											 * "Yes" ){ newDiv=newDiv+"<div
+											 * class=\"downloadHallTicketButton
+											 * accordianButton\"><div
+											 * class=\"halTktCatBtmIcon01
+											 * deactivated\" title=\"Download
+											 * Hall Ticket\"
+											 * data-statickey=\"Download Hall
+											 * Ticket\"
+											 * data-statickeytype=\"title\"><a
+											 * onclick=\"fnGenerateLBAHallTicket("+subjects[subject].subjectId+",'"+subjects[subject].isHallticketDownloaded+"',"+result[key].assessmentId+","+courses[course].courseId+",'"+result[key].HTMode+"','"+subjects[subject].driveId+"')\"><i
+											 * class=\"fa fa-download\"
+											 * aria-hidden=\"true\"></i><span
+											 * data-statickey=\"Hall
+											 * Ticket\">Hall Ticket</span></a></div></div>";
+											 * break; } }
+											 * 
+											 * newDiv=newDiv+"<div
+											 * class=\"downloadTicketInfoWrapper\"><span
+											 * class=\"downloadTicketInfo\"
+											 * data-statickey=\"Course Hall
+											 * Ticket will only available once
+											 * all subjects slot booking
+											 * done\">Course Hall Ticket will
+											 * only available once all subjects
+											 * slot booking done</span></div>";
+											 */
+
+											newDiv = newDiv
+													+ "<div class=\"clear\"></div>";
+											newDiv = newDiv + "</div>";
+											/*
+											 * newDiv=newDiv+"<div
+											 * class=\"haSubHead\">";
+											 * newDiv=newDiv+"<span
+											 * class=\"haSubHeadTxt\"></span>";
+											 * newDiv=newDiv+"<span>";
+											 * newDiv=newDiv+"<span
+											 * class=\"addressDtl\"> <a
+											 * href=\"https://maps.google.com/\"
+											 * target=\"_blank\"
+											 * class=\"loc-map\"><span
+											 * class=\"deskV\"></span><span
+											 * class=\"mobV\"></span></a></span>";
+											 * newDiv=newDiv+"</span>";
+											 * newDiv=newDiv+"<span
+											 * class=\"right\">";
+											 * newDiv=newDiv+"<span><img
+											 * src=\"images/cal-icon.png\" /></span>";
+											 * newDiv=newDiv+"<span>2 July,
+											 * 2017</span>"; newDiv=newDiv+"<span> |
+											 * </span>"; newDiv=newDiv+"<span>3:20
+											 * AM</span>"; newDiv=newDiv+"</span>";
+											 * newDiv=newDiv+"</div>";
+											 */
+
+											newDiv = newDiv
+													+ "<div class=\"subjectCont clearfix\">";
+											newDiv = newDiv
+													+ "<div class=\"clear\"></div>";
+											newDiv = newDiv
+													+ "<div class=\"wrapCont\">";
+										}
+										for ( var subject in subjects) {
+
+											subjectCount++;
+
+											/*
+											 * if(subjectCount>3)
+											 * newDiv=newDiv+"<div
+											 * data-subjectCount=\""
+											 * +subjectCount +"\"
+											 * class=\"col-xs-12 col-sm-6
+											 * col-md-4 halTktCatCont hal-cl\"
+											 * style=\"display:none\">"; else
+											 */
+											newDiv = newDiv
+													+ "<div data-subjectcount=\""
+													+ subjectCount
+													+ "\" class=\"col-xs-12 col-sm-6 col-md-4 halTktCatCont hal-cl\">";
+
+											newDiv = newDiv
+													+ "<div class=\"halTktCat\">";
+
+											if (courseCount == 1
+													&& subCnt == 1
+													&& courses[course].courseName == subjects[subject].subjectName) {
+
+												newDiv = newDiv
+														+ "<div class=\"halTktCatHead halTktCatHead01\">"
+														+ subjects[subject].subjectName
+														+ "</div>";
+											}
+
+											else if (courseCount == 1
+													&& subCnt == 1
+													&& courses[course].courseName != subjects[subject].subjectName) {
+
+												newDiv = newDiv
+														+ "<div class=\"halTktCatHead halTktCatHead01\">"
+														+ courses[course].courseName
+														+ " / "
+														+ subjects[subject].subjectName
+														+ "</div>";
+											}
+
+											else {
+
+												newDiv = newDiv
+														+ "<div class=\"halTktCatHead halTktCatHead01\">"
+														+ subjects[subject].subjectName
+														+ "</div>";
+											}
+
+											if (subjects[subject].isSlotBooked == 'No') {
+
+												if (subjects[subject].isValidDateForSlotBooking == 'Yes') {
+													newDiv = newDiv
+															+ "<div class=\"halTktCatTxt\">";
+													newDiv = newDiv
+															+ "<p data-staticKey=\"Yet to book the test center?\">Yet to book the test center?</p>";
+													newDiv = newDiv
+															+ "<p data-staticKey=\"Click here to book in preferred place and time.\">Click here to book in preferred place and time.</p>";
+													newDiv = newDiv + "</div>"; // halTktCatTxt
+													// ends
+
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtm01\">";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01\" data-toggle=\"modal\" data-target=\"#hallTicketPopUpLBA\">";
+
+													newDiv = newDiv
+															+ "<div class=\"hallTicketScheduleIconWrapper\">";
+													newDiv = newDiv
+															+ "<figure class=\"hallTicketScheduleIcon\" title=\"Book Your Slot\" data-staticKey=\"Book Your Slot\" data-staticKeyType=\"title\"></figure>"
+													newDiv = newDiv + "</div> "
+													newDiv = newDiv
+															+ "<div class=\"hallTicketTimeWrapper\"><a class=\"text-Underline\" onclick=\"fnGetSlotModalLBA('"
+															+ result[key].assessmentId
+															+ "','"
+															+ courses[course].courseId
+															+ "','"
+															+ subjects[subject].subjectId
+															+ "','"
+															+ finalassessmentName
+															+ "','"
+															+ HTMode
+															+ "','"
+															+ subjects[subject].subjectName
+															+ "')\"><span class=\"hallTicketTime link\" data-staticKey=\"Slot Booking\">Slot Booking</span></a>"
+													newDiv = newDiv + "</div>"
+
+													newDiv = newDiv + "</div>"; // halTktCatBtmIcon01
+													// ends
+													newDiv = newDiv + "</div>"; // halTktCatBtm01
+													// ends
+												} else {
+													newDiv = newDiv
+															+ "<div class=\"halTktCatTxt\">";
+
+													newDiv = newDiv + "<p></p>";
+													newDiv = newDiv + "<p></p>";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtm01\">";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01 defaultcursor\" data-toggle=\"\" data-target=\"\" ><img src=\"images/cal-icon.png\" /> <span data-staticKey=\"Slot Booking Not Available\" > Slot Booking Not Available </span></div>";
+													newDiv = newDiv + "</div>"; // halTktCatBtm01
+													// ends
+
+													newDiv = newDiv + "</div>"; // halTktCatTxt
+													// ends
+												}
+												newDiv = newDiv
+														+ "<div class=\"clear\"></div>";
+
+												// newDiv=newDiv+"</div>";
+												// newDiv=newDiv+"</div>";
+
+											} else {
+												newDiv = newDiv
+														+ "<div class=\"halTktCatTxt\">"
+												if (lba_tcname_visibility == "Show") {
+													newDiv = newDiv
+															+ "<div class=\"htIconWrapper\">"
+													newDiv = newDiv
+															+ "<figure class=\"hallTicketLocationIcon\"></figure>"
+													newDiv = newDiv + "</div>"
+												}
+												if (lba_tcname_visibility == "Show"
+														|| lba_tcaddr_visibility == "Show") {
+													newDiv = newDiv
+															+ "<div class=\"htTextWrapper\">"
+													if (lba_tcname_visibility == "Show") {
+														newDiv = newDiv
+																+ "<p>"
+																+ subjects[subject].tcName
+																+ "</p>"
+													}
+													if (lba_tcaddr_visibility == "Show") {
+														newDiv = newDiv
+																+ "<p>"
+																+ subjects[subject].tcAddress
+																+ "</p>"
+													}
+													newDiv = newDiv + "</div>"
+
+												}
+												newDiv = newDiv
+														+ "<div class=\"clear\"></div>"
+												newDiv = newDiv + "</div>" // halTktCatTxt
+												// ends
+
+												newDiv = newDiv
+														+ "<div class=\"halTktCatBtm01\">"
+												if (lba_timeslot_visibility == "Show") {
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01 defaultcursor\" onclick=\"fnGetSlotModalLBA('"
+															+ result[key].assessmentId
+															+ "','"
+															+ courses[course].courseId
+															+ "','"
+															+ subjects[subject].subjectId
+															+ "','"
+															+ result[key].assessmentName
+															+ "','"
+															+ HTMode
+															+ "','"
+															+ subjects[subject].subjectName
+															+ "')\">"
+													newDiv = newDiv
+															+ "<div class=\"hallTicketScheduleIconWrapper\"><figure class=\"hallTicketScheduleIcon\" title=\"Slot Booked\" data-staticKey=\"Slot Booked\" data-staticKeyType=\"title\"></figure></div>"
+													newDiv = newDiv
+															+ "<div class=\"hallTicketTimeWrapper \"><span class=\"hallTicketTime defaultcursor\">"
+															+ subjects[subject].driveDate
+																	.split(' ')[0]
+															+ " "
+															+ subjects[subject].startTime
+															+ "-"
+															+ subjects[subject].endTime
+															+ "</span></div>"
+
+													newDiv = newDiv + "</div>" // halTktCatBtmIcon01x
+																				// //
+																				// ends
+												}
+
+												newDiv = newDiv + "</div>" // halTktCatBtm01
+												// ends
+
+												// newDiv=newDiv+"</div>";
+
+												// if(subjects[subject].isSlotBooked
+												// == 'Yes'){
+
+												if (subjects[subject].isValidDateForHallticket == "Yes") {
+													/*
+													 * newDiv=newDiv+"<div
+													 * class=\"halTktCatBtm02\">";
+													 * //newDiv=newDiv+"<div
+													 * class=\"view-map\"><a
+													 * href=\"https://maps.google.com/\"
+													 * target=\"_blank\"><span
+													 * class=\"deskV\">View
+													 * Location Map</span><span
+													 * class=\"mobV\">View Map</span></a></div>";
+													 * newDiv=newDiv+"<div
+													 * class=\"halTktCatBtmIcon01\"
+													 * title=\"Download Hall
+													 * Ticket\"><a
+													 * onclick=fnGenerateLBAHallTicket("+subjects[subject].subjectId+",'"+subjects[subject].isHallticketDownloaded+"',"+result[key].assessmentId+","+courses[course].courseId+",'"+result[key].HTMode+"','"+subjects[subject].driveId+"')><i
+													 * class=\"fa fa-download\"
+													 * aria-hidden=\"true\"></i>
+													 * <span
+													 * data-staticKey=\"Hall
+													 * Ticket\">Hall Ticket</span></a></div>";
+													 */
+													newDiv = newDiv
+															+ "<div class=\"hallTicketDownloadWrapper\">"
+
+													newDiv = newDiv
+															+ "<div class=\"downloadHallTicketInfo\">"
+													newDiv = newDiv
+															+ "<span class=\"downloadedHallTicketCount\"></span>"
+													newDiv = newDiv
+															+ "<span class=\"maxHallTicketLimit\"></span>"
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>"
+													newDiv = newDiv + "</div>"
+
+													/*
+													 * newDiv=newDiv+"<div
+													 * class=\"downloadHallTicketButton\">"
+													 * newDiv=newDiv+"<div
+													 * class=\"halTktCatBtmIcon01\"
+													 * title=\"Download Hall
+													 * Ticket\"
+													 * data-staticKey=\"Download
+													 * Hall Ticket\"
+													 * data-staticKeyType=\"title\"><a
+													 * onclick=fnGenerateLBAHallTicket("+subjects[subject].subjectId+",'"+subjects[subject].isHallticketDownloaded+"',"+result[key].assessmentId+","+courses[course].courseId+",'"+result[key].HTMode+"','"+subjects[subject].driveId+"')><i
+													 * class=\"fa fa-download\"
+													 * aria-hidden=\"true\"></i><span
+													 * data-staticKey=\"Hall
+													 * Ticket\"> Hall Ticket</span></a></div>"
+													 * newDiv=newDiv+"</div>"
+													 */
+
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>"
+
+													newDiv = newDiv + "</div>" // hallTicketDownloadWrapper
+													// ends
+												}
+												// newDiv=newDiv+"<div
+												// class=\"clear\"></div>";
+												else {
+													newDiv = newDiv
+															+ "<div class=\"hallTicketDownloadWrapper\">";
+													newDiv = newDiv
+															+ "<div class=\"\" title=\"\"></div>";
+													newDiv = newDiv + "</div>" // hallTicketDownloadWrapper
+													// ends
+												}
+
+												if (subjects[subject].isValidDateForSubjectiveABPublish == 'Yes'
+														|| subjects[subject].isValidDateForQPPublish == "Yes"
+														|| subjects[subject].isIonEyeRequired == 'Yes') {
+
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtm\" style=\"float: left;\">";
+													// newDiv=newDiv+"<div
+													// class=\"view-map\"><a
+													// href=\"https://maps.google.com/\"
+													// target=\"_blank\"><span
+													// class=\"deskV\">View
+													// Location Map</span><span
+													// class=\"mobV\">View
+													// Map</span></a></div>";
+
+													if (subjects[subject].isValidDateForQPPublish == 'Yes')
+														newDiv = newDiv
+																+ "<div class=\"halTktCatBtmIcon02\" data-tooltip=\"tooltip\" title=\"QP HTML Download\" data-staticKey=\"QP HTML Download\" data-staticKeyType=\"title\"><img onClick=\" getAssessmentQPHTMLPath("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].subjectId
+																+ ",'"
+																+ subjects[subject].driveId
+																+ "');\" src=\"/EForms/images/QuestionPaperDownload.png\"></img></div>";
+
+													if (subjects[subject].isValidDateForSubjectiveABPublish == 'Yes')
+														newDiv = newDiv
+																+ "<div class=\"halTktCatBtmIcon03\" data-tooltip=\"tooltip\" title=\"Answer-sheet Download\" data-staticKey=\"Answer-sheet Download\" data-staticKeyType=\"title\"><img onClick=\"getEvaluationABPublishPath("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].subjectId
+																+ ");\" src=\"/EForms/images/AnswerSheetDownload.png\"></img></div>";
+
+													if (subjects[subject].isIonEyeRequired == 'Yes')
+														newDiv = newDiv
+																+ "<div class=\"ionEyeReport\" data-tooltip=\"tooltip\" title=\"IonEyeReport\" data-staticKey=\"IonEyeReport\" data-staticKeyType=\"title\"><img onClick=\" getIonEyeReport("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].IonEyeTsId
+																+ ",'"
+																+ subjects[subject].IonEyeReportId
+																+ "');\" src=\"/EForms/images/ViewReports.svg\"></img></div>";
+
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>";
+													newDiv = newDiv + "</div>"; // halTktCatBtm
+													// ends
+
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>";
+													// newDiv=newDiv+"</div>";
+													// newDiv=newDiv+"</div>";
+												}
+
+												if (subjects[subject].isValidDateForSlotBooking == 'Yes'
+														&& subjects[subject].isHallticketGenerated != '1') {
+													newDiv = newDiv
+															+ "<div  class=\"halTktCatBtm01\" style=\"float:left;\">";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01\" data-toggle=\"modal\" data-target=\"#hallTicketPopUpLBA\"> <a class=\"text-Underline\" style=\"color:#337ab7 !important\" onclick=\"fnGetSlotModalLBA('"
+															+ result[key].assessmentId
+															+ "','"
+															+ courses[course].courseId
+															+ "','"
+															+ subjects[subject].subjectId
+															+ "','"
+															+ finalassessmentName
+															+ "','"
+															+ HTMode
+															+ "','"
+															+ subjects[subject].subjectName
+															+ "')\" data-staticKey=\"Edit slot\">Edit slot</a></div>";
+													newDiv = newDiv + "</div>";
+												}
+
+												// newDiv=newDiv+"</div>";
+												// newDiv=newDiv+"</div>";
+												// }
+												// newDiv=newDiv+"</div>";
+
+											}
+
+											newDiv = newDiv + "</div>"; // halTktCat
+											// ends
+											newDiv = newDiv
+													+ "<div class=\"clear\"></div>"
+											newDiv = newDiv + "</div>"; // col-xs-12
+											// col-sm-6
+											// col-md-4
+											// halTktCatCont
+											// hal-cl
+											// ends
+										}
+
+										newDiv = newDiv + "</div>"; // end of
+										// wrapCont
+										newDiv = newDiv + "</div>"; // end of
+										// subjectCont
+
+										if (courseCount > 1 || subCnt > 1) {
+											newDiv = newDiv + "</div>"; // end
+											// of
+											// innerCont
+										}
+										newDiv = newDiv + "</div>"; // end of
+										// halTktCatCont
+										newDiv = newDiv + "</div>"; // end of
+										// col-md-12
+
+										newDiv = newDiv
+												+ "<div class=\"clear\"></div>";
+										newDiv = newDiv
+												+ "<div class=\"clear\"></div>";
+										newDiv = newDiv + "</div>"; // end of
+										// historySecCont
+									}
+
+									// newDiv=newDiv+"<div class=\"subjectDivAdd
+									// left\"></div>";
+
+									/*
+									 * if(clsubj>3){ newDiv=newDiv+"<div
+									 * class=\"col-xs-12 col-sm-12 col-lg-12
+									 * loadMoreCont mar-top-20\">";
+									 * newDiv=newDiv+"<div
+									 * class=\"loaderCont\">"; newDiv=newDiv+"<div
+									 * class=\"loaderImg\"></div>";
+									 * newDiv=newDiv+"</div>"; newDiv=newDiv+"<div
+									 * class=\"loadMore loadMoreAss\">LOAD
+									 * MORE...</div>"; newDiv=newDiv+"</div>"; }
+									 */
+
+									newDiv = newDiv
+											+ "<div class=\"clear\"></div>";
+
+									newDiv = newDiv + "</div>"; // end of
+									// accordContentWrapper
+									newDiv = newDiv + "</section>";
+								}// end of HTType = Assessment
+
+								else if (result[key].HTLevel == "Course") {
+									var lba_tcname_visibility = result[key].lba_tcname_vis;
+									var lba_tcaddr_visibility = result[key].lba_tcaddr_vis;
+									var lba_timeslot_visibility = result[key].lba_timeslot_vis;
+									var lba_htname1 = " ";
+									var lba_htname = ""
+									if (result[key].ht_name_lba != ""
+											|| result[key].ht_name_lba != undefined) {
+										lba_htname = result[key].ht_name_lba;
+										lba_htname = lba_htname1
+												.concat(lba_htname);
+									}
+
+									clsubj++;
+									var courses = result[key].courses;
+
+									newDiv = newDiv
+											+ "<section class=\"historySec marginTop20\" style=\"padding: 0px !important\">";
+									newDiv = newDiv
+											+ "<div class=\"historySecHead grandParent\">";
+									newDiv = newDiv + "<div class=\"cells\">";
+
+									// newDiv=newDiv+"<div
+									// class=\"pull-left\"><div
+									// class=\"image-container\"><img
+									// src=\"/OnlineAssessment/logo-ion.png\"
+									// class=\"\"
+									// onerror=\"this.src='/EForms/images/onlineAppForm/default_user_group.png'\"
+									// width=\"50\" height=\"50\"></div></div>";
+
+									newDiv = newDiv
+											+ "<span class=\"historySecHead01\">"
+											+ finalassessmentName + "</span>";
+								/*	newDiv = newDiv
+											+ "<span class=\"historySecHeadRight\" data-staticKey=\"More Details\">More Details </span>";*/
+									newDiv = newDiv + "</div>";
+									newDiv = newDiv + "<div class=\"cells\">";
+									newDiv = newDiv
+											+ "<span class=\"historySecHead04 antiRotate90\" data-tooltip=\"tooltip\" title=\"Expand/Collapse\"></span>";
+									newDiv = newDiv + "</div>";
+									newDiv = newDiv
+											+ "<div class=\"clear\"></div>";
+									newDiv = newDiv + "</div>";
+									newDiv = newDiv
+											+ "<div class=\"accordContentWrapper\">";
+									// newDiv=newDiv+"<div
+									// class=\"historySecCont\" style=\"display:
+									// block;\">";
+									for ( var course in courses) {
+
+										var subCnt = result[key]["courses"][course]["subjects"].length;
+										var subjects = courses[course].subjects;
+
+										if (courseCount == 1 && subCnt == 1) {
+											newDiv = newDiv
+													+ "<div class=\"historySecCont\" style=\"display: block;\">";
+											newDiv = newDiv
+													+ "<div class=\"col-md-12\">";
+											newDiv = newDiv
+													+ "<div class=\"halTktCatCont hal-cl\">";
+											newDiv = newDiv
+													+ "<div class=\"subjectCont clearfix\">";
+											newDiv = newDiv
+													+ "<div class=\"clear\"></div>";
+											newDiv = newDiv
+													+ "<div class=\"wrapCont\">";
+										}
+
+										else {
+											newDiv = newDiv
+													+ "<div class=\"historySecCont\" style=\"display: block;\">";
+											newDiv = newDiv
+													+ "<div class=\"col-md-12\">";
+											newDiv = newDiv
+													+ "<div class=\"halTktCatCont hal-cl\">";
+											newDiv = newDiv
+													+ "<div class=\"innerCont\">";
+											newDiv = newDiv
+													+ "<div class=\"innerContHead\">";
+											newDiv = newDiv
+													+ "<div class=\"left text\">"
+													+ courses[course].courseName
+													+ "</div>";
+											newDiv = newDiv
+													+ "<div class=\"accordianArrowIconWrapper\"><span class=\"accordianArrowIcon antiRotate90\"></span></div>";
+
+											// To Display Hall Tiicket
+											for ( var subject in subjects) {
+												if (subjects[subject].isSlotBooked == 'Yes'
+														&& subjects[subject].isValidDateForHallticket == "Yes") {
+													if (lba_htname != ""
+															|| lba_htname != undefined) {
+														newDiv = newDiv
+																+ "<div class=\"downloadHallTicketButton accordianButton\"><div class=\"halTktCatBtmIcon01 deactivated\" title=\""
+																+ lba_htname
+																+ "\" data-staticKey=\"Download Hall Ticket\" data-staticKeyType=\"title\"><a href=\"#\" onclick=\"fnGenerateLBAHallTicket("
+																+ subjects[subject].subjectId
+																+ ",'"
+																+ subjects[subject].isHallticketDownloaded
+																+ "',"
+																+ result[key].assessmentId
+																+ ","
+																+ courses[course].courseId
+																+ ",'"
+																+ result[key].HTMode
+																+ "','"
+																+ subjects[subject].driveId
+																+ "')\"><i class=\"fa fa-download\" aria-hidden=\"true\"></i><span data-staticKey=\" Hall Ticket\">"
+																+ lba_htname
+																+ "</span></a></div></div>";
+														break;
+													} else {
+														newDiv = newDiv
+																+ "<div class=\"downloadHallTicketButton accordianButton\"><div class=\"halTktCatBtmIcon01 deactivated\" title=\"Download Hall Ticket\" data-staticKey=\"Download Hall Ticket\" data-staticKeyType=\"title\"><a href=\"#\" onclick=\"fnGenerateLBAHallTicket("
+																+ subjects[subject].subjectId
+																+ ",'"
+																+ subjects[subject].isHallticketDownloaded
+																+ "',"
+																+ result[key].assessmentId
+																+ ","
+																+ courses[course].courseId
+																+ ",'"
+																+ result[key].HTMode
+																+ "','"
+																+ subjects[subject].driveId
+																+ "')\"><i class=\"fa fa-download\" aria-hidden=\"true\"></i><span data-staticKey=\" Hall Ticket\"> Hall Ticket</span></a></div></div>";
+														break;
+													}
+												}
+											}
+
+											newDiv = newDiv
+													+ "<div class=\"downloadTicketInfoWrapper\"><span class=\"downloadTicketInfo\" data-staticKey=\"Course Hall Ticket will only be available once all subjects slot booking is done\">Course Hall Ticket will only be available once all subjects slot booking is done</span></div>";
+											newDiv = newDiv
+													+ "<div class=\"clear\"></div>";
+											newDiv = newDiv + "</div>";
+											/*
+											 * newDiv=newDiv+"<div
+											 * class=\"haSubHead\">";
+											 * newDiv=newDiv+"<span
+											 * class=\"haSubHeadTxt\"></span>";
+											 * newDiv=newDiv+"<span>";
+											 * newDiv=newDiv+"<span
+											 * class=\"addressDtl\"> <a
+											 * href=\"https://maps.google.com/\"
+											 * target=\"_blank\"
+											 * class=\"loc-map\"><span
+											 * class=\"deskV\"></span><span
+											 * class=\"mobV\"></span></a></span>";
+											 * newDiv=newDiv+"</span>";
+											 * newDiv=newDiv+"<span
+											 * class=\"right\">";
+											 * newDiv=newDiv+"<span><img
+											 * src=\"images/cal-icon.png\" /></span>";
+											 * newDiv=newDiv+"<span>2 July,
+											 * 2017</span>"; newDiv=newDiv+"<span> |
+											 * </span>"; newDiv=newDiv+"<span>3:20
+											 * AM</span>"; newDiv=newDiv+"</span>";
+											 * newDiv=newDiv+"</div>";
+											 */
+
+											newDiv = newDiv
+													+ "<div class=\"subjectCont clearfix\">";
+											newDiv = newDiv
+													+ "<div class=\"clear\"></div>";
+											newDiv = newDiv
+													+ "<div class=\"wrapCont\">";
+										}
+										for ( var subject in subjects) {
+
+											subjectCount++;
+
+											/*
+											 * if(subjectCount>3)
+											 * newDiv=newDiv+"<div
+											 * data-subjectCount=\""
+											 * +subjectCount +"\"
+											 * class=\"col-xs-12 col-sm-6
+											 * col-md-4 halTktCatCont hal-cl\"
+											 * style=\"display:none\">"; else
+											 */
+											newDiv = newDiv
+													+ "<div data-subjectcount=\""
+													+ subjectCount
+													+ "\" class=\"col-xs-12 col-sm-6 col-md-4 halTktCatCont hal-cl\">";
+
+											newDiv = newDiv
+													+ "<div class=\"halTktCat\">";
+
+											if (courseCount == 1
+													&& subCnt == 1
+													&& courses[course].courseName == subjects[subject].subjectName) {
+
+												newDiv = newDiv
+														+ "<div class=\"halTktCatHead halTktCatHead01\">"
+														+ subjects[subject].subjectName
+														+ "</div>";
+											}
+
+											else if (courseCount == 1
+													&& subCnt == 1
+													&& courses[course].courseName != subjects[subject].subjectName) {
+
+												newDiv = newDiv
+														+ "<div class=\"halTktCatHead halTktCatHead01\">"
+														+ courses[course].courseName
+														+ " / "
+														+ subjects[subject].subjectName
+														+ "</div>";
+											}
+
+											else {
+
+												newDiv = newDiv
+														+ "<div class=\"halTktCatHead halTktCatHead01\">"
+														+ subjects[subject].subjectName
+														+ "</div>";
+											}
+
+											if (subjects[subject].isSlotBooked == 'No') {
+
+												if (subjects[subject].isValidDateForSlotBooking == 'Yes') {
+													newDiv = newDiv
+															+ "<div class=\"halTktCatTxt\">";
+													newDiv = newDiv
+															+ "<p data-staticKey=\"Yet to book the test center?\">Yet to book the test center?</p>";
+													newDiv = newDiv
+															+ "<p data-staticKey=\"Click here to book in preferred place and time.\">Click here to book in preferred place and time.</p>";
+													newDiv = newDiv + "</div>"; // halTktCatTxt
+													// ends
+
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtm01\">";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01\" data-toggle=\"modal\" data-target=\"#hallTicketPopUpLBA\">";
+
+													newDiv = newDiv
+															+ "<div class=\"hallTicketScheduleIconWrapper\">";
+													newDiv = newDiv
+															+ "<figure class=\"hallTicketScheduleIcon\" title=\"Book Your Slot\" data-staticKey=\"Book Your Slot\" data-staticKeyType=\"title\"></figure>"
+													newDiv = newDiv + "</div> "
+													newDiv = newDiv
+															+ "<div class=\"hallTicketTimeWrapper\"><a class=\"text-Underline\" onclick=\"fnGetSlotModalLBA('"
+															+ result[key].assessmentId
+															+ "','"
+															+ courses[course].courseId
+															+ "','"
+															+ subjects[subject].subjectId
+															+ "','"
+															+ finalassessmentName
+															+ "','"
+															+ HTMode
+															+ "','"
+															+ subjects[subject].subjectName
+															+ "')\"><span class=\"hallTicketTime link\" data-staticKey=\"Slot Booking\">Slot Booking</span></a>"
+													newDiv = newDiv + "</div>"
+
+													newDiv = newDiv + "</div>"; // halTktCatBtmIcon01
+													// ends
+													newDiv = newDiv + "</div>"; // halTktCatBtm01
+													// ends
+												} else {
+													newDiv = newDiv
+															+ "<div class=\"halTktCatTxt\">";
+
+													newDiv = newDiv + "<p></p>";
+													newDiv = newDiv + "<p></p>";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtm01\">";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01 defaultcursor\" data-toggle=\"\" data-target=\"\" ><img src=\"images/cal-icon.png\" /> <span data-staticKey=\"Slot Booking Not Available\"> Slot Booking Not Available </span></div>";
+													newDiv = newDiv + "</div>"; // halTktCatBtm01
+													// ends
+
+													newDiv = newDiv + "</div>"; // halTktCatTxt
+													// ends
+												}
+												newDiv = newDiv
+														+ "<div class=\"clear\"></div>";
+
+												// newDiv=newDiv+"</div>";
+												// newDiv=newDiv+"</div>";
+
+											} else {
+												newDiv = newDiv
+														+ "<div class=\"halTktCatTxt\">"
+												if (lba_tcname_visibility == "Show") {
+													newDiv = newDiv
+															+ "<div class=\"htIconWrapper\">"
+													newDiv = newDiv
+															+ "<figure class=\"hallTicketLocationIcon\"></figure>"
+													newDiv = newDiv + "</div>"
+												}
+												if (lba_tcname_visibility == "Show"
+														|| lba_tcaddr_visibility == "Show") {
+													newDiv = newDiv
+															+ "<div class=\"htTextWrapper\">"
+													if (lba_tcname_visibility == "Show") {
+														newDiv = newDiv
+																+ "<p>"
+																+ subjects[subject].tcName
+																+ "</p>"
+													}
+													if (lba_tcaddr_visibility == "Show") {
+														newDiv = newDiv
+																+ "<p>"
+																+ subjects[subject].tcAddress
+																+ "</p>"
+													}
+													newDiv = newDiv + "</div>"
+
+												}
+												newDiv = newDiv
+														+ "<div class=\"clear\"></div>"
+												newDiv = newDiv + "</div>" // halTktCatTxt
+												// ends
+
+												newDiv = newDiv
+														+ "<div class=\"halTktCatBtm01\">"
+												if (lba_timeslot_visibility == "Show") {
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01 defaultcursor\" onclick=\"fnGetSlotModalLBA('"
+															+ result[key].assessmentId
+															+ "','"
+															+ courses[course].courseId
+															+ "','"
+															+ subjects[subject].subjectId
+															+ "','"
+															+ result[key].assessmentName
+															+ "','"
+															+ HTMode
+															+ "','"
+															+ subjects[subject].subjectName
+															+ "')\">"
+													newDiv = newDiv
+															+ "<div class=\"hallTicketScheduleIconWrapper\"><figure class=\"hallTicketScheduleIcon\" title=\"Slot Booked\" data-staticKey=\"Slot Booked\" data-staticKeyType=\"title\"></figure></div>"
+
+													newDiv = newDiv
+															+ "<div class=\"hallTicketTimeWrapper \"><span class=\"hallTicketTime defaultcursor\">"
+															+ subjects[subject].driveDate
+																	.split(' ')[0]
+															+ " "
+															+ subjects[subject].startTime
+															+ "-"
+															+ subjects[subject].endTime
+															+ "</span></div>"
+													newDiv = newDiv + "</div>"
+												}
+												newDiv = newDiv + "</div>" // halTktCatBtm01
+												// ends
+
+												// newDiv=newDiv+"</div>";
+
+												// if(subjects[subject].isSlotBooked
+												// == 'Yes'){
+
+												if (subjects[subject].isValidDateForHallticket == "Yes") {
+													/*
+													 * newDiv=newDiv+"<div
+													 * class=\"halTktCatBtm02\">";
+													 * //newDiv=newDiv+"<div
+													 * class=\"view-map\"><a
+													 * href=\"https://maps.google.com/\"
+													 * target=\"_blank\"><span
+													 * class=\"deskV\">View
+													 * Location Map</span><span
+													 * class=\"mobV\">View Map</span></a></div>";
+													 * newDiv=newDiv+"<div
+													 * class=\"halTktCatBtmIcon01\"
+													 * title=\"Download Hall
+													 * Ticket\"><a
+													 * onclick=fnGenerateLBAHallTicket("+subjects[subject].subjectId+",'"+subjects[subject].isHallticketDownloaded+"',"+result[key].assessmentId+","+courses[course].courseId+",'"+result[key].HTMode+"','"+subjects[subject].driveId+"')><i
+													 * class=\"fa fa-download\"
+													 * aria-hidden=\"true\"></i>
+													 * <span
+													 * data-staticKey=\"Hall
+													 * Ticket\">Hall Ticket</span></a></div>";
+													 */
+													newDiv = newDiv
+															+ "<div class=\"hallTicketDownloadWrapper\">"
+
+													newDiv = newDiv
+															+ "<div class=\"downloadHallTicketInfo\">"
+													newDiv = newDiv
+															+ "<span class=\"downloadedHallTicketCount\"></span>"
+													newDiv = newDiv
+															+ "<span class=\"maxHallTicketLimit\"></span>"
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>"
+													newDiv = newDiv + "</div>"
+
+													if (courseCount == 1
+															&& subCnt == 1) {
+														newDiv = newDiv
+																+ "<div class=\"downloadHallTicketButton\">"
+														if (lba_htname != ""
+																|| lba_htname != undefined) {
+															newDiv = newDiv
+																	+ "<div class=\"halTktCatBtmIcon01\" title=\""
+																	+ lba_htname
+																	+ "\" data-staticKey=\"Download Hall Ticket\" data-staticKeyType=\"title\"><a onclick=fnGenerateLBAHallTicket("
+																	+ subjects[subject].subjectId
+																	+ ",'"
+																	+ subjects[subject].isHallticketDownloaded
+																	+ "',"
+																	+ result[key].assessmentId
+																	+ ","
+																	+ courses[course].courseId
+																	+ ",'"
+																	+ result[key].HTMode
+																	+ "','"
+																	+ subjects[subject].driveId
+																	+ "')><i class=\"fa fa-download\" aria-hidden=\"true\"></i><span data-staticKey=\"Hall Ticket\">"
+																	+ lba_htname
+																	+ "</span></a></div>"
+														} else {
+															newDiv = newDiv
+																	+ "<div class=\"halTktCatBtmIcon01\" title=\"Download Hall Ticket\" data-staticKey=\"Download Hall Ticket\" data-staticKeyType=\"title\"><a onclick=fnGenerateLBAHallTicket("
+																	+ subjects[subject].subjectId
+																	+ ",'"
+																	+ subjects[subject].isHallticketDownloaded
+																	+ "',"
+																	+ result[key].assessmentId
+																	+ ","
+																	+ courses[course].courseId
+																	+ ",'"
+																	+ result[key].HTMode
+																	+ "','"
+																	+ subjects[subject].driveId
+																	+ "')><i class=\"fa fa-download\" aria-hidden=\"true\"></i><span data-staticKey=\" Hall Ticket\"> Hall Ticket</span></a></div>"
+														}
+														newDiv = newDiv
+																+ "</div>"
+													}
+
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>"
+
+													newDiv = newDiv + "</div>" // hallTicketDownloadWrapper
+													// ends
+												}
+												// newDiv=newDiv+"<div
+												// class=\"clear\"></div>";
+												else {
+													newDiv = newDiv
+															+ "<div class=\"hallTicketDownloadWrapper\">";
+													newDiv = newDiv
+															+ "<div class=\"\" title=\"\"></div>";
+													newDiv = newDiv + "</div>" // hallTicketDownloadWrapper
+													// ends
+												}
+
+												if (subjects[subject].isValidDateForSubjectiveABPublish == 'Yes'
+														|| subjects[subject].isValidDateForQPPublish == "Yes") {
+
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtm\" style=\"float: left;\">";
+													// newDiv=newDiv+"<div
+													// class=\"view-map\"><a
+													// href=\"https://maps.google.com/\"
+													// target=\"_blank\"><span
+													// class=\"deskV\">View
+													// Location Map</span><span
+													// class=\"mobV\">View
+													// Map</span></a></div>";
+
+													if (subjects[subject].isValidDateForQPPublish == 'Yes')
+														newDiv = newDiv
+																+ "<div class=\"halTktCatBtmIcon02\" data-tooltip=\"tooltip\" title=\"QP HTML Download\" data-staticKey=\"QP HTML Download\" data-staticKeyType=\"title\"><img onClick=\" getAssessmentQPHTMLPath("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].subjectId
+																+ ",'"
+																+ subjects[subject].driveId
+																+ "');\" src=\"/EForms/images/QuestionPaperDownload.png\"></img></div>";
+
+													if (subjects[subject].isValidDateForSubjectiveABPublish == 'Yes')
+														newDiv = newDiv
+																+ "<div class=\"halTktCatBtmIcon03\" data-tooltip=\"tooltip\" title=\"Answer-sheet Download\" data-staticKey=\"Answer-sheet Download\" data-staticKeyType=\"title\"><img onClick=\"getEvaluationABPublishPath("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].subjectId
+																+ ");\" src=\"/EForms/images/AnswerSheetDownload.png\"></img></div>";
+
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>";
+													newDiv = newDiv + "</div>"; // halTktCatBtm
+													// ends
+
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>";
+													// newDiv=newDiv+"</div>";
+													// newDiv=newDiv+"</div>";
+												}
+
+												if (subjects[subject].isValidDateForSlotBooking == 'Yes'
+														&& subjects[subject].isHallticketGenerated != '1') {
+													newDiv = newDiv
+															+ "<div  class=\"halTktCatBtm01\" style=\"float:left;\">";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01\" data-toggle=\"modal\" data-target=\"#hallTicketPopUpLBA\"> <a class=\"text-Underline\" style=\"color:#337ab7 !important\" onclick=\"fnGetSlotModalLBA('"
+															+ result[key].assessmentId
+															+ "','"
+															+ courses[course].courseId
+															+ "','"
+															+ subjects[subject].subjectId
+															+ "','"
+															+ finalassessmentName
+															+ "','"
+															+ HTMode
+															+ "','"
+															+ subjects[subject].subjectName
+															+ "')\" data-staticKey=\"Edit slot\">Edit slot</a></div>";
+													newDiv = newDiv + "</div>";
+												}
+
+												// newDiv=newDiv+"</div>";
+												// newDiv=newDiv+"</div>";
+												// }
+												// newDiv=newDiv+"</div>";
+
+											}
+
+											newDiv = newDiv + "</div>"; // halTktCat
+											// ends
+											newDiv = newDiv
+													+ "<div class=\"clear\"></div>"
+											newDiv = newDiv + "</div>"; // col-xs-12
+											// col-sm-6
+											// col-md-4
+											// halTktCatCont
+											// hal-cl
+											// ends
+										}
+
+										newDiv = newDiv + "</div>"; // end of
+										// wrapCont
+										newDiv = newDiv + "</div>"; // end of
+										// subjectCont
+
+										if (courseCount > 1 || subCnt > 1) {
+											newDiv = newDiv + "</div>"; // end
+											// of
+											// innerCont
+										}
+										newDiv = newDiv + "</div>"; // end of
+										// halTktCatCont
+										newDiv = newDiv + "</div>"; // end of
+										// col-md-12
+
+										newDiv = newDiv
+												+ "<div class=\"clear\"></div>";
+										newDiv = newDiv
+												+ "<div class=\"clear\"></div>";
+										newDiv = newDiv + "</div>"; // end of
+										// historySecCont
+									}
+
+									// newDiv=newDiv+"<div class=\"subjectDivAdd
+									// left\"></div>";
+
+									/*
+									 * if(clsubj>3){ newDiv=newDiv+"<div
+									 * class=\"col-xs-12 col-sm-12 col-lg-12
+									 * loadMoreCont mar-top-20\">";
+									 * newDiv=newDiv+"<div
+									 * class=\"loaderCont\">"; newDiv=newDiv+"<div
+									 * class=\"loaderImg\"></div>";
+									 * newDiv=newDiv+"</div>"; newDiv=newDiv+"<div
+									 * class=\"loadMore loadMoreAss\">LOAD
+									 * MORE...</div>"; newDiv=newDiv+"</div>"; }
+									 */
+
+									newDiv = newDiv
+											+ "<div class=\"clear\"></div>";
+
+									newDiv = newDiv + "</div>"; // end of
+									// accordContentWrapper
+									newDiv = newDiv + "</section>";
+								}// end of HT type = Course
+
+								else if (result[key].HTLevel == "Subject"
+										|| (result[key].HTLevel).toLowerCase() == "notconfigured") {
+
+									var lba_tcname_visibility = result[key].lba_tcname_vis;
+									var lba_tcaddr_visibility = result[key].lba_tcaddr_vis;
+									var lba_timeslot_visibility = result[key].lba_timeslot_vis;
+									var lba_htname1 = " ";
+									var lba_htname = ""
+									if (result[key].ht_name_lba != ""
+											|| result[key].ht_name_lba != undefined) {
+										lba_htname = result[key].ht_name_lba;
+										lba_htname = lba_htname1
+												.concat(lba_htname);
+									}
+
+									slsubj++;
+									var courses = result[key].courses;
+
+									newDiv = newDiv
+											+ "<section class=\"historySec marginTop20\" style=\"padding: 0px !important\">";
+									newDiv = newDiv
+											+ "<div class=\"historySecHead grandParent\">";
+									newDiv = newDiv + "<div class=\"cells\">";
+
+									// newDiv=newDiv+"<div
+									// class=\"pull-left\"><div
+									// class=\"image-container\"><img
+									// src=\"/OnlineAssessment/logo-ion.png\"
+									// class=\"\"
+									// onerror=\"this.src='/EForms/images/onlineAppForm/default_user_group.png'\"
+									// width=\"50\" height=\"50\"></div></div>";
+
+									newDiv = newDiv
+											+ "<span class=\"historySecHead01\">"
+											+ finalassessmentName + "</span>";
+									newDiv = newDiv + "</div>";
+
+									newDiv = newDiv + "<div class=\"cells\">";
+									newDiv = newDiv
+											+ "<span class=\"historySecHead04 antiRotate90\" data-tooltip=\"tooltip\" title=\"Expand/Collapse\"></span>";
+									newDiv = newDiv + "</div>";
+
+									newDiv = newDiv
+											+ "<div class=\"clear\"></div>";
+
+									newDiv = newDiv + "</div>"; // historySecHead
+									// grandParent
+									// ends
+
+									newDiv = newDiv
+											+ "<div class=\"accordContentWrapper\">"
+									newDiv = newDiv
+											+ "<div class=\"historySecCont\" style=\"display:block\">";
+									newDiv = newDiv
+											+ "<div class=\"col-md-12\">";
+
+									newDiv = newDiv
+											+ "<div class=\"halTktCatCont hal-cl\">"
+									newDiv = newDiv + "<div class=\"\">"
+									newDiv = newDiv
+											+ "<div class=\"haSubHead\"></div>"
+									newDiv = newDiv
+											+ "<div class=\"clear\"></div>"
+									newDiv = newDiv + "</div>"
+									newDiv = newDiv + "</div>" // halTktCatCont
+									// hal-cl ends
+
+									newDiv = newDiv
+											+ "<div class=\"subjectsWrapper\" data-assessmentid=\""
+											+ assessmentId + "\">"
+
+									var subjectCount = 0;
+
+									for ( var course in courses) {
+
+										var subjects = courses[course].subjects;
+
+										for ( var subject in subjects) {
+
+											subjectCount++;
+
+											/*
+											 * if(subjectCount>3)
+											 * newDiv=newDiv+"<div
+											 * data-subjectCount=\""
+											 * +subjectCount +"\"
+											 * class=\"col-xs-12 col-sm-6
+											 * col-md-4 halTktCatCont hal-cl\"
+											 * style=\"display:none\">"; else
+											 */
+											newDiv = newDiv
+													+ "<div data-subjectcount=\""
+													+ subjectCount
+													+ "\" class=\"col-xs-12 col-sm-6 col-md-4 halTktCatCont hal-cl\">";
+
+											newDiv = newDiv
+													+ "<div class=\"halTktCat\">";
+											newDiv = newDiv
+													+ "<div class=\"halTktCatHead halTktCatHead01\">"
+													+ subjects[subject].subjectName
+													+ "</div>";
+
+											if (subjects[subject].isSlotBooked == 'No') {
+
+												if (subjects[subject].isValidDateForSlotBooking == 'Yes') {
+													newDiv = newDiv
+															+ "<div class=\"halTktCatTxt\">";
+													newDiv = newDiv
+															+ "<p data-staticKey=\"Yet to book the test center?\">Yet to book the test center?</p>";
+													newDiv = newDiv
+															+ "<p data-staticKey=\"Click here to book in preferred place and time.\">Click here to book in preferred place and time.</p>";
+													newDiv = newDiv + "</div>"; // halTktCatTxt
+													// ends
+
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtm01\">";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01\" data-toggle=\"modal\" data-target=\"#hallTicketPopUpLBA\">";
+
+													newDiv = newDiv
+															+ "<div class=\"hallTicketScheduleIconWrapper\">";
+													newDiv = newDiv
+															+ "<figure class=\"hallTicketScheduleIcon\" title=\"Book Your Slot\" data-staticKey=\"Book Your Slot\" data-staticKeyType=\"title\" ></figure>"
+													newDiv = newDiv + "</div> "
+													newDiv = newDiv
+															+ "<div class=\"hallTicketTimeWrapper\"><a class=\"text-Underline\" onclick=\"fnGetSlotModalLBA('"
+															+ result[key].assessmentId
+															+ "','"
+															+ courses[course].courseId
+															+ "','"
+															+ subjects[subject].subjectId
+															+ "','"
+															+ finalassessmentName
+															+ "','"
+															+ HTMode
+															+ "','"
+															+ subjects[subject].subjectName
+															+ "')\"><span class=\"hallTicketTime link\" data-staticKey=\"Slot Booking\">Slot Booking</span></a>"
+													newDiv = newDiv + "</div>"
+
+													newDiv = newDiv + "</div>"; // halTktCatBtmIcon01
+													// ends
+													newDiv = newDiv + "</div>"; // halTktCatBtm01
+													// ends
+												} else {
+													newDiv = newDiv
+															+ "<div class=\"halTktCatTxt\">";
+
+													newDiv = newDiv + "<p></p>";
+													newDiv = newDiv + "<p></p>";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtm01\">";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01 defaultcursor\" data-toggle=\"\" data-target=\"\"><img src=\"images/cal-icon.png\" /> <span data-staticKey=\"Slot Booking Not Available\"> Slot Booking Not Available </span> </div>";
+													newDiv = newDiv + "</div>"; // halTktCatBtm01
+													// ends
+
+													newDiv = newDiv + "</div>"; // halTktCatTxt
+													// ends
+												}
+												newDiv = newDiv
+														+ "<div class=\"clear\"></div>";
+
+												// newDiv=newDiv+"</div>";
+												// newDiv=newDiv+"</div>";
+
+											} else {
+												newDiv = newDiv
+														+ "<div class=\"halTktCatTxt\">"
+												if (lba_tcname_visibility == "Show") {
+													newDiv = newDiv
+															+ "<div class=\"htIconWrapper\">"
+													newDiv = newDiv
+															+ "<figure class=\"hallTicketLocationIcon\"></figure>"
+													newDiv = newDiv + "</div>"
+												}
+												if (lba_tcname_visibility == "Show"
+														|| lba_tcaddr_visibility == "Show") {
+													newDiv = newDiv
+															+ "<div class=\"htTextWrapper\">"
+													if (lba_tcname_visibility == "Show") {
+														newDiv = newDiv
+																+ "<p>"
+																+ subjects[subject].tcName
+																+ "</p>"
+													}
+													if (lba_tcaddr_visibility == "Show") {
+														newDiv = newDiv
+																+ "<p>"
+																+ subjects[subject].tcAddress
+																+ "</p>"
+													}
+													newDiv = newDiv + "</div>"
+
+												}
+												newDiv = newDiv
+														+ "<div class=\"clear\"></div>"
+												newDiv = newDiv + "</div>" // halTktCatTxt
+												// ends
+
+												newDiv = newDiv
+														+ "<div class=\"halTktCatBtm01\">"
+												if (lba_timeslot_visibility == "Show") {
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01 defaultcursor\" onclick=\"fnGetSlotModalLBA('"
+															+ result[key].assessmentId
+															+ "','"
+															+ courses[course].courseId
+															+ "','"
+															+ subjects[subject].subjectId
+															+ "','"
+															+ finalassessmentName
+															+ "','"
+															+ HTMode
+															+ "','"
+															+ subjects[subject].subjectName
+															+ "')\">"
+													newDiv = newDiv
+															+ "<div class=\"hallTicketScheduleIconWrapper\"><figure class=\"hallTicketScheduleIcon\" title=\"Slot Booked\" data-staticKey=\"Slot Booked\" data-staticKeyType=\"title\"></figure></div>"
+													newDiv = newDiv
+															+ "<div class=\"hallTicketTimeWrapper\"><span class=\"hallTicketTime defaultcursor\">"
+															+ subjects[subject].driveDate
+																	.split(' ')[0]
+															+ " "
+															+ subjects[subject].startTime
+															+ "-"
+															+ subjects[subject].endTime
+															+ "</span></div>"
+													newDiv = newDiv + "</div>"
+												}// halTktCatBtmIcon01
+												// ends
+												newDiv = newDiv + "</div>" // halTktCatBtm01
+												// ends
+
+												// newDiv=newDiv+"</div>";
+
+												// if(subjects[subject].isSlotBooked
+												// == 'Yes'){
+
+												if (subjects[subject].isValidDateForHallticket == "Yes") {
+													/*
+													 * newDiv=newDiv+"<div
+													 * class=\"halTktCatBtm02\">";
+													 * //newDiv=newDiv+"<div
+													 * class=\"view-map\"><a
+													 * href=\"https://maps.google.com/\"
+													 * target=\"_blank\"><span
+													 * class=\"deskV\">View
+													 * Location Map</span><span
+													 * class=\"mobV\">View Map</span></a></div>";
+													 * newDiv=newDiv+"<div
+													 * class=\"halTktCatBtmIcon01\"
+													 * title=\"Download Hall
+													 * Ticket\"><a
+													 * onclick=fnGenerateLBAHallTicket("+subjects[subject].subjectId+",'"+subjects[subject].isHallticketDownloaded+"',"+result[key].assessmentId+","+courses[course].courseId+",'"+result[key].HTMode+"','"+subjects[subject].driveId+"')><i
+													 * class=\"fa fa-download\"
+													 * aria-hidden=\"true\"></i>
+													 * <span
+													 * data-staticKey=\"Hall
+													 * Ticket\">Hall Ticket</span></a></div>";
+													 */
+													newDiv = newDiv
+															+ "<div class=\"hallTicketDownloadWrapper\">"
+
+													newDiv = newDiv
+															+ "<div class=\"downloadHallTicketInfo\">"
+													newDiv = newDiv
+															+ "<span class=\"downloadedHallTicketCount\"></span>"
+													newDiv = newDiv
+															+ "<span class=\"maxHallTicketLimit\"></span>"
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>"
+													newDiv = newDiv + "</div>"
+
+													newDiv = newDiv
+															+ "<div class=\"downloadHallTicketButton\">"
+													if (lba_htname != ""
+															|| lba_htname != undefined) {
+														newDiv = newDiv
+																+ "<div class=\"halTktCatBtmIcon01\" title=\""
+																+ lba_htname
+																+ "\" data-staticKey=\"Download Hall Ticket\" data-staticKeyType=\"title\"><a onclick=fnGenerateLBAHallTicket("
+																+ subjects[subject].subjectId
+																+ ",'"
+																+ subjects[subject].isHallticketDownloaded
+																+ "',"
+																+ result[key].assessmentId
+																+ ","
+																+ courses[course].courseId
+																+ ",'"
+																+ result[key].HTMode
+																+ "','"
+																+ subjects[subject].driveId
+																+ "')><i class=\"fa fa-download\" aria-hidden=\"true\"></i><span data-staticKey=\"Hall Ticket\">"
+																+ lba_htname
+																+ "</span></a></div>"
+													} else {
+														newDiv = newDiv
+																+ "<div class=\"halTktCatBtmIcon01\" title=\"Download Hall Ticket\" data-staticKey=\"Download Hall Ticket\" data-staticKeyType=\"title\"><a onclick=fnGenerateLBAHallTicket("
+																+ subjects[subject].subjectId
+																+ ",'"
+																+ subjects[subject].isHallticketDownloaded
+																+ "',"
+																+ result[key].assessmentId
+																+ ","
+																+ courses[course].courseId
+																+ ",'"
+																+ result[key].HTMode
+																+ "','"
+																+ subjects[subject].driveId
+																+ "')><i class=\"fa fa-download\" aria-hidden=\"true\"></i><span data-staticKey=\"Hall Ticket\"> Hall Ticket</span></a></div>"
+													}
+													newDiv = newDiv + "</div>"
+
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>"
+
+													newDiv = newDiv + "</div>" // hallTicketDownloadWrapper
+													// ends
+												}
+												// newDiv=newDiv+"<div
+												// class=\"clear\"></div>";
+												else {
+
+													newDiv = newDiv
+															+ "<div class=\"hallTicketDownloadWrapper analys_wrapper\">";
+													newDiv = newDiv
+															+ "<div class=\"analy_panel\">";
+
+													if (subjects[subject].isRTIRequired == "Yes"
+															&& subjects[subject].isIonEyeRequired == "Yes"
+															&& subjects[subject].isValidDateForSubjectiveABPublish == "Yes") {
+														newDiv = newDiv
+																+ "<a onclick=fnGetRTIReport('"
+																+ result[key].assessmentId
+																+ "','"
+																+ subjects[subject].subjectId
+																+ "','"
+																+ subjects[subject].driveId
+																+ "')> class=\"analysis_cols\" target=\"_blank\ style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"rtiicon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>RTI</p></div></a>"
+														// "<a href=\"#\"
+														// class=\"analysis_cols
+														// \" target=\"_blank\
+														// style=\"height:74px\">"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+<div
+														// class=\"analy_panel\">
+														// <a href=\"#\"
+														// class=\"analysis_cols
+														// \" target=\"_blank\
+														// style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<a onclick=\"getIonEyeReport('"
+																+ result[key].assessmentId
+																+ "','"
+																+ subjects[subject].IonEyeTsId
+																+ "','"
+																+ subjects[subject].IonEyeReportId
+																+ "')\"class=\"analysis_cols\" target=\"_blank\" style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"reporticon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>Analysis Report</p></div></a>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"<div
+														// class=\"analy_panel\">
+														// <a href=\"#\"
+														// class=\"analysis_cols
+														// \" target=\"_blank\
+														// style=\"height:74px\">"
+														// "<a href=\"#\"
+														// class=\"analysis_cols
+														// \" target=\"_blank\
+														// style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<a onclicl=\"getEvaluationABPublishPath("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].subjectId
+																+ ");\" class=\"analysis_cols \" target=\"_blank\" style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"answericon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>Answer Sheet</p></div></a>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"<div
+														// class=\"clear\"></div>"
+														// newDiv=newDiv+"</div>"
+													}
+
+													if (subjects[subject].isValidDateForIonEyeReport == "Yes"
+															|| subjects[subject].isIonEyeRequired == "Yes"
+															&& subjects[subject].isRTIRequired == "Yes") {
+
+														newDiv = newDiv
+																+ "<a onclick=fnGetRTIReport('"
+																+ result[key].assessmentId
+																+ "','"
+																+ subjects[subject].subjectId
+																+ "','"
+																+ subjects[subject].driveId
+																+ "')> class=\"analysis_cols\" target=\"_blank\ style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"rtiicon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>RTI</p></div></a>"
+														newDiv = newDiv
+																+ "<a onclick=\"getIonEyeReport('"
+																+ result[key].assessmentId
+																+ "','"
+																+ subjects[subject].IonEyeTsId
+																+ "','"
+																+ subjects[subject].IonEyeReportId
+																+ "')\"class=\"analysis_cols\" target=\"_blank\" style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"reporticon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>Analysis Report</p></div></a>"
+														// newDiv=newDiv+"</div>"
+
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"<div
+														// class=\"clear\"></div>"
+														// newDiv=newDiv+"</div>"
+
+													}
+
+													if (subjects[subject].isValidDateForIonEyeReport == "Yes"
+															&& subjects[subject].isValidDateForSubjectiveABPublish == "Yes") {
+
+														newDiv = newDiv
+																+ "<a onclick=\"getIonEyeReport('"
+																+ result[key].assessmentId
+																+ "','"
+																+ subjects[subject].IonEyeTsId
+																+ "','"
+																+ subjects[subject].IonEyeReportId
+																+ "','"
+																+ subjects[subject].tcId
+																+ "')\"class=\"analysis_cols\" target=\"_blank\" style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"reporticon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>Analysis Report</p></div></a>"
+														newDiv = newDiv
+																+ "<a onclicl=\"getEvaluationABPublishPath("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].subjectId
+																+ ");\" class=\"analysis_cols\" target=\"_blank\" style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"answericon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>Answer Sheet</p></div></a>"
+														// newDiv=newDiv+"</div>"
+
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"<div
+														// class=\"clear\"></div>"
+														// newDiv=newDiv+"</div>"
+
+													}
+													if (subjects[subject].isRTIRequired == "Yes"
+															&& subjects[subject].isValidDateForSubjectiveABPublish == "Yes") {
+
+														newDiv = newDiv
+																+ "<a onclick=\"fnGetRTIReport('"
+																+ result[key].assessmentId
+																+ "','"
+																+ subjects[subject].subjectId
+																+ "','"
+																+ subjects[subject].driveId
+																+ "')\"class=\"analysis_cols\" target=\"_blank\" style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"rtiicon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>RTI</p></div></a>"
+														newDiv = newDiv
+																+ "<a onclicl=\"getEvaluationABPublishPath("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].subjectId
+																+ ");\" class=\"analysis_cols\" target=\"_blank\" style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"answericon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>Answer Sheet</p></div></a>"
+														// newDiv=newDiv+"</div>"
+
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"<div
+														// class=\"clear\"></div>"
+														// newDiv=newDiv+"</div>"
+
+													}
+
+													if (subjects[subject].isRTIRequired == "Yes") {
+
+														newDiv = newDiv
+																+ "<a onclick=\"fnGetRTIReport('"
+																+ result[key].assessmentId
+																+ "','"
+																+ subjects[subject].subjectId
+																+ "','"
+																+ subjects[subject].driveId
+																+ "')\"class=\"analysis_cols custwid100\" target=\"_blank\" style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"rtiicon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>RTI</p></div></a>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"</div>"
+														// onclick=\"fnGetSlotModalLBA('"+result[key].assessmentId+"','"+courses[course].courseId+"','"+subjects[subject].subjectId+"','"+result[key].assessmentName+"','"+HTMode+"','"+subjects[subject].subjectName+"')\"
+														// newDiv=newDiv+"<div
+														// class=\"clear\"></div>"
+														// newDiv=newDiv+"</div>"
+
+													}
+													/*
+													 * if(subjects[subject].isValidDateForSubjectiveABPublish=="Yes") {
+													 * 
+													 * 
+													 * newDiv=newDiv+"<a
+													 * onclicl=\"getEvaluationABPublishPath("+result[key].assessmentId+","+subjects[subject].subjectId+");\"
+													 * class=\"analysis_cols
+													 * custwid100\"
+													 * target=\"_blank\"
+													 * style=\"height:74px\">"
+													 * newDiv=newDiv+"<div
+													 * class=\"answericon\"></div>"
+													 * newDiv=newDiv+"<div
+													 * class=\"analy_txt\"><p>Answer
+													 * Sheet</p></div></a>"
+													 * newDiv=newDiv+"</div>" //
+													 * newDiv=newDiv+"</div>" //
+													 * newDiv=newDiv+"</div>" //
+													 * newDiv=newDiv+"</div>" //
+													 * newDiv=newDiv+"<div
+													 * class=\"clear\"></div>" //
+													 * newDiv=newDiv+"</div>" }
+													 */
+													if (subjects[subject].isIonEyeRequired == "Yes") {
+
+														newDiv = newDiv
+																+ "<a onclick=\"getIonEyeReport('"
+																+ result[key].assessmentId
+																+ "','"
+																+ subjects[subject].IonEyeTsId
+																+ "','"
+																+ subjects[subject].IonEyeReportId
+																+ "','"
+																+ subjects[subject].tcId
+																+ "')\"class=\"analysis_cols custwid100\" target=\"_blank\" style=\"height:74px\">"
+														newDiv = newDiv
+																+ "<div class=\"reporticon\"></div>"
+														newDiv = newDiv
+																+ "<div class=\"analy_txt\"><p>Analysis Report</p></div></a>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"</div>"
+														// newDiv=newDiv+"<div
+														// class=\"clear\"></div>"
+														// newDiv=newDiv+"</div>"
+
+													}
+
+													newDiv = newDiv + "</div>"; // end
+													// of
+													// analy
+													// panel
+													// div
+													newDiv = newDiv
+															+ "<div class=\"\" title=\"\"></div>";
+													newDiv = newDiv + "</div>" // hallTicketDownloadWrapper
+													// ends
+
+												}
+
+												if (subjects[subject].isValidDateForSubjectiveABPublish == 'Yes'
+														|| subjects[subject].isValidDateForQPPublish == "Yes") {
+
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtm\" style=\"float: left;\">";
+													// newDiv=newDiv+"<div
+													// class=\"view-map\"><a
+													// href=\"https://maps.google.com/\"
+													// target=\"_blank\"><span
+													// class=\"deskV\">View
+													// Location Map</span><span
+													// class=\"mobV\">View
+													// Map</span></a></div>";
+
+													if (subjects[subject].isValidDateForQPPublish == 'Yes')
+														newDiv = newDiv
+																+ "<div class=\"halTktCatBtmIcon02\" data-tooltip=\"tooltip\" title=\"QP HTML Download\" data-staticKey=\"QP HTML Download\" data-staticKeyType=\"title\"><img onClick=\" getAssessmentQPHTMLPath("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].subjectId
+																+ ",'"
+																+ subjects[subject].driveId
+																+ "');\" src=\"/EForms/images/QuestionPaperDownload.png\"></img></div>";
+
+													if (subjects[subject].isValidDateForSubjectiveABPublish == 'Yes')
+														newDiv = newDiv
+																+ "<div class=\"halTktCatBtmIcon03\" data-tooltip=\"tooltip\" title=\"Answer-sheet Download\" data-staticKey=\"Answer-sheet Download\" data-staticKeyType=\"title\"><img onClick=\"getEvaluationABPublishPath("
+																+ result[key].assessmentId
+																+ ","
+																+ subjects[subject].subjectId
+																+ ");\" src=\"/EForms/images/AnswerSheetDownload.png\"></img></div>";
+
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>";
+													newDiv = newDiv + "</div>"; // halTktCatBtm
+													// ends
+
+													newDiv = newDiv
+															+ "<div class=\"clear\"></div>";
+													// newDiv=newDiv+"</div>";
+													// newDiv=newDiv+"</div>";
+												}
+
+												if (subjects[subject].isValidDateForSlotBooking == 'Yes'
+														&& subjects[subject].isHallticketGenerated != '1') {
+													newDiv = newDiv
+															+ "<div  class=\"halTktCatBtm01\" style=\"float:left;\">";
+													newDiv = newDiv
+															+ "<div class=\"halTktCatBtmIcon01\" data-toggle=\"modal\" data-target=\"#hallTicketPopUpLBA\"> <a class=\"text-Underline\" style=\"color:#337ab7 !important\" onclick=\"fnGetSlotModalLBA('"
+															+ result[key].assessmentId
+															+ "','"
+															+ courses[course].courseId
+															+ "','"
+															+ subjects[subject].subjectId
+															+ "','"
+															+ finalassessmentName
+															+ "','"
+															+ HTMode
+															+ "','"
+															+ subjects[subject].subjectName
+															+ "')\" data-staticKey=\"Edit slot\">Edit slot</a></div>";
+													newDiv = newDiv + "</div>";
+												}
+
+												// newDiv=newDiv+"</div>";
+												// newDiv=newDiv+"</div>";
+												// }
+												// newDiv=newDiv+"</div>";
+
+											}
+
+											newDiv = newDiv + "</div>"; // halTktCat
+											// ends
+											newDiv = newDiv
+													+ "<div class=\"clear\"></div>"
+											newDiv = newDiv + "</div>"; // col-xs-12
+											// col-sm-6
+											// col-md-4
+											// halTktCatCont
+											// hal-cl
+											// ends
+										}
+
+										// newDiv=newDiv+"</div>";
+										/*
+										 * newDiv=newDiv+"<div
+										 * class=\"col-xs-12 col-sm-12 col-lg-12
+										 * loadMoreCont\">"; newDiv=newDiv+"<div
+										 * class=\"loaderCont\">";
+										 * newDiv=newDiv+"<div
+										 * class=\"loaderImg\"></div>";
+										 * newDiv=newDiv+"</div>";
+										 * newDiv=newDiv+"</div>";
+										 * newDiv=newDiv+"<div class=\"loadMore
+										 * loadMoreAss\">LOAD MORE...</div>";
+										 */
+										// newDiv=newDiv+"</div>";
+									}
+
+									newDiv = newDiv + "</div>"; // unnamed class
+									// ends
+
+									newDiv = newDiv + "</div>"; // col-md-12
+									// ends
+									newDiv = newDiv
+											+ "<div class=\"clear\"></div>";
+
+									newDiv = newDiv + "</div>"; // historySecCont
+									// ends
+
+									/*
+									 * // Inner pagination code var pages =
+									 * (subjectCount%10==0) ? subjectCount/10 :
+									 * subjectCount/10 + 1;
+									 * 
+									 * if(pages>1) { newDiv=newDiv+"<div
+									 * class=\"container-fluid marginBottom30
+									 * marginTop10 pagin oneLevel\">"
+									 * newDiv=newDiv+"<p class=\"pagenumbertext bottompagetext\"><span
+									 * class=\"sansSB\">10</span> of Total 230
+									 * Assessment </p>" newDiv=newDiv+"<div
+									 * class=\" bottompagenum\">"
+									 * newDiv=newDiv+"<div class=\"text-center
+									 * visible-sm visible-xs\"><a class=\"btn
+									 * btn-default\"><i class=\"fa
+									 * fa-angle-left\"></i> Back</a> <a
+									 * class=\"btn btn-default\">Next <i
+									 * class=\"fa fa-angle-right\"></i></a></div>"
+									 * newDiv=newDiv+"<nav class=\"hidden-sm
+									 * hidden-xs\">" newDiv=newDiv+"<ul class=\"pagination\">"
+									 * newDiv=newDiv+"<li class=\"active\"><a
+									 * onclick=\"showSubjectPage(" +assessmentId
+									 * +",1)\">1</a></li>"
+									 * 
+									 * for(var i=2; i<=pages; i++)
+									 * newDiv=newDiv+"<li><a
+									 * onclick=\"showSubjectPage(" +assessmentId
+									 * +"," +i +")\">" +i +"</a></li>"
+									 * 
+									 * newDiv=newDiv+"<li><a
+									 * href=\"javascript:void(0);\"
+									 * aria-label=\"Next\" title=\"\"
+									 * data-tooltip=\"tooltip\"
+									 * data-trigger=\"hover\"
+									 * data-original-title=\"Next\"> <i
+									 * class=\"fa fa-angle-right\"></i> </a>
+									 * </li>" newDiv=newDiv+"</ul>"
+									 * newDiv=newDiv+"</nav>" newDiv=newDiv+"</div>"
+									 * newDiv=newDiv+"</div>" }
+									 */
+
+									newDiv = newDiv + "</div>"; // accordContentWrapper
+									// ends
+
+									newDiv = newDiv + "</section>";
+								}// end of HTType = Subject
+
+								newDiv = newDiv + "</div>";// end of
+								// tabsContent
+
+								newDiv = newDiv + "</div>";// end of
+								// currentAssessment
+
+								assCount++;
+
+								$('#LBAdiv').append(newDiv);
+
+							}// end of assCount<10 if condition
+						}// end of traversing result
+
+						if (noOfAssessments > 10) {
+							newDiv = newDiv
+									+ "<div class=\"container-fluid marginBottom30 marginTop30\">";
+							newDiv = newDiv
+									+ "<p class=\"pagenumbertext bottompagetext\"><span class=\"sansSB\">10</span> of Total "
+									+ noOfAssessments + " Assessment </p>";
+							newDiv = newDiv + "<div class=\" bottompagenum\">";
+							newDiv = newDiv
+									+ "<nav class=\"hidden-sm hidden-xs\">";
+							newDiv = newDiv + "<ul class=\"pagination\">";
+							for (var i = 1; i < noOfAssessments + 1; i++) {
+
+								if (i == pageNo) {
+									newDiv = newDiv
+											+ "<li class=\"active\" id=\"Page"
+											+ i
+											+ "\"><a  style=\"cursor:pointer\"   onclick=\"fnGetLBAData('lba','','"
+											+ i + "');\">" + i + "</a></li>";
+								} else {
+									newDiv = newDiv
+											+ "<li id=\"Page"
+											+ i
+											+ "\"><a  style=\"cursor:pointer\"  onclick=\"fnGetLBAData('lba','','"
+											+ i + "');\">" + i + "</a></li>";
+								}
+
+								/*
+								 * if(i==currPage){ newDiv=newDiv+"<div
+								 * class=\"text-center visible-sm visible-xs\"><a
+								 * class=\"btn btn-default\"><i class=\"fa
+								 * fa-angle-left\"></i> Back</a> <a
+								 * class=\"btn btn-default\">Next <i class=\"fa
+								 * fa-angle-right\"></i></a></div>";
+								 * newDiv=newDiv+"<nav class=\"hidden-sm
+								 * hidden-xs\">"; newDiv=newDiv+"<ul class=\"pagination\">";
+								 * newDiv=newDiv+"<li class=\"active\"><a
+								 * href=\"javascript:void(0);\">1</a></li>";
+								 * newDiv=newDiv+"<li><a
+								 * href=\"javascript:void(0);\">2</a></li>";
+								 * newDiv=newDiv+"<li><a
+								 * href=\"javascript:void(0);\"
+								 * aria-label=\"Next\" title=\"\"
+								 * data-tooltip=\"tooltip\"
+								 * data-original-title=\"Next\"> <i class=\"fa
+								 * fa-angle-right\"></i> </a> </li>";
+								 * newDiv=newDiv+"</ul>"; newDiv=newDiv+"</nav>";
+								 * newDiv=newDiv+"</div>"; }
+								 */
+							}
+							newDiv = newDiv + "</ul>";
+							newDiv = newDiv + "</nav>";
+							newDiv = newDiv + "</div>";
+
+							$('#LBAdiv').append(newDiv);
+						}
+
+						$("#LBAdiv .historySec").first()
+								.find(".historySecHead").click(); // added to
+						// open
+						// first by
+						// default
+						// added to reopen the last one
+						/*
+						 * var activeTab = $('#LBAdiv
+						 * span.historySecHead01:contains("'+$('#LBAdiv').data('act')+'"):first');
+						 * if(activeTab.length)
+						 * activeTab.parents('.historySecHead').trigger('click');
+						 * 
+						 * showNote('#LBAdiv','Click on arrow icon <span
+						 * style="background: rgba(0, 0, 0, 0)
+						 * url(/EForms/images/arrows.png) no-repeat scroll;
+						 * display: inline-block; height: 15px; width: 15px;
+						 * opacity: 0.4;"></span> at the right of below tabs
+						 * for downloading Hall Ticket, booking Slot and
+						 * more..')
+						 */
+
+						if (typeof window.fnGetLBADataPostFunctionForValidResponse == 'function') {
+
+							fnGetLBADataPostFunctionForValidResponse();
+						}
+					}// end of else
+				},
+				error : function(xhr, err, ex) {
+					newDiv = '<div class="currentAssessment tabCont act"><div class="tabsContent"><div style="margin: 0 auto; text-align: center;font-size: 14px;" data-staticKey=\"No LAN Based Assessments.\">No LAN Based Assessments.</div></div></div>';
+					$('#LBAdiv').html(newDiv);
+					console.log("error in getLBAAssessments");
+					if (typeof window.fnGetLBADataPostFunctionForNoResponse == 'function') {
+
+						fnGetLBADataPostFunctionForNoResponse();
+					}
+				}
+
+			});
+
+}
+
+$(document).ready(
+		function(e) {
+			$('body').addClass("revampLBA");
+			// ----to be removed
+			$('#hallTicketPopUpLBA').css("background", "#F6F6F6").on(
+					'show.bs.modal', function() {
+						$('body').css('overflow', 'hidden');
+					}).on('hide.bs.modal', function() {
+				$('body').css('overflow', 'auto');
+			})// ----to be removed
+
+			$(document).on(
+					'click',
+					'.innerContHead',
+					function() {
+
+						$(this).next().slideToggle();
+						$(this).find('.accordianArrowIcon').toggleClass(
+								'antiRotate90');
+					});
+
+			$(document).on('click', '.innerContHead .downloadHallTicketButton',
+					function() {
+						stopPropagation();
+					});
+
+			$(document).on('click', '.historySecHead.grandParent', function() {
+				$(this).next().slideToggle();
+				$(this).find('.historySecHead04').toggleClass('antiRotate90');
+				$(this).parent('.historySec').toggleClass('open');
+				$(this).toggleClass('open');
+				$(this).find('.historySecHeadRight').toggle();
+			});
+
+			$(document).on('click',
+					'.historySecHead.grandParent .downloadHallTicketButton',
+					function() {
+						stopPropagation();
+					});
+
+			$(document).on('click', '#LBAdiv button[value="Hall Ticket"]',
+					function(e) {
+						e.stopPropagation();
+					});
+
+			$(document).on('click', '.btnfilter', function(e) {
+				$(".filterBook").slideDown();
+				$(this).removeClass("inactive");
+				if ($(window).width() <= 640) {
+					$("#hallTicketPopUpLBA").css("overflow", "hidden");
+				}
+			});
+			$(document).on('click', '.filterBook .close_link', function(e) {
+				$(".filterBook").slideUp();
+				$('.btnfilter').addClass("inactive");
+				$("#hallTicketPopUpLBA").css("overflow", "auto");
+			});
+			$(document).on('click', '.slotBox', function(e) {
+				$('.slotBox').not('.slotBox:first-child').removeClass('active')
+				$(this).not('.slotBox:first-child').addClass('active');
+			});
+
+			$(document)
+					.on(
+							'click',
+							'.sloTSelecbtn',
+							function(e) {
+								var $this = $(this);
+
+								$this.parents('.halTktContSub').find(
+										'.slotBooking').slideToggle();
+
+								if ($this.find('.showSlot.openSlt').hasClass(
+										'in')) {
+									$this.find('.showSlot.openSlt')
+											.removeClass('in');
+									$this.find('.showSlot.closedSlt').addClass(
+											'in');
+								} else {
+									$this.find('.showSlot.closedSlt')
+											.removeClass('in');
+									$this.find('.showSlot.openSlt').addClass(
+											'in');
+
+								}
+								/*
+								 * if(!$this.parents('.halTktContSub').find('.slotBooking').is(':visible')){
+								 * $this.find('.showSlot').removeClass('in');
+								 * $this.find('.showSlot.closedSlt').addClass('in'); }
+								 * else{
+								 * $this.find('.showSlot').removeClass('in');
+								 * $this.find('.showSlot.openSlt').addClass('in'); }
+								 */
+
+							});
+
+		});
+
+/*
+ * $(document).on("click",".historySecHead", function(){
+ * 
+ * $(".historySecCont").slideUp(); $(".historySec").removeClass("act");
+ * 
+ * var $nextDiv = $(this).next('div');
+ * 
+ * if ($nextDiv.css('display')=='none'){
+ * $(this).parents(".historySec").addClass("act"); $nextDiv.slideDown();
+ * $nextDiv.find('[class="halTktCat"]').attr('style','height:'+Math.max.apply(Math,$nextDiv.find('.halTktCat').map(function(){
+ * return $(this).height() }).toArray())+'px'); }else { $nextDiv.slideUp(); }
+ * 
+ * });
+ */
+
+$(document)
+		.on(
+				"click",
+				".selCourseSubmit, .selCourseSel",
+				function() {
+					if ($('#LBAcountry').val() == ""
+							|| $('#LBAState').val() == ""
+							|| $('#LBACity').val() == "") {
+						showError('Please select Country State and City');
+						return false;
+					} else {
+						var httab = $(this).data("ht-tab");
+						$('.halTktSecTabTxt').removeClass('halTktSecTabTxtAct');
+						$('.halTktSecTabIndxBdr').removeClass(
+								'halTktSecTabIndxBdrAct');
+						$('.halTktSecTabIndxTxt').removeClass(
+								'halTktSecTabIndxTxtAct');
+						$(".halTktTab").eq(httab - 2).find('.halTktSecTabTxt')
+								.addClass('halTktSecTabTxtVis');
+						$(".halTktTab").eq(httab - 2).find(
+								'.halTktSecTabIndxBdr').addClass(
+								'halTktSecTabIndxBdrVis');
+						$(".halTktTab").eq(httab - 2).find(
+								'.halTktSecTabIndxTxt').addClass(
+								'halTktSecTabIndxTxtVis');
+						$(".halTktTab").eq(httab - 1).find('.halTktSecTabTxt')
+								.removeClass('halTktSecTabTxtVis').addClass(
+										'halTktSecTabTxtAct');
+						$(".halTktTab").eq(httab - 1).find(
+								'.halTktSecTabIndxBdr').removeClass(
+								'halTktSecTabIndxBdrVis').addClass(
+								'halTktSecTabIndxBdrAct');
+						$(".halTktTab").eq(httab - 1).find(
+								'.halTktSecTabIndxTxt').removeClass(
+								'halTktSecTabIndxTxtVis').addClass(
+								'halTktSecTabIndxTxtAct');
+						$(".halTktTab").removeClass("halTktTabShow");
+						$(".halTktTab").eq(httab - 1).addClass(
+								"halTktTabAct halTktTabShow");
+						$(".halTktTabBack").removeClass("halTktTabBackAct");
+						$(".halTktTabBack").eq(httab - 2).addClass(
+								"halTktTabBackAct");
+						$(".halTktCont").hide();
+						$(".halTktCont").eq(httab - 1).show();
+						$("html, body, #hallTicketPopUpLBA").animate({
+							scrollTop : "0px"
+						});
+					}
+				});
+
+function urlappend() {
+	var url_string = window.location.href;
+	var sub = url_string.split("?");
+	var strng;
+	if(sub[1]!= undefined &&  sub[1]!= "")
+	strng= sub[1];
+	var str = "";
+	if(strng!= undefined &&  strng!= ""){
+	var arr = strng.split("&");
+	for (var i = 0; i < arr.length; i++) {
+		var arr1 = arr[i].split("=");
+		if (arr1[0] == "orgId" || arr1[0] == "p_orgId_formId_decrypt"
+				|| arr1[0] == "subAction" || arr1[0] == "formId"
+				|| arr1[0] == "sessChk" || arr1 == "userid"
+				|| arr1[0] == "entityId" || arr1[0] == "appSeqForValidation"
+				|| arr1[0] == "app_seq_no" || arr1[0] == "listFormId"
+				|| arr1[0] == "checksum" || arr1[0] == "applnSequenceField") {
+			continue;
+		} else {
+			str = str + "&" + arr[i];
+		}
+	}
+	}
+	return str;
+}
+
+function fnGetSlotModalLBA(assessmentId, courseId, subjectId, AssessmentName,
+		HTMode, subjectName) {
+
+	$('#hallTicketPopUpLBA').html('');
+	var checksum = $('#checksum').val();
+	var orgID = document.getElementById('orgId').value;
+	var formId = $('#formId').val();
+	var entityId = $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#' + applnSequenceField).val();
+	var assessment = AssessmentName;
+	var removeSpecialchar1 = assessment.replace(">", "&gt");
+	var finalassessmentName2 = removeSpecialchar1.replace("<", "&lt");
+
+	$
+			.ajax({
+				type : "POST",
+				url : "/EForms/CodedTabsServlet",
+				data : {
+					orgId : orgID,
+					checkSum : checksum,
+					formId : formId,
+					entityId : entityId,
+					appSeqNo : appSeqNo,
+					actionTaken : 'getCountriesForLBA',
+					assessmentId : assessmentId,
+					sessChk : sessChk
+
+				},
+				dataType : "json",
+				success : function(result) {
+					if (result == undefined || result == null
+							|| result == "null") {
+						var msgDiv = "<div class=\"desc-heading margintop20\"><div style=\"margin: 0 auto; width:280px;font-size: 14px;\" data-staticKey=\"No State list \">No state list.</div></div>"
+						jQuery('selstate').html(msgDiv);
+					}
+					if (result == "SessionTimeout") {
+						var str = urlappend();
+						location
+								.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="
+										+ formId + "&orgId=" + 726 + str);
+					} else {
+						console.log(result);
+						var CountryJSON = result;
+
+						var newDiv = "";
+						var lbaDiv="";
+
+						newDiv += "<div class=\"modal-header clearfix\">"
+						newDiv += "<div class=\"hallTicketPopUpHeader left\">";
+						newDiv += "<span  style='font-size: large;'>"
+								+ finalassessmentName2
+								+ "</span><span style='font-size: large;padding: 1em;'> | </span><span style='font-size: medium;'>"
+								+ subjectName
+								+ "</span>"
+								+ "<input type = \"hidden\" id = \"assessmentId\" value = '"
+								+ assessmentId
+								+ "'>"
+								+ "<input type = \"hidden\" id = \"subjectName\" value = '"
+								+ subjectName + "'>";
+						newDiv += "<div></div>";
+						newDiv += "</div>";
+						newDiv = newDiv
+								+ "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" data-tooltip=\"tooltip\" title=\"Close\" data-original-title=\"Close\" style=\"height: 21px;width: 21px;margin-right: 26px;\">"
+								+ "<div class=\"close_link\">"
+								+ "<svg height=\"25\" width=\"25\">"
+								+ "<line x1=\"15\" y1=\"0\" x2=\"0\" y2=\"15\" style=\"stroke:rgb(255,255,255);stroke-width:2\"></line>"
+								+ "<line x1=\"0\" y1=\"0\" x2=\"15\" y2=\"15\" style=\"stroke:rgb(255,255,255);stroke-width:2\"></line>"
+								+ "</svg></div></button>";
+						newDiv += "</div>";
+						// content scrolling start
+						newDiv += "<section class=\"halTktSecCont halTktSecContRes slotCalndr\">"
+						newDiv += "<div data-ht-tab=\"1\" class=\"halTktTabBack\">Back to step 1</div>";
+						newDiv += "<div data-ht-tab=\"2\" class=\"halTktTabBack\">Back to step 2</div>";
+						// //content scrolling ends.
+						// halTktSecTabCont starts.
+
+						newDiv += "<div class=\"halTktSecTabCont\">";
+						newDiv += "<div data-ht-tab=\"1\" class=\"halTktTab halTktTabAct halTktTabShow\">";
+						newDiv += "<div class=\"halTktSecTabTxt halTktSecTabTxtAct\" data-staticKey=\"Select Test Center\">Select Test Center</div>";
+						newDiv += "<div class=\"halTktSecTabIndx\">";
+						newDiv += "<div class=\"halTktSecTabIndxBdr halTktSecTabIndxBdrAct\"></div>";
+						newDiv += "<div class=\"halTktSecTabIndxTxt halTktSecTabIndxTxtAct\">1</div>";
+						newDiv += "</div>";
+						newDiv += "</div>"
+						newDiv += "<div data-ht-tab=\"2\" class=\"halTktTab\">";
+						newDiv += "<div class=\"halTktSecTabTxt\" data-staticKey=\"Book Your Time\">Book Your Time</div>";
+						newDiv += "<div class=\"halTktSecTabIndx\">";
+						newDiv += "<div class=\"halTktSecTabIndxBdr\"></div>"
+						newDiv += "<div class=\"halTktSecTabIndxTxt\">2</div>";
+						newDiv += "</div>";
+						newDiv += "</div>";
+						newDiv += "<div data-ht-tab=\"3\" class=\"halTktTab\">";
+						newDiv += "<div class=\"halTktSecTabTxt\" data-staticKey=\"Confirm your selection\">Confirm your selection</div>";
+						newDiv += "<div class=\"halTktSecTabIndx\">";
+						newDiv += "<div class=\"halTktSecTabIndxBdr\"></div>";
+						newDiv += "<div class=\"halTktSecTabIndxTxt\">3</div>";
+						newDiv += "</div>";
+						newDiv += "</div>";
+						newDiv += "</div>";
+						// halTktSecTabCont ends.
+						// dropDowns start
+
+						newDiv += "<div class=\"halTktCont selLocationTabCont halTktContShow\">";
+						newDiv += "<div class=\"col-md-8\">";
+						newDiv += "<div class=\"selCourseContHead marginBottom20\" data-staticKey=\"Select Your Location\">Select Your Location</div>";
+						newDiv += "<div class=\"selectOpt\" style=\"z-index:auto\">";
+						newDiv += "<div class=\"selName\">Select Country</div>";
+						newDiv += "<select id = \"LBACountry\" class=\"selectpicker form-control selCourseContbtn\" title=\"Select Country\" onchange=\"fnGetStatesForLBA("
+								+ assessmentId + ")\">";
+						newDiv = newDiv
+								+ "<option value=\"\">Select Country</option>";
+						for ( var key in CountryJSON) {
+							if (key == "slotBookingLevel") {
+								newDiv += "<input type=\"hidden\" id=\"slotBookingLevel\" value = \""
+										+ CountryJSON['slotBookingLevel']
+										+ "\">";
+							} else {
+								if (Object.keys(CountryJSON).length == 2) {
+									newDiv += "<option selected value=" + key
+											+ ">" + CountryJSON[key]
+											+ "</option>";
+								} else
+									newDiv += "<option  value=" + key + ">"
+											+ CountryJSON[key] + "</option>";
+
+							}
+
+						}
+						var sbLevel = CountryJSON['slotBookingLevel'];
+						newDiv += "</select><span id=\"strLBACountry\" class=\"str \">*</span>";
+						newDiv += "</div>";
+						newDiv += "<div class=\"selectOpt\" style=\"z-index:auto\" >";
+						newDiv += "<div class=\"selName\">Select State</div>";
+						newDiv += "<select id = \"LBAState\" class=\"selectpicker form-control selCourseContbtn\" title=\"Select State\" onchange=\"fnGetCitiesForLBA("
+								+ assessmentId + ",'" + sbLevel + "')\" >";
+
+						newDiv += "</select><span id = \"strLBAState\" class=\"str hidden \">*</span></div>";
+						// newDiv += "</div>";
+
+						if (sbLevel == 'Test Center Level') {
+							newDiv += "<div class=\"selectOpt\" style=\"z-index:auto\">";
+							newDiv += "<div class=\"selName\">Select City</div>";
+							newDiv += "<select id = \"LBACity\" class=\"selectpicker form-control selCourseContbtn\" title=\"Select City\" >";
+
+							newDiv += "</select><span id=\"strLBACity\" class=\"str hidden\">*</span></div>";
+							// newDiv += "</div>";
+						}
+						newDiv += "</div>";
+						newDiv += "<div class=\"col-md-12\" id=\"LBAContinue\" style=\"display:none\" onclick = \"getTestCenters('"
+								+ assessmentId
+								+ "','"
+								+ courseId
+								+ "','"
+								+ subjectId + "')\">";
+						newDiv += "<a data-ht-tab=\"2\" class=\"btn btn-lg btn-success selCourseSubmit\">Continue</a>";
+						newDiv += "</div>";
+						newDiv += "</div>";
+
+						// dropDowns ends.
+						// 2nd tab starts
+						newDiv += "<div id=\"halTktCont4\" class=\"halTktCont selBookTimeTabCont\">";
+						// Heading of 2nd tab starts
+						newDiv += "<div class=\"container-fluid marginBottom20 clearfix\">";
+						newDiv += "<div class=\"selCourseContHead\">";
+						newDiv += "<div data-staticKey\"Book Your Test Center and Time Slot\">Book Your Test Center and Time Slot</div>";
+						newDiv += "<div class=\"selCourseContSubHead\">Here are the available time slots at your chosen centre. Click on desired slot time section to proceed with the booking. </div>";
+						if (sbLevel == 'Test Center Level') {
+							newDiv += "<div class=\"btnfilter inactive\"><button type=\"button\" class=\"btn\">Select Filter <i class=\"fa fa-filter\" aria-hidden=\"true\"></i>";
+							newDiv += "</button></div>";
+						}
+						newDiv += "</div>";
+						newDiv += "</div>";
+						// Heading of 2nd tab ends.
+						// Filter in 2nd tab starts
+						if (sbLevel == 'Test Center Level') {
+							newDiv += "<div class=\"filterBook container-fluid\">";
+							newDiv += "<div class=\"close_link\" data-tooltip=\"tooltip\" title=\"Close\" data-original-title=\"Close\" data-placement=\"bottom\">";
+							newDiv += "<svg xml:space=\"preserve\" enable-background=\"new 0 0 24 24\" viewBox=\"0 0 24 24\" height=\"24px\" width=\"24px\" y=\"0px\" x=\"0px\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" id=\"Layer_1\" onclick=\"$('#LBATCSearch').val('')\" version=\"1.1\">"
+									+ "<path d=\"M20.203,20.475c-0.241,0.227-0.62,0.215-0.847-0.027l-7.082-7.708"
+									+ "l-7.112,7.706c-0.227,0.244-0.605,0.256-0.847,0.027c-0.241-0.229-0.253-0.611-0.027-0.857l7.161-7.758L4.463,4.372"
+									+ "C4.237,4.131,4.249,3.751,4.49,3.525c0.242-0.227,0.621-0.214,0.847,0.027l6.928,7.422l6.883-7.417"
+									+ "c0.226-0.244,0.604-0.256,0.847-0.027c0.241,0.229,0.253,0.612,0.027,0.856l-6.933,7.471l7.141,7.77"
+									+ "C20.456,19.869,20.444,20.248,20.203,20.475z\" class=\"close_icon\" fill=\"#666\" clip-rule=\"evenodd\" fill-rule=\"evenodd\"></path>"
+									+ "</svg></div>";
+
+							newDiv += "<div class=\"col-md-3 col-sm-3 col-xs-4\">";
+							newDiv += "<div class=\"filterTxt marginBottom10 semibold\">Filter </div>";
+							newDiv += "<div class=\"form-group posRel testCentr filterLbl\">";
+							newDiv += "<span> </span>";
+							newDiv += "<div class=\"inlineBlock media-middle\">";
+							newDiv += "<input type=\"text\" placeholder=\"Test Center Name\" id=\"LBATCSearch\" class=\"form-control selectOpt\">";
+							newDiv += "<div class=\"selName\">Test Center Name</div>";
+							newDiv += "</div>";
+							newDiv += " </div>";
+							newDiv += "</div>";
+							newDiv += "<div class=\"col-md-9 col-sm-9 col-xs-8\">";
+							/*
+							 * newDiv += "<div class=\"form-group left col-md-4
+							 * col-sm-4 col-xs-6 filterLbl\">"; newDiv += "<span>From:</span>";
+							 * newDiv += "<div class=\"inlineBlock
+							 * media-middle\">"; newDiv += "<div
+							 * class='datePickerIco posRel'>"; newDiv += "<input
+							 * type='text' id=\"fromDatePickr\"
+							 * class=\"form-control\" placeholder=\"DD/MM/YYYY\"
+							 * />"; newDiv += "</div>"; newDiv += "</div>";
+							 * newDiv += "</div>"; newDiv += "<div
+							 * class=\"form-group left col-md-4 col-sm-4
+							 * col-xs-6 filterLbl\">"; newDiv += "<span>To:</span>";
+							 * newDiv += "<div class=\"inlineBlock
+							 * media-middle\">"; newDiv += "<div
+							 * class='datePickerIco posRel'>"; newDiv += "<input
+							 * type='text' id=\"toDatePickr\"
+							 * class=\"form-control\" placeholder=\"DD/MM/YYYY\"
+							 * />"; newDiv += "</div>"; newDiv += "</div>";
+							 * newDiv += "</div>";
+							 */
+							newDiv += "<div class=\"col-md-2 col-sm-2 col-xs-12 text-right filterLbl\">";
+							newDiv += "<span> </span>";
+							newDiv += "<div class=\"inlineBlock media-middle\">";
+							newDiv += "<button id=\"LBATCApplyFilter\" type=\"button\" onclick = \"getTestCenters('"
+									+ assessmentId
+									+ "','"
+									+ courseId
+									+ "','"
+									+ subjectId
+									+ "','TCFilter');\" class=\"btn btn-success\">Apply Filter</button></div>";
+							newDiv += "</div>";
+							newDiv += "</div>";
+
+							newDiv += "</div>";
+						}
+						// filter ends
+						// Body of 2nd tab starts
+						newDiv += "<div id = \"assessmentList\" class=\"halTktCalenderCont\">";
+						// Main date bar starts.
+
+						// Main date bar ends.
+						newDiv += "</div>";
+						newDiv += "</div>";
+
+						newDiv = newDiv
+								+ "<div id = \"LBASBconfirm\" class=\"halTktCont selBookTimeTabCont\">"
+								+ "<input type = \"hidden\" id = \"HTMode\"  value=\""
+								+ HTMode + "\">";
+
+						newDiv = newDiv + "</div>";// end of
+						// selCnfrmTabCont,OASBconfirm
+
+						newDiv = newDiv + "<div class=\"clear\"></div>";
+						
+						
+						/*if($('#hallTicketPopUpLBA').length==0)
+							{
+							lbaDiv += "<div id=\"hallTicketPopUpLBA\" class=\"modal fade hallTicketPopUpLBA _lba\" role= \"dialog"\ +"\>";
+							lbaDiv += newDiv
+							lbaDiv += "</div>";
+							
+							}
+						else
+							{*/
+							$('#hallTicketPopUpLBA').append(newDiv);
+						//	}
+					
+						
+						
+						
+						
+					//	$('[data-target="#hallTicketPopUpLBA"]')append(newDiv);
+
+					}
+				},
+				error : function(xhr, err, ex) {
+					showError("", "Error", 2000);
+				},
+				complete : function() {
+					$('#LBACountry').selectpicker('refresh');
+					$('#LBACountry').css('display', 'block');
+					fnGetStatesForLBA(assessmentId, $('#LBACountry').val());
+				}
+			});
+
+	// $('#hallTicketPopUpLBA').modal('show');
+}
+
+function fnGetStatesForLBA(assessmentId, countryId) {
+	var checksum = $('#checksum').val();
+	var orgID = $('#orgId').val();
+	var formId = $('#formId').val();
+	var entityId = $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#' + applnSequenceField).val();
+	var countryId = countryId || $('#LBACountry').val();
+	var $state = $('#LBAState');
+	var $city = $('#LBACity');
+
+	$state.html('');
+	$city.html('');
+
+	$
+			.ajax({
+				type : "POST",
+				url : "/EForms/CodedTabsServlet",
+				data : {
+					orgId : orgID,
+					checkSum : checksum,
+					formId : formId,
+					entityId : entityId,
+					appSeqNo : appSeqNo,
+					actionTaken : 'getStatesForLBA',
+					assessmentId : assessmentId,
+					countryId : countryId,
+					sessChk : sessChk
+				},
+				dataType : "json",
+				success : function(result) {
+					if (!result || result == "null") {
+						var msgDiv = "<div class=\"desc-heading margintop20\"><div style=\"margin: 0 auto; width:280px;font-size: 14px;\" data-staticKey=\"No State list \">No state list.</div></div>"
+						jQuery('selstate').html(msgDiv);
+					}
+					if (result == "SessionTimeout") {
+						var str = urlappend();
+						location
+								.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="
+										+ formId + "&orgId=" + 726 + str);
+					} else {
+						console.log(result);
+						var kys = Object.keys(result);
+						if (kys.length == 1) {
+							$state.append($("<option selected></option>").attr(
+									"value", kys[0]).text(result[kys[0]]));
+
+						} else {
+							$state.append($("<option></option>").attr("value",
+									"").text("Select State"));
+
+							for ( var key in result)
+								$state.append($("<option ></option>").attr(
+										"value", key).text(result[key]));
+
+						}
+
+					}
+				},
+				error : function(xhr, err, ex) {
+					showError("", "Error", 2000);
+				},
+				complete : function() {
+					$state.selectpicker('refresh');
+					$state.css('display', 'block');
+					fnGetCitiesForLBA(assessmentId, $('#slotBookingLevel')
+							.val());
+					$('#strLBAState').removeClass('hidden');
+				}
+
+			});
+
+}
+
+function fnGetCitiesForLBA(assessmentId, slotBookingLevel) {
+
+	if (slotBookingLevel == "Test Center Level") {
+		var checksum = $('#checksum').val();
+		var orgID = $('#orgId').val();
+		var formId = $('#formId').val();
+		var entityId = $('#entityId').val();
+		var sessChk = $('#sessChk').val();
+		var applnSequenceField = $('#applnSequenceField').val();
+		var appSeqNo = $('#' + applnSequenceField).val();
+		var countryId = $('#LBACountry').val();
+		var $state = $('#LBAState');
+		var stateId = $state.val();
+		var $city = $('#LBACity');
+
+		$city.html('');
+
+		$
+				.ajax({
+					type : "POST",
+					url : "/EForms/CodedTabsServlet",
+					data : {
+						orgId : orgID,
+						checkSum : checksum,
+						formId : formId,
+						entityId : entityId,
+						appSeqNo : appSeqNo,
+						actionTaken : 'getCitiesForLBA',
+						assessmentId : assessmentId,
+						countryId : countryId,
+						stateId : stateId,
+						sessChk : sessChk
+					},
+					dataType : "json",
+					success : function(result) {
+						if (!result || result == "null") {
+							var msgDiv = "<div class=\"desc-heading margintop20\"><div style=\"margin: 0 auto; width:280px;font-size: 14px;\" data-staticKey=\"No State list \">No state list.</div></div>"
+							jQuery('selstate').html(msgDiv);
+						}
+						if (result == "SessionTimeout") {
+							var str = urlappend();
+							location
+									.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="
+											+ formId + "&orgId=" + 726 + str);
+						} else {
+							console.log(result);
+							var kys = Object.keys(result);
+							if (kys.length == 1) {
+								$city.append(
+										$("<option selected></option>").attr(
+												"value", kys[0]).text(
+												result[kys[0]])).selectpicker(
+										'refresh');
+								;
+							} else {
+
+								$city.append($("<option></option>").attr(
+										"value", "").text("Select City"));
+
+								for ( var key in result)
+									$city.append($("<option></option>").attr(
+											"value", key).text(result[key]));
+
+								$city.selectpicker('refresh');
+
+							}
+
+						}
+					},
+					complete : function() {
+						$state.selectpicker('refresh');
+						$city.selectpicker('refresh');
+						$city.css('display', 'block');
+						$('#strLBACity').removeClass('hidden');
+						$('#LBAContinue').show();
+					}
+
+				});
+
+	} else {
+		$('#LBAContinue').show();
+	}
+
+}
+
+function isEmpty(el) {
+	return !$.trim(el.html());
+}
+var tcsdates = '';
+
+function getTestCenters(assessmentId, courseId, subjectId, startDate) {
+	var checksum= $('#checksum').val();
+	var orgID = document.getElementById('orgId').value;
+	var formId = $('#formId').val();
+	var entityId= $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#'+applnSequenceField).val();
+	var tcNameFilter;
+	if(startDate=='TCFilter'){
+		startDate = selectedDate;
+	tcNameFilter = $('#LBATCSearch').val();
+	}
+
+	var tcDate ="";
+	var tcDateCount = "";
+	var LBACountry = $('#LBACountry').val();
+	var LBAState = $('#LBAState').val();
+	var LBACity = $('#LBACity').val();
+	var newDiv = "";
+	$('#startDate').html('');
+
+
+	$.ajax({
+        type: "POST",
+        url: "/EForms/CodedTabsServlet",
+        data: {
+        	orgId:orgID,
+        	checkSum:checksum,
+        	formId:formId,
+        	entityId:entityId,
+        	appSeqNo:appSeqNo,
+        	actionTaken: 'getTestCenters',
+        	assessmentId:assessmentId,
+        	subjectId:subjectId,
+        	LBACountry:LBACountry,
+        	LBAState:LBAState,
+        	LBACity:LBACity,
+        	courseId:courseId,
+        	startDate:startDate,
+        	tcNameFilter:tcNameFilter,
+        	sessChk: sessChk
+
+     	   },
+        dataType: "json",
+        success: function(result)
+        {
+        	if(result==undefined || result==null || result=="null"){
+        		var msgDiv="<div class=\"desc-heading margintop20\"><div style=\"margin: 0 auto; width:280px;font-size: 14px;\" data-staticKey=\"No State list \">No state list.</div></div>"
+      			  jQuery('selstate').html(msgDiv);
+        	}
+        	if(result=="SessionTimeout"){
+        		var str=urlappend();
+        		location.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="+formId+"&orgId="+726+str);
+        	}
+        	else
+        	{
+        		console.log(result);
+        		var tcs = result["testCenters"];
+
+        		if(result["dates"] != undefined)
+        		tcsdates = result["dates"];
+
+        		if(tcsdates != undefined){
+        		if(tcsdates.length>7){
+        		newDiv += "<div class=\"halTktCalender\">";
+				newDiv += "<span class=\"weekChng weekDec\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"Previous\"><i class=\"fa fa-chevron-left\" aria-hidden=\"true\"></i></span>";
+				newDiv += "<span data-div='custom-schedule' data-calendar-view=\"month\" class=\"datetimepicker12\"><span>June 2015 <span>- Week <span class=\"weekCount\">4</span></span></span></span></span>";
+				newDiv += "<span class=\"weekChng weekInc\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"Next\"><i class=\"fa fa-chevron-right\" aria-hidden=\"true\"></i></span>";
+				newDiv += "<div class=\"flyout_cont\">";
+				newDiv += "<div class=\"custom_datetime\"></div>";
+					newDiv += "<div class=\"arrow\"></div>";
+						newDiv += "<div class='text-center marginTop10'>";
+							newDiv += "<a href=\"javascript:void(0);\" class=\"btn btn-sm apply-btn marginrgt5\">Apply</a>";
+								newDiv += "<a href=\"javascript:void(0);\" class='cancel'>Cancel</a>";
+									newDiv += "</div>";
+										newDiv += "<div class=\"clear\"></div>";
+											newDiv += "</div>";
+												newDiv += "</div>";
+
+
+        		}
+				//Main long date bar starts
+				newDiv +="<div class=\"halTktCalenderTabCont\">";
+				//Dymanic testcenter population date wise";
+
+				for(var i = 0 ; i < tcsdates.length;i++)
+					{
+						var ontcsDate = (tcsdates[i].split(' ')[0]).split('-');
+			     		 tcDate = $.datepicker.formatDate('dd M yy ', new Date(ontcsDate[0], ontcsDate[1] - 1, ontcsDate[2]));
+			     		if(i<7){
+			     		 if(tcsdates[i] == startDate || startDate == undefined)
+			     			 {
+			     			$('#assessmentList').html('');
+			     			 newDiv = newDiv+"<div  data-ht-tab=\"1\" class=\"halTktCalenderTab halTktCalenderTabAct\">";
+			     			 startDate = tcsdates[i];
+			     			 selectedDate = tcsdates[i];
+			     			 }
+			     		 else
+			     			 {
+			     			if (isEmpty($('#'+startDate.split(' ')[0]))) {
+
+			     			newDiv = newDiv+"<div onclick=\"getTestCenters("+assessmentId+","+courseId+","+subjectId+",'"+tcsdates[i]+"')\" data-ht-tab=\"1\" class=\"halTktCalenderTab \">";
+			     			 }
+			     			else
+			     				newDiv = newDiv+"<div onclick=\"\" data-ht-tab=\"1\" class=\"halTktCalenderTab \">";
+			     			 }
+			     		}
+			     		else
+			     			newDiv = newDiv+"<div onclick=\"getTestCenters("+assessmentId+","+courseId+","+subjectId+",'"+tcsdates[i]+"')\" data-ht-tab=\"1\" class=\"halTktCalenderTab hidden\">";
+
+						newDiv = newDiv+"<div class=\"halTktContSub mainClik\">";
+						newDiv = newDiv+"<div class=\"fstDiv\">"+tcDate+"<span></span></div>";
+						newDiv = newDiv+"</div>";
+						newDiv = newDiv+"</div>";
+					}
+
+				}//end of if
+				newDiv = newDiv+"<div class=\"clear\"></div>";
+				newDiv = newDiv+"</div>";
+				$('#assessmentList').append(newDiv);
+
+				//Test Centers population  starts
+				if( $.isEmptyObject(tcs) == false){
+				if (isEmpty($('#'+startDate.split(' ')[0]))) {
+
+				newDiv = "<div id = \""+startDate.split(' ')[0]+"\" class=\"halTktContMain"+tcDate+" halTktContMain halTktContMainAct\">";
+				for(tcIds in tcs){
+				newDiv = newDiv+"<div class=\"halTktContSub\">";
+				newDiv = newDiv+"<div class=\"clearfix\">";
+				newDiv = newDiv+"<div class=\"selCourseContSubTxt selCourseContSubTxt01\">";
+				newDiv = newDiv+"<div>"+tcs[tcIds].tcName+"</div>";
+
+				if(tcs[tcIds].tcAddress != null && tcs[tcIds].tcAddress != "" && tcs[tcIds].tcAddress != undefined)
+				newDiv = newDiv+"<div>"+tcs[tcIds].tcAddress+"  <a href=\"https://maps.google.com/maps?f=q&source=s_q&hl=en&q="+tcs[tcIds].tcAddress+"\" target=\"_blank\" class=\"loc-map\" data-staticKey=\"View Location Map\">View Location Map</a></div>";
+
+				newDiv = newDiv+"</div>";
+				newDiv = newDiv+"<!--<div class=\"halTktContSubBtn\">";
+				newDiv = newDiv+"<a data-ht-tab=\"3\" class=\"btn btn-lg btn-success selCourseSel\">Book</a>";
+				newDiv = newDiv+"</div>";
+				newDiv = newDiv+"<div class=\"selCourseContSubTxt selCourseContSubTxt02\">";
+				newDiv = newDiv+"<a href=\"https://maps.google.com/maps?f=q&source=s_q&hl=en&q="+tcs[tcIds].tcAddress+"\" target=\"_blank\" data-staticKey=\"View Location Map\">View Location Map</a>";
+				newDiv = newDiv+"</div>-->";
+				newDiv = newDiv+"<div class=\"selCourseContSubTxt selCourseContSubTxt03\">";
+				if(tcs[tcIds].isElevatorPresent == 'Yes')
+				newDiv = newDiv+"<div class=\"selTest-ico3\" data-toggle=\"tooltip\" title=\"Lift Available\" data-original-title=\"Lift Available\"><img src=\"/EForms/images/selTest-ico3.png\"></img></div>";
+				if(tcs[tcIds].medicalHelp == 'Yes')
+				newDiv = newDiv+"<div class=\"selTest-ico2\" data-toggle=\"tooltip\" title=\"Wheelchair Available\" data-original-title=\"Wheelchair Available\"><img src=\"/EForms/images/LBA_medical-help.png\"></img></div>";
+				if(tcs[tcIds].isSecuredStoreRoomAvailable == 'Yes')
+				newDiv = newDiv+"<div class=\"selTest-ico1\" data-toggle=\"tooltip\" title=\"StoreRoom Available\" data-original-title=\"StoreRoom Available\"><img src=\"/EForms/images/LBA_secured-store.png\"></img></div>";
+
+				newDiv = newDiv+"</div>";
+				newDiv = newDiv+"</div>";
+				newDiv = newDiv+"<div class=\"clearfix marginTop10 slotsCapc posRel\">";
+				newDiv = newDiv+"<div class=\"slotBox text-uppercase semibold\"><div data-staticKey=\"Slots\">Slots</div><div data-staticKey=\"Capacity\">Capacity</div></div>";
+				newDiv = newDiv+"<!--<div style=\"overflow:auto\">-->";
+				var dates = tcs[tcIds].dateDetails;
+				for(slots in dates){
+					var shifts = dates[slots];
+					for(shift in shifts){
+						var confirmDate = $.datepicker.formatDate('dd M yy ', new Date(selectedDate));
+				newDiv = newDiv+"<div id =\"slotDetails1\" onclick = \"fnShowLBAConfirm('"+tcs[tcIds].tcAddress+"','"+tcs[tcIds].tcName+"','"+shifts[shift].startTime+"','"+shifts[shift].endTime+"','"+confirmDate+"','"+tcIds+"','"+subjectId+"')\" class=\"slotBox\" data-ht-tab=\"3\"><div>"+shifts[shift].startTime+"-"+shifts[shift].endTime+"</div><div>Total ("+shifts[shift].availableCapacity+")</div></div>";
+					}
+					}
+				newDiv = newDiv+"<!-- </div>-->";
+				newDiv = newDiv+"</div>";
+				newDiv = newDiv+"</div>";
+
+				//end of test centers
+				}
+        	}// end of isempty
+				else
+					$('#'+startDate.split(' ')[0]).show();
+
+			//Dynamic population ends
+				newDiv +="</div> <br/>";
+
+				newDiv += "<div class=\"col-md-12\">";
+				newDiv += "<a data-ht-tab=\"1\" class=\"btn btn-lg btn-default selCourseBack\" data-staticKey=\"Back\">Back</a>";
+				newDiv += "<a id=\"continueStep2\" data-ht-tab=\"3\" style=\"display:none\" class=\"btn btn-lg btn-success selCourseSubmit\" data-staticKey=\"Continue\">Continue</a>";
+				newDiv += "</div>";
+
+        		}
+        		else{
+
+        			newDiv = "<div class=\"col-md-12\"><big><big> No Test Centers Available</big></big> </div>";
+        		}
+
+				$('#assessmentList').append(newDiv);//appended below active tab;
+
+
+
+				$('.custom_datetime').datetimepicker({
+				    format: 'dd-mm-yy HH:MM:ss',
+					inline: true,
+				}).on("dp.change", function (e) {
+		            	 // myDate = $.datepicker.formatDate('dd-mm-yy ', new Date(e.date._d));
+		            	  eDate = moment(eDate).format("YYYY-MM-DD HH:mm:ss");
+		            	selectedDate = eDate;
+		            getTestCenters(assessmentId,courseId,subjectId,eDate);
+		        });
+        	}
+        },
+        error: function(xhr, err, ex){
+            showError("","Error",2000);
+        }
+	});
+
+}
+
+function fnShowLBAConfirm(tcAddress, tcName, startTime, endTime, tcDate, tcsId,
+		subjectId) {
+	$('#LBASBconfirm').html('');
+	$('#continueStep2').css('display', '');
+	var subjectName = $('#subjectName').val();
+	var tcDateArr = tcDate.split(' ');
+	var date = $.datepicker.formatDate('mm/dd/yy ', new Date(tcDateArr[2],
+			getMonthFromString(tcDateArr[1].toString()) - 1, tcDateArr[0]));
+	var newDiv = "";
+	newDiv = "<div class=\"col-md-8\">";
+	newDiv = newDiv + "<div class=\"selCnfrmTabDetCont\">";
+	newDiv = newDiv
+			+ "<div class=\"selCnfrmTabDetContHead\" data-staticKey =\"Booking Details\">Booking Details</div>";
+	newDiv = newDiv + "<div class=\"selCnfrmTabDet\">"
+			+ "<input type = \"hidden\" id = \"LBAtcId\" value=\"abc\">";
+	newDiv = newDiv + "<div class=\"selCnfrmTabDetHead\"><span >" + subjectName
+			+ "</div>";
+	newDiv = newDiv + "<div class=\"selCnfrmTabDetSub\">";
+	newDiv = newDiv + "<p>" + tcName + "</p>";
+	if (tcAddress != null && tcAddress != "" && tcAddress != undefined
+			&& tcAddress != "undefined") {
+		newDiv = newDiv + "<p>" + tcAddress + "</p>";
+
+	}
+	newDiv = newDiv + "</div>";
+	newDiv = newDiv + "<div class=\"selCnfrmTabDetSub\">";
+	newDiv = newDiv + "<p>" + tcDate + "<br>" + startTime + " - " + endTime
+			+ "</p>";
+	newDiv = newDiv + "<p> </p>";
+	newDiv = newDiv + "</div>";
+	// newDiv = newDiv+"<div id=\"Time\" class=\"selCnfrmTabDetSub\">Start Time
+	// : <span id =
+	// \"slotstarttime\">"+$('#sTHrs').html()+":"+$('#sTMin').html()+":"+$('#sTSec').html()+"</span><br
+	// />";
+	// newDiv = newDiv+"End Time : <span id =
+	// \"slotendtime\">"+$('#eTHrs').html()+":"+$('#eTMin').html()+":"+$('#eTSec').html()+"</span></div>";
+	newDiv = newDiv + "<div class=\"clear\"></div>";
+	newDiv = newDiv + "</div>";// end of selCnfrmTabDet
+	newDiv = newDiv + "</div>";// end of selCnfrmTabDetCont
+	newDiv = newDiv + "<div class=\"selCnfrmTabNote\">";
+	newDiv = newDiv + "<p data-staticKey=\"NOTE\">NOTE</p>";
+	newDiv = newDiv
+			+ "<p data-staticKey=\"Your booking is not complete until you select confirm below and complete the confirmation process.\"> Your booking is not complete until you select confirm below and complete the confirmation process.</p>";
+	newDiv = newDiv + "</div>";
+	newDiv = newDiv + "</div>";// end of col-md-8
+	newDiv = newDiv + "<div class=\"col-md-12\">";
+	newDiv = newDiv
+			+ "<a data-ht-tab=\"2\" class=\"btn btn-lg btn-default selCourseBack\" data-staticKey=\"Back\">Back</a>";
+	newDiv = newDiv
+			+ "<a class=\"btn btn-lg btn-default selCourseCancel\" data-dismiss=\"modal\" data-staticKey=\"Cancel\">Cancel</a>";
+	newDiv = newDiv
+			+ "<a onclick=\"fnConfirmLBATC('"
+			+ tcAddress
+			+ "','"
+			+ tcName
+			+ "','"
+			+ startTime
+			+ "','"
+			+ endTime
+			+ "','"
+			+ date
+			+ "','"
+			+ tcsId
+			+ "','"
+			+ subjectId
+			+ "');\" class=\"btn btn-lg btn-success selCourseSubmitt\"  data-target=\"#confirmPopLBA\" data-dismiss=\"modal\"  data-staticKey=\"Confirm\">Confirm</a>";//
+	newDiv = newDiv + "</div>";// end of col-md-12
+
+	$('#LBASBconfirm').append(newDiv);
+}
+
+function getMonthFromString(mon) {
+	return new Date(Date.parse(mon + " 1, 2012")).getMonth() + 1
+}
+
+function fnConfirmLBATC(tcAddress, tcName, startTime, endTime, tcDate, tcId,
+		subjectId) {
+	var checksum = $('#checksum').val();
+	var orgID = document.getElementById('orgId').value;
+	var formId = $('#formId').val();
+	var entityId = $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#' + applnSequenceField).val();
+	var assessmentType = "Form";
+
+	var assessmentId = $('#assessmentId').val();
+	var HTMode = $('#HTMode').val();
+
+	$
+			.ajax({
+				type : "POST",
+				url : "/EForms/CodedTabsServlet",
+				data : {
+					orgId : orgID,
+					checkSum : checksum,
+					formId : formId,
+					entityId : entityId,
+					appSeqNo : appSeqNo,
+					actionTaken : 'confirmSlot',
+					assessmentId : assessmentId,
+					subjectId : subjectId,
+					startTime : startTime,
+					endTime : endTime,
+					ExamDate : tcDate,
+					assessmentType : assessmentType,
+					tcId : tcId,
+					HTMode : HTMode,
+					sessChk : sessChk
+
+				},
+				dataType : "text",
+				success : function(result) {
+					if (result == undefined || result == null
+							|| result == "null") {
+						var msgDiv = "<div class=\"desc-heading margintop20\"><div style=\"margin: 0 auto; width:280px;font-size: 14px;\" data-staticKey=\"No State list \">No state list.</div></div>"
+						jQuery('selstate').html(msgDiv);
+					}
+					if (result == "SessionTimeout") {
+						var str = urlappend();
+						location
+								.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="
+										+ formId + "&orgId=" + 726 + str);
+					} else {
+						console.log(result);
+
+						if (result == "success") {
+							$('#confirmPopLBA').modal('show');
+							$('#assessmentList').append('');
+							$('#LBAdiv')
+									.data(
+											"act",
+											$(
+													'#hallTicketPopUpLBA .hallTicketPopUpHeader.left span:first')
+													.text())
+							fnGetLBADataRefresh();
+						} else
+							showError(result);
+					}
+				},
+				error : function(xhr, err, ex) {
+					showError("", "Error", 2000);
+				}
+			});
+
+}
+
+function fnGenerateLBAHallTicket(subjectId, isHallticketDownloaded,
+		assessmentId, courseId, HTMode, driveId, HTLevel) {
+	var checksum = $('#checksum').val();
+	var orgID = document.getElementById('orgId').value;
+	var formId = $('#formId').val();
+	var entityId = $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#' + applnSequenceField).val();
+	var assessmentType = "Form";
+
+	$
+			.ajax({
+				type : "POST",
+				url : "/EForms/CodedTabsServlet",
+				data : {
+					orgId : orgID,
+					checkSum : checksum,
+					formId : formId,
+					entityId : entityId,
+					appSeqNo : appSeqNo,
+					actionTaken : 'generateCandidateHallticket',
+					assessmentId : assessmentId,
+					subjectId : subjectId,
+					isHallticketDownloaded : isHallticketDownloaded,
+					courseId : courseId,
+					driveId : driveId,
+					HTMode : HTMode,
+					tcId : '1',
+					HTLevel : HTLevel,
+					sessChk : sessChk
+				},
+				dataType : "text",
+				success : function(result) {
+					console.log(result);
+					if (!result || result == "null") {
+						var msgDiv = "<div class=\"desc-heading margintop20\"><div style=\"margin: 0 auto; width:280px;font-size: 14px;\" data-staticKey=\"No State list \">No state list.</div></div>"
+						jQuery('selstate').html(msgDiv);
+					}
+					if (result == "SessionTimeout") {
+						var str = urlappend();
+						location
+								.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="
+										+ formId + "&orgId=" + 726 + str);
+					} else {
+						console.log(result);
+						if (result.indexOf("Hallticket is not yet co") != -1) {
+							showError("Hallticket is not yet configured.");
+						} else {
+							console.log("in new logic");
+
+							$(
+									"<form action='/EForms/CodedTabsServlet' method ='post'><input type='hidden' name='actionTaken' value='downloadHallTicket'><input type='hidden' name='orgId' value='"
+											+ orgID
+											+ "'><input type='hidden' name='formId' value='"
+											+ formId
+											+ "'><input type='hidden' name='checkSum' value='"
+											+ checksum
+											+ "'><input type='hidden' name='appSeqNo' value='"
+											+ appSeqNo
+											+ "'><input type='hidden' name='entityId' value='"
+											+ entityId
+											+ "'><input type='hidden' name='sessChk' value='"
+											+ sessChk
+											+ "'><input type='hidden' name='pdfPath' value='"
+											+ result + "'></form>").appendTo(
+									'body').submit().remove();
+						}
+					}
+				},
+				error : function(xhr, err, ex) {
+					showError("Could not generate the Hall Ticket.", "Error",
+							3000);
+				}
+			});
+
+	return false;
+
+}
+
+function getEvaluationABPublishPath() {
+	var checksum = $('#checksum').val();
+	var orgID = document.getElementById('orgId').value;
+	var formId = $('#formId').val();
+	var entityId = $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#' + applnSequenceField).val();
+	var subjectId = $('#subjectId').val();
+	var assessmentId = $('#assessmentId').val();
+
+	$
+			.ajax({
+				type : "POST",
+				url : "/EForms/CodedTabsServlet",
+				data : {
+					orgId : orgID,
+					checkSum : checksum,
+					formId : formId,
+					entityId : entityId,
+					appSeqNo : appSeqNo,
+					actionTaken : 'getEvaluationABPublishPath',
+					assessmentId : assessmentId,
+					subjectId : subjectId,
+					sessChk : sessChk
+
+				},
+				dataType : "text",
+				success : function(result) {
+					if (result == undefined || result == null
+							|| result == "null") {
+						var msgDiv = "<div class=\"desc-heading margintop20\"><div style=\"margin: 0 auto; width:280px;font-size: 14px;\" data-staticKey=\"No State list \">No state list.</div></div>"
+						jQuery('selstate').html(msgDiv);
+					}
+					if (result == "SessionTimeout") {
+						var str = urlappend();
+						location
+								.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="
+										+ formId + "&orgId=" + 726 + str);
+					} else {
+						window.open(result);
+					}
+				},
+				error : function(xhr, err, ex) {
+					showError("", "Error", 2000);
+				}
+			});
+
+}
+
+function getAssessmentQPHTMLPath(assessmentId, subjectId, strDriveId) {
+	var checksum = $('#checksum').val();
+	var orgID = document.getElementById('orgId').value;
+	var formId = $('#formId').val();
+	var entityId = $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#' + applnSequenceField).val();
+	// var subjectId = $('#subjectId').val();
+	var shiftId = strDriveId.substring(0, strDriveId.lastIndexOf("D"));
+	$
+			.ajax({
+				type : "POST",
+				url : "/EForms/CodedTabsServlet",
+				data : {
+					orgId : orgID,
+					checkSum : checksum,
+					formId : formId,
+					entityId : entityId,
+					appSeqNo : appSeqNo,
+					actionTaken : 'getAssessmentQPHTMLPath',
+					assessmentId : strDriveId,
+					subjectId : subjectId,
+					sessChk : sessChk
+
+				},
+				dataType : "text",
+				success : function(result) {
+					if (result == undefined || result == null
+							|| result == "null") {
+						var msgDiv = "<div class=\"desc-heading margintop20\"><div style=\"margin: 0 auto; width:280px;font-size: 14px;\" data-staticKey=\"No State list \">No state list.</div></div>"
+						jQuery('selstate').html(msgDiv);
+					}
+					if (result == "SessionTimeout") {
+						var str = urlappend();
+						location
+								.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="
+										+ formId + "&orgId=" + 726 + str);
+					} else {
+						console.log(result);
+						if (result.indexOf("Error@@QPHTML") != -1) {
+							alert("QPHTML path not found.");
+						} else if (result
+								.indexOf("Error@@error in getting particip") != -1) {
+							alert("Error in getting participant id.");
+						} else if (result
+								.indexOf("Error@@error in getting assessmen") != -1) {
+							alert("Error in getting assessment id.");
+						} else if (result
+								.indexOf("Error@@error in getting formI") != -1) {
+							alert("Error in getting formId id.");
+						} else if (result
+								.indexOf("Error@@error in getting subjectI") != -1) {
+							alert("Error in getting subjectId id.");
+						} else if (result
+								.indexOf("Error@@error in getting driveI") != -1) {
+							alert("Error in getting driveId id.");
+						} else if (result
+								.indexOf("Error@@error in getting appSeq") != -1) {
+							alert("Error in getting appSeqNo");
+						} else
+							window.open(result);
+					}
+				},
+				error : function(xhr, err, ex) {
+					showError("", "Error", 2000);
+				}
+			});
+
+}
+
+function getIonEyeReport(assessmentId, IonEyeTsId, IonEyeReportId, tcId) {
+	// alert("in ion eye report");
+	var checksum = $('#checksum').val();
+	var orgID = document.getElementById('orgId').value;
+	var formId = $('#formId').val();
+	var entityId = $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#' + applnSequenceField).val();
+
+	$
+			.ajax({
+				type : "POST",
+				url : "/EForms/CodedTabsServlet",
+				data : {
+					orgId : orgID,
+					checkSum : checksum,
+					formId : formId,
+					entityId : entityId,
+					appSeqNo : appSeqNo,
+					actionTaken : 'ionEyeReport',
+					assessmentId : assessmentId,
+					sessChk : sessChk,
+					IonEyeTsId : IonEyeTsId,
+					IonEyeReportId : IonEyeReportId,
+					tcId : tcId
+				},
+				dataType : "text",
+				success : function(result) {
+					var resultf = result.startsWith("null")
+					console.log(result);
+					// alert(result);
+					if (resultf) {
+						// var msgDiv="<div class=\"desc-heading
+						// margintop20\"><div style=\"margin: 0 auto;
+						// width:280px;font-size: 14px;\" data-staticKey=\"No
+						// Ion Eye Report \">Ion Report has not been generated
+						// please contact system administrator</div></div>"
+						alert("iON Eye Report has not been generated Please Contact System Administrator");
+					}
+
+					if (result == "SessionTimeout") {
+						var str = urlappend();
+						location
+								.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="
+										+ formId + "&orgId=" + 726 + str);
+					} else if (!resultf) {
+						console.log(result);
+						window.open(result);
+
+					}
+
+				}
+			});
+}
+
+function fnGetRTIReport(assessmentId, subjectId, strDriveId) {
+
+	var checksum = $('#checksum').val();
+	var orgID = document.getElementById('orgId').value;
+	var formId = $('#formId').val();
+	var entityId = $('#entityId').val();
+	var sessChk = $('#sessChk').val();
+	var applnSequenceField = $('#applnSequenceField').val();
+	var appSeqNo = $('#' + applnSequenceField).val();
+	// var subjectId = $('#subjectId').val();
+	var shiftId = strDriveId.substring(0, strDriveId.lastIndexOf("D"));
+	$
+			.ajax({
+				type : "POST",
+				url : "/EForms/CodedTabsServlet",
+				data : {
+					orgId : orgID,
+					checkSum : checksum,
+					formId : formId,
+					entityId : entityId,
+					appSeqNo : appSeqNo,
+					actionTaken : 'getRTIReportPath',
+					assessmentId : shiftId,
+					subjectId : subjectId,
+					sessChk : sessChk
+
+				},
+				dataType : "text",
+				success : function(result) {
+					console.log(result);
+					// alert(result);
+					if (result == undefined || result == null
+							|| result == "null" || result == "") {
+						var msgDiv = "<div class=\"desc-heading margintop20\"><div style=\"margin: 0 auto; width:280px;font-size: 14px;\" data-staticKey=\"No Report Available \">No Report Available please contact system administrator</div></div>"
+						jQuery('selstate').html(msgDiv);
+					}
+					if (result == "SessionTimeout") {
+						var str = urlappend();
+						location
+								.href("/EForms/loginAction.do?subAction=ViewLoginPage&formId="
+										+ formId + "&orgId=" + 726 + str);
+					}
+
+					else {
+						// console.log(result);
+						// window.open(result);
+						$(
+								"<form action='/EForms/CodedTabsServlet' method ='post'><input type='hidden' name='actionTaken' value='downloadRTI'><input type='hidden' name='orgId' value='"
+										+ orgID
+										+ "'><input type='hidden' name='formId' value='"
+										+ formId
+										+ "'><input type='hidden' name='checkSum' value='"
+										+ checksum
+										+ "'><input type='hidden' name='appSeqNo' value='"
+										+ appSeqNo
+										+ "'><input type='hidden' name='entityId' value='"
+										+ entityId
+										+ "'><input type='hidden' name='sessChk' value='"
+										+ sessChk
+										+ "'><input type='hidden' name='rtiPath' value='"
+										+ result + "'></form>")
+								.appendTo('body').submit().remove();
+					}
+				},
+				error : function(xhr, err, ex) {
+					showError("", "Error", 2000);
+				}
+			});
+
+}
